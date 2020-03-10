@@ -1,0 +1,92 @@
+.wrapper{
+    margin: 20px 190px;
+   
+  }
+  .quick-note{
+    /* background-color: #F7F6F9; */
+
+  }
+  .detail-quick-note{
+    background-color: #ffffff;
+  }
+  .header-quick{
+      /* background-color: #FEA600;; */
+  }
+  .page-banner {
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .page-banner h1{
+     margin:0;
+  }
+  
+  .page-banner h6{
+     margin-top:13px;
+  }
+  
+  .page-banner input{
+  width: 30%;
+   height: 30px;
+  border-radius: 5px; 
+    padding-left: 5px;
+  }
+  
+  .book-list h3{
+    /* width: 50%; */
+
+    margin-left: 20px;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  li {
+    border-left: 5px solid;
+    border-color: #D3D3D3;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .delete {
+    float: right;
+    background-color: #9932CC;
+    color: white;
+    border-style: 1px solid;
+    border-radius: 7px;
+    padding: 5px;
+  }
+  
+  .newdelete{
+    float: right;
+    background-color: #9932CC;
+    color: white;
+    border-style: 1px solid;
+    border-radius: 7px;
+    padding: 5px;
+  }
+  
+  
+  
+  .add-book{
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .add-book input{
+    width: 30%;
+   height: 30px;
+     border-radius: 5px 0px 0px 5px;
+    padding-left: 5px;
+  
+  }
+  
+  button{
+     width: 10%;
+   height: 36px;
+    background-color: #9932CC;
+    color: white;
+    padding: 5px;
+    border-radius: 0px 5px 5px 0px;
+  }

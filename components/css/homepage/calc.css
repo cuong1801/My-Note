@@ -1,0 +1,81 @@
+.calc-wrap #calc {
+    margin: 2em auto 0;
+    width: 25em;
+    height: auto;
+    padding: 20px 20px 9px;
+    background: #FFFEE4;
+    box-shadow: 2px 5px 6px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  .calc-wrap #calc .top span.clear {
+    float: left;
+  }
+  .calc-wrap #calc .top .result {
+    height: 40px;
+    width: 212px;
+    float: right;
+    padding: 0 10px;
+    background: #607779;
+    border-radius: 3px;
+    box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+    font-size: 17px;
+    line-height: 40px;
+    color: #FFFEE4;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-align: right;
+    letter-spacing: 1px;
+  }
+  .calc-wrap #calc .keys, .calc-wrap #calc .top {
+    overflow: hidden;
+  }
+  
+  .keys span, .top span.clear {
+    float: left;
+    top: 0;
+    cursor: pointer;
+    width: 5rem;
+    height: 3rem;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: #FFF;
+    border-radius: 3px;
+    margin: 0 9px 11px 0;
+    color: #607779;
+    line-height: 3rem;
+    text-align: center;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  .keys span:hover, .top span.clear:hover {
+    background: #91B7BA;
+    color: #FFFEE4;
+  }
+  
+  .keys span.op {
+    background: #607779;
+    margin-right: 0;
+    font-size: 2em;
+    color: #FFFEE4;
+  }
+  .keys span.op.mult {
+    font-size: 1.3em;
+  }
+  
+  .keys span.eval {
+    font-size: 2em;
+    background: #FEFBAF;
+  }
+  .keys span.eval:hover {
+    background: #91B7BA;
+    color: #FFFEE4;
+  }
+  
+  .top span.clear {
+    background: #F25036;
+    color: #FFFEE4;
+  }
+  

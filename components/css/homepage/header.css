@@ -1,0 +1,25 @@
+.title {
+    display: table;
+    color: black;
+    font-weight: 400;
+    text-align: center;
+    margin: auto;
+    padding: 50px 50px 0 50px;
+    font-size: 60px;
+  }
+  .title-note{
+    display: table;
+    color: #999;
+    font-weight: 400;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    font-size: 20px;
+  }
+  .btn-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
