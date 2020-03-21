@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="components/css/homepage/footer.css">
     <link rel="stylesheet" href="components/css/homepage/menu.css">
     <link rel="stylesheet" href="components/css/homepage/header.css">
+    <link rel="stylesheet" href="components/css/homepage/effect.css">
+
 
 </head>
 
@@ -764,13 +766,150 @@
     </div>
     <!-- footer -->
 
-    <div id="footer" class="cf"></div>
+    <div id="footer" class="cf">
+        <div id="button"></div>
+        <div id="container">
+            <div id="cont">
+                <div class="footer_center">
+                    <h3>
+                        <div class="add-show">
+                            <button class="btnAddnote" type="button" data-toggle="modal" data-target="#exampleModal"
+                                data-whatever="@addnote">Add Note</button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group-title">
+                                                    <label for="title" class="col-form-label">Title:</label>
+                                                    <input type="text" class="form-control" id="title"
+                                                        placeholder="Write something...">
+                                                </div>
+
+                                                <div class="form-group-location">
+                                                    <label for="location" class="col-form-label">Add Location:</label>
+                                                    <input type="text" class="form-control" id="location"
+                                                        placeholder="Add location..."></textarea>
+                                                </div>
+
+                                                <div class="form-group-content">
+                                                    <label for="content" class="col-form-label">Content:</label>
+                                                    <input type="text" class="form-control" id="content"
+                                                        placeholder="Write somethinng..."></textarea>
+                                                </div>
+
+                                                <br>
+                                                <div class="custom-file">
+                                                    <input type="file" value="upload" id="fileButton" multiple />
+                                                </div>
+                                                <br>
+
+                                                <div class="form-row row">
+                                                    <div class="form-group-category">
+                                                        <label class="text-category" for="danhmuc">Category</label>
+                                                        <select id="ListNotes_category1"
+                                                            class="form-control cursor form-select select-category"
+                                                            style="width:auto; height:auto;">
+                                                            <option selected>No Categories</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-notification">
+                                                    <div class="form-check">
+                                                        <input class="" type="checkbox" id="NewNotes_checkTime">
+                                                        <label for="thongbao">Notification</label>
+                                                        <div id="notification" class="row" style="display: none;">
+                                                            <div class="col-md-6">
+                                                                <input id="day_no" type="date" class="form-control "
+                                                                    name="bday">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input id="time_no" type="time" class="form-control "
+                                                                    name="bday">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn-primary">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btnShowInfo" type="button" data-toggle="modal" data-target="#exampleModal1"
+                                data-whatever="@showinfo">Show Information</button>
+                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel1">Show Information</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+
+
+
+                                        </div>
+
+                                        </button>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group-avatar">
+                                                    <img src="image/test.jpg" alt="Girl avatar" height="100"
+                                                        width="100">
+                                                </div>
+                                                <div class="form-group-name">
+                                                    <label for="name" class="col-form-name">Name:</label>
+                                                    <input type="text" class="form-control" id="title"
+                                                        placeholder="Name...">
+                                                </div>
+                                                <div class="form-group-dob">
+                                                    <label for="dob" class="col-form-dob">Birthday:</label>
+                                                    <input type="text" class="form-control" id="title"
+                                                        placeholder="Birthday...">
+                                                </div>
+                                                <div class="form-group-descript">
+                                                    <label for="name" class="col-form-name">Name:</label>
+                                                    <input type="text" class="form-control" id="title"
+                                                        placeholder="Descript...">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-secondary"
+                                                data-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                    </h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- partial -->
     <script src='https://cdn.3up.dk/jquery@3.3.1/dist/jquery.slim.min.js'></script>
     <script src='https://cdn.3up.dk/bootstrap@4.1.3/dist/js/bootstrap.min.js'></script>
     <script src='components/js/homepage/quickly-note.js'></script>
     <script src='components/js/homepage/calc.js'></script>
     <script src='components/js/homepage/menu.js'></script>
+    <script src='components/js/homepage/effect.js'></script>
 
 
 </body>
