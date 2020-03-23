@@ -16,6 +16,8 @@
   button {
     border: none;
     background: transparent;
+    width: auto;
+    height: auto;
   }
   .controller-container {
     margin-bottom: 5%;
