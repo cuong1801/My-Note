@@ -149,3 +149,62 @@ window.onload = function () {
         }
     });
 }
+    $('#listCategory').load('show_category.html');
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+
+            var user = firebase.auth().currentUser;
+
+            if (user != null) {
+                var idUser = firebase.auth().currentUser.uid;
+                var docRef = db.collection('users').doc(idUser);
+                docRef.get().then(function (doc) {
+
+                    if (doc.exists) {
+                        console.log("Document user profile:", doc.data());
+                        $('#first_Name').val(doc.data().firstName);
+                        $('#last_Name').val(doc.data().lastName);
+                        $('#nationality').val(doc.data().nationality);
+                        $('#national').text(doc.data().nationality);
+                        $('#full_Name').text((doc.data().firstName) + " " + (doc.data().lastName));
+                        $('#DropDownTimezone').val(doc.data().timeZone);
+
+                        var imgProfile = document.getElementById("profile-image1");
+                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function (url) {
+                            imgProfile.src = url;
+                        }).catch(function (error) {
+                            // Handle any errors
+                        });
+
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
+                }).catch(function (error) {
+                    console.log("Error getting document:", error);
+                    alert(error);
+                });
+                db.collection("notelist").orderBy("timepost", "desc").get().then(snapshot => {
+
+                    snapshot.docs.forEach(doc => {
+                        if (doc.data().userID == idUser) {
+                            $("#name_category").append(
+                                '<a href="#tab1" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab1"'+
+                              '  aria-selected="true">'+
+                              '  <i class="mdi mdi-help-circle">'+doc.data().category+'</i>'+
+                           ' </a>'
+                                
+
+                            );
+
+                            var imgNote = document.getElementById("imgNote" + doc.id);
+                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                imgNote.src = url;
+                            }).catch(function (error) {});
+                        }
+                    });
+
+                });
+            }
+        }
+    });

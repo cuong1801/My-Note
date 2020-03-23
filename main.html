@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="components/css/homepage/header.css">
     <link rel="stylesheet" href="components/css/homepage/effect.css">
     <link rel="stylesheet" href="components/css/homepage/card.css">
+    <link rel="stylesheet" href="components/css/homepage/dropdown.css">
+
 
     <!-- ios support -->
 
@@ -46,57 +48,32 @@
             <p class="title-note">Và đây là một chú thích bằng tiếng anh.</p>
             <br>
             <div class="btn-1">
-                <button type="button" class="btn btn-outline-danger" style="margin: 7px;">Danger</button>
-
-                <button type="button" class="btn btn-outline-danger">Danger</button>
-
+                <button type="button" class="btn btn-lg btn-outline-danger" style=" margin: 10px; height: auto;">NEW</button>
+                <button type="button" class="btn btn-lg btn-outline-danger" style="background-color:white; height: auto; margin: 10px;">PIC</button>
             </div>
         </div>
     </div>
-    <!-- add note -->
-    <!-- end add note -->
-
-    <!--User Profile modal-->
-    <!-- sidebar-wrapper  -->
-
-    <!-- page-content" -->
-
-
-
     <div class="p-slope-left" style="background-color: #FFFFFF;">
         <br>
 
-        <div class="container">
+        <div class="">
             <div class="row list-note">
-                <div class="col-lg-4">
-                    <div class="nav nav-pills faq-nav" id="faq-tabs" role="tablist" aria-orientation="vertical">
-                        <a href="#tab1" class="nav-link active" data-toggle="pill" role="tab" aria-controls="tab1"
-                            aria-selected="true">
-                            <i class="mdi mdi-help-circle"></i> Frequently Asked Questions
-                        </a>
-                        <a href="#tab2" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab2"
-                            aria-selected="false">
-                            <i class="mdi mdi-account"></i> Profile
-                        </a>
-                        <a href="#tab3" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab3"
-                            aria-selected="false">
-                            <i class="mdi mdi-account-settings"></i> Account
-                        </a>
-                        <a href="#tab4" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab4"
-                            aria-selected="false">
-                            <i class="mdi mdi-heart"></i> Favorites
-                        </a>
-                        <a href="#tab5" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab5"
-                            aria-selected="false">
-                            <i class="mdi mdi-coin"></i> Transactions
-                        </a>
-                        <a href="#tab6" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab6"
-                            aria-selected="false">
-                            <i class="mdi mdi-help"></i> General help
-                        </a>
+                <div class="col-lg-2">
+                    <span class="custom-dropdown big">
+                        <select>    
+                            <option>Sherlock Holmes</option>
+                            <option>The Great Gatsby</option>  
+                            <option>V for Vendetta</option>
+                            <option>The Wolf of Wallstreet</option>
+                            <option>Quantum of Solace</option>
+                        </select>
+                    </span>
+                    <div class="nav nav-pills faq-nav" id="listCategory" role="tablist" aria-orientation="vertical">
+                       
+                       
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <div id="listNotes">
                     </div>
 
@@ -110,7 +87,7 @@
 
     </div>
     <div>
-        <div class="container">
+        <div class="">
             <div class="quick-note">
                 <header class="header-quick">
                     <div class="page-banner ">

@@ -7,7 +7,7 @@
 }
 .p-slope-left {
     /* -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%); */
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%);
+    /* clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%); */
 }
 .p-divider {
     margin: 0 auto;
