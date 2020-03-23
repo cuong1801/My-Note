@@ -5,7 +5,7 @@ var notYet = false;
 var storageRef = firebase.storage().ref();
 
 db.enablePersistence()
-    .catch(function(err) {
+    .catch(function (err) {
         if (err.code == 'failed-precondition') {
             // probably multible tabs open at once
             console.log('persistance failed');
@@ -15,10 +15,10 @@ db.enablePersistence()
         }
     });
 
-window.onload = function() {
+window.onload = function () {
     var dem = 0;
     $('#listNotes').load('show_not.html');
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
 
             var user = firebase.auth().currentUser;
@@ -26,7 +26,7 @@ window.onload = function() {
             if (user != null) {
                 var idUser = firebase.auth().currentUser.uid;
                 var docRef = db.collection('users').doc(idUser);
-                docRef.get().then(function(doc) {
+                docRef.get().then(function (doc) {
 
                     if (doc.exists) {
                         console.log("Document user profile:", doc.data());
@@ -38,9 +38,9 @@ window.onload = function() {
                         $('#DropDownTimezone').val(doc.data().timeZone);
 
                         var imgProfile = document.getElementById("profile-image1");
-                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function(url) {
+                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function (url) {
                             imgProfile.src = url;
-                        }).catch(function(error) {
+                        }).catch(function (error) {
                             // Handle any errors
                         });
 
@@ -48,7 +48,7 @@ window.onload = function() {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
                     }
-                }).catch(function(error) {
+                }).catch(function (error) {
                     console.log("Error getting document:", error);
                     alert(error);
                 });
@@ -63,23 +63,33 @@ window.onload = function() {
                             var subTit = tit.slice(0, 30);
                             var subDes = des.slice(0, 30);
                             $("#name_notes").append(
-                                '<div class="accordion" id="accordion-tab-' + doc.id + '">' +
-                                '<div class="card">' +
-                                '<div class="card-header" id="accordion-tab-' + doc.id + '-heading-' + doc.id + '">' +
-                                '<h5>' +
-                                '<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-' + doc.id + '-content-' + doc.id + '" aria-expanded="false" aria-controls="accordion-tab-' + doc.id + '-content-' + doc.id + '">' + subTit + '</button></h5> ' +
-                                '</div>' +
-                                ' <div class="collapsing " id="accordion-tab-' + doc.id + '-content-' + doc.id + '" aria-labelledby="accordion-tab-1-heading-1" data-parent="#accordion-tab-' + doc.id + '">' +
-                                '<div class="card-body">' +
-                                '<p></p>' +
-                                '<p class="p small ">Content:' + subDes + '</p>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="go-corner" >' +
-                                '<div id="' + doc.id + '" class="go-arrow btn btn-outline-danger" onclick="deleteNote()">' +
-                                'x' +
-                                '</div>' +
-                                '</div>' +
+ 
+                                '<div class="card card--medium">' +
+                                '  <h2 class="card__title">'+subTit+'</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                '  <p class="card__text">'+subDes+'</p>' +
+                                '  <div class="card__action-bar">' +
+                                '    <button class="card__button">SHARE</button>' +
+                                '    <button class="card__button">LEARN MORE</button>' +
+                                '  </div>' +
+                                '</div>'
+                                //ádasd
+                                // '<div class="accordion" id="accordion-tab-' + doc.id + '">' +
+                                // '<div class="card">' +
+                                // '<div class="card-header" id="accordion-tab-' + doc.id + '-heading-' + doc.id + '">' +
+                                // '<h5>' +
+                                // '<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-' + doc.id + '-content-' + doc.id + '" aria-expanded="false" aria-controls="accordion-tab-' + doc.id + '-content-' + doc.id + '">' + subTit + '</button></h5> ' +
+                                // '</div>' +
+                                // ' <div class="collapsing " id="accordion-tab-' + doc.id + '-content-' + doc.id + '" aria-labelledby="accordion-tab-1-heading-1" data-parent="#accordion-tab-' + doc.id + '">' +
+                                // '<div class="card-body">' +
+                                // '<p></p>' +
+                                // '<p class="p small ">Content:' + subDes + '</p>' +
+                                // '</div>' +
+                                // '</div>' +
+                                // '<div class="go-corner" >' +
+                                // '<div id="' + doc.id + '" class="go-arrow btn btn-outline-danger" onclick="deleteNote()">' +
+                                // 'x' +
+                                // '</div>' +
+                                // '</div>' +
                                 // '<div  data-toggle="modal" data-target="#exampleModalScrollable' + doc.id + '">' +
 
                                 // '<h4 id="' + doc.id + 'Linhcategory" class="h4" style="margin-top:20px;">' + doc.data().category + '</h4>' +
@@ -122,15 +132,15 @@ window.onload = function() {
                                 // '</div>' +
                                 // '</div>' +
                                 // ' </div>' +
-                                '</div>' +
-                                '</div>'
+                                // '</div>' +
+                                // '</div>'
 
                             );
 
                             var imgNote = document.getElementById("imgNote" + doc.id);
-                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
                                 imgNote.src = url;
-                            }).catch(function(error) {});
+                            }).catch(function (error) {});
                         }
                     });
 
