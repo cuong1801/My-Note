@@ -63,77 +63,16 @@ window.onload = function () {
                             var subTit = tit.slice(0, 30);
                             var subDes = des.slice(0, 30);
                             $("#name_notes").append(
- 
+
                                 '<div class="card card--medium">' +
-                                '  <h2 class="card__title">'+subTit+'</h2><span class="card__subtitle">By Mattia Astorino</span>' +
-                                '  <p class="card__text">'+subDes+'</p>' +
+                                '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                '  <p class="card__text">' + subDes + '</p>' +
                                 '  <div class="card__action-bar">' +
-                                '    <button class="card__button">SHARE</button>' +
-                                '    <button class="card__button">LEARN MORE</button>' +
+                                '    <button class="card__button">OPEN</button>' +
+                                '    <button class="card__button">DELETE</button>' +
                                 '  </div>' +
                                 '</div>'
-                                //ádasd
-                                // '<div class="accordion" id="accordion-tab-' + doc.id + '">' +
-                                // '<div class="card">' +
-                                // '<div class="card-header" id="accordion-tab-' + doc.id + '-heading-' + doc.id + '">' +
-                                // '<h5>' +
-                                // '<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-' + doc.id + '-content-' + doc.id + '" aria-expanded="false" aria-controls="accordion-tab-' + doc.id + '-content-' + doc.id + '">' + subTit + '</button></h5> ' +
-                                // '</div>' +
-                                // ' <div class="collapsing " id="accordion-tab-' + doc.id + '-content-' + doc.id + '" aria-labelledby="accordion-tab-1-heading-1" data-parent="#accordion-tab-' + doc.id + '">' +
-                                // '<div class="card-body">' +
-                                // '<p></p>' +
-                                // '<p class="p small ">Content:' + subDes + '</p>' +
-                                // '</div>' +
-                                // '</div>' +
-                                // '<div class="go-corner" >' +
-                                // '<div id="' + doc.id + '" class="go-arrow btn btn-outline-danger" onclick="deleteNote()">' +
-                                // 'x' +
-                                // '</div>' +
-                                // '</div>' +
-                                // '<div  data-toggle="modal" data-target="#exampleModalScrollable' + doc.id + '">' +
 
-                                // '<h4 id="' + doc.id + 'Linhcategory" class="h4" style="margin-top:20px;">' + doc.data().category + '</h4>' +
-
-                                // '<div class="dimmer"> <h6 class="h6">' + doc.data().timepostShow + '</h6></div>' +
-                                // '<div class="dimmer"> <h6 class="h6">' + doc.data().timenotification + '</h6></div>' +
-
-                                // '</div>' +
-
-                                // '</a>' +
-
-                                // '<div class="modal fade" id="exampleModalScrollable' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">' +
-                                // '<div class="modal-dialog modal-dialog-scrollable" role="document">' +
-                                // '<div class="modal-content">' +
-                                // '<div class="modal-header">' +
-                                // '<h1 id="' + doc.id + 'Linhname" class="modal-title">' + doc.data().name + '</h1>' +
-                                // '<small style="padding: 15px;"><em>' + doc.data().category + '</em></small>' +
-
-                                // '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
-                                // '<span aria-hidden="true">&times;</span>' +
-                                // '</button>' +
-                                // '</div>' +
-                                // '<div class="modal-body">' +
-                                // '<small><em>' + doc.data().timepostShow + '</em></small>' +
-                                // '<div class="dimmer"> <h6 id="' + doc.id + 'Linhnotification" class="h6">' + doc.data().timenotification + '</h6></div>' +
-                                // '<small ><em id="' + doc.id + 'Linhlocation"> ' + doc.data().location + '</em></small><br>' +
-                                // '<pre>' + doc.data().content + '</pre>' +
-
-                                // '<textarea id="' + doc.id + 'Linhcontent"class="form-control" rows="7">' + doc.data().content + '</textarea>' +
-                                // '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
-
-                                // '</div>' +
-                                // '<div class="modal-footer">' +
-                                // '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal">Close</button>' +
-                                // '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
-                                // '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
-
-                                // '</div>' +
-                                // ' </div>' +
-                                // '</div>' +
-                                // '</div>' +
-                                // ' </div>' +
-                                // '</div>' +
-                                // '</div>'
 
                             );
 
@@ -149,62 +88,28 @@ window.onload = function () {
         }
     });
 }
-    $('#listCategory').load('show_category.html');
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
+$(document).ready(function () {
+    $(".menu-button").click(function () {
+        $(".menu-bar").toggleClass("open");
+    })
+})
+// In your Javascript (external .js resource or <script> tag)
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
 
-            var user = firebase.auth().currentUser;
+        var user = firebase.auth().currentUser;
 
-            if (user != null) {
-                var idUser = firebase.auth().currentUser.uid;
-                var docRef = db.collection('users').doc(idUser);
-                docRef.get().then(function (doc) {
+        if (user != null) {
 
-                    if (doc.exists) {
-                        console.log("Document user profile:", doc.data());
-                        $('#first_Name').val(doc.data().firstName);
-                        $('#last_Name').val(doc.data().lastName);
-                        $('#nationality').val(doc.data().nationality);
-                        $('#national').text(doc.data().nationality);
-                        $('#full_Name').text((doc.data().firstName) + " " + (doc.data().lastName));
-                        $('#DropDownTimezone').val(doc.data().timeZone);
-
-                        var imgProfile = document.getElementById("profile-image1");
-                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function (url) {
-                            imgProfile.src = url;
-                        }).catch(function (error) {
-                            // Handle any errors
-                        });
-
-                    } else {
-                        // doc.data() will be undefined in this case
-                        console.log("No such document!");
+            var idUser = firebase.auth().currentUser.uid;
+            db.collection('category').onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === 'added' && change.doc.data().userID === idUser) {
+                        $("#ListNotes_category").append('<option>' + change.doc.data().category + '</option>');
+                        $("#ListNotes_category1").append('<option ">' + change.doc.data().category + '</option>');
                     }
-                }).catch(function (error) {
-                    console.log("Error getting document:", error);
-                    alert(error);
                 });
-                db.collection("notelist").orderBy("timepost", "desc").get().then(snapshot => {
-
-                    snapshot.docs.forEach(doc => {
-                        if (doc.data().userID == idUser) {
-                            $("#name_category").append(
-                                '<a href="#tab1" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab1"'+
-                              '  aria-selected="true">'+
-                              '  <i class="mdi mdi-help-circle">'+doc.data().category+'</i>'+
-                           ' </a>'
-                                
-
-                            );
-
-                            var imgNote = document.getElementById("imgNote" + doc.id);
-                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
-                                imgNote.src = url;
-                            }).catch(function (error) {});
-                        }
-                    });
-
-                });
-            }
+            });
         }
-    });
+    }
+});

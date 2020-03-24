@@ -12,7 +12,9 @@
   :root.bg--small {
     background-color: #4527A0;
   }
-
+  .list-note{
+    margin-left: -9px;
+  }
   button {
     border: none;
     background: transparent;
@@ -65,7 +67,7 @@
     overflow: hidden;
     background-color: #fafafa;
     height: 35%;
-    width: 344px;
+    width: 375px;
     -webkit-transition: all 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
     transition: all 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);

@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="components/css/homepage/menu.css">
     <link rel="stylesheet" href="components/css/homepage/header.css">
     <link rel="stylesheet" href="components/css/homepage/effect.css">
-    <link rel="stylesheet" href="components/css/homepage/card.css">
     <link rel="stylesheet" href="components/css/homepage/dropdown.css">
 
 
@@ -48,8 +47,10 @@
             <p class="title-note">Và đây là một chú thích bằng tiếng anh.</p>
             <br>
             <div class="btn-1">
-                <button type="button" class="btn btn-lg btn-outline-danger" style=" margin: 10px; height: auto;">NEW</button>
-                <button type="button" class="btn btn-lg btn-outline-danger" style="background-color:white; height: auto; margin: 10px;">PIC</button>
+                <button type="button" class="btn btn-lg btn-outline-danger"
+                    style=" margin: 10px; height: auto;">NEW</button>
+                <button type="button" class="btn btn-lg btn-outline-danger"
+                    style="background-color:white; height: auto; margin: 10px;">PIC</button>
             </div>
         </div>
     </div>
@@ -60,18 +61,14 @@
             <div class="row list-note">
                 <div class="col-lg-2">
                     <span class="custom-dropdown big">
-                        <select>    
-                            <option>Sherlock Holmes</option>
-                            <option>The Great Gatsby</option>  
-                            <option>V for Vendetta</option>
-                            <option>The Wolf of Wallstreet</option>
-                            <option>Quantum of Solace</option>
+                        <select id="ListNotes_category">
+
                         </select>
                     </span>
-                    <div class="nav nav-pills faq-nav" id="listCategory" role="tablist" aria-orientation="vertical">
-                       
-                       
-                    </div>
+                    <!-- <div class="nav nav-pills faq-nav" id="listCategory" role="tablist" aria-orientation="vertical">
+
+
+                    </div> -->
                 </div>
                 <div class="col-lg-10">
                     <div id="listNotes">
@@ -200,6 +197,8 @@
     <script src='components/js/homepage/calc.js'></script>
     <script src='components/js/homepage/menu.js'></script>
     <script src='components/js/homepage/effect.js'></script>
+    <link rel="stylesheet" href="components/css/homepage/card.css">
+
 </body>
 
 </html>
