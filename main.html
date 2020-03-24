@@ -46,29 +46,111 @@
             </p>
             <p class="title-note">Và đây là một chú thích bằng tiếng anh.</p>
             <br>
-            <div class="btn-1">
+            <!-- <div class="btn-1">
                 <button type="button" class="btn btn-lg btn-outline-danger"
                     style=" margin: 10px; height: auto;">NEW</button>
                 <button type="button" class="btn btn-lg btn-outline-danger"
-                    style="background-color:white; height: auto; margin: 10px;">PIC</button>
+                    style="background-color:white; height: auto; margin: 10px;">QUICKLY NOTE</button>
+            </div> -->
+            <div class="demo-btns">
+                <div class="info">
+                    <div class="buttons">
+                        <p>
+                            <a href="" data-modal="#add-new-note" class="modal__trigger">Add New Note</a>
+                            <a href="" data-modal="#quick-note" class="modal__trigger">Quickly Note</a>
+
+                        </p>
+                    </div>
+
+                </div>
             </div>
+
+            <!-- Modal -->
+
+
+            <div id="add-new-note" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
+                <div class="modal__dialog">
+                    <div class="modal__content">
+                        <h1>Big Modal</h1>
+                        <h3>This modal is pretty tall.</h3>
+                        <p>Selfies normcore four dollar toast four loko listicle artisan. Hoodie Marfa authentic,
+                            wayfarers church-key tofu Banksy pop-up Kickstarter Brooklyn heirloom swag synth. Echo Park
+                            cray synth mixtape. Tofu gastropub squid readymade, trust fund Wes Anderson DIY PBR 8-bit
+                            try-hard +1 Shoreditch lo-fi tote bag.</p>
+                        <p><img src="http://unsplash.it/600/300" alt="" /></p>
+                        <p>Mumblecore cred selfies fingerstache. Tousled skateboard plaid lo-fi shabby chic salvia, swag
+                            Odd Future Etsy art party Austin cronut. Crucifix whatever Pinterest food truck, pickled
+                            viral cray 90's DIY chambray keffiyeh biodiesel Vice blog. Cred meh yr tofu.</p>
+                        <p>Mumblecore cred selfies fingerstache. Tousled skateboard plaid lo-fi shabby chic salvia, swag
+                            Odd Future Etsy art party Austin cronut. Crucifix whatever Pinterest food truck, pickled
+                            viral cray 90's DIY chambray keffiyeh biodiesel Vice blog. Cred meh yr tofu.</p>
+                        <!-- modal close button -->
+                        <a href="" class="modal__close demo-close">
+                            <svg class="" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
+                                <path d="M0 0h24v24h-24z" fill="none" /></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="quick-note" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
+                <div class="modal__dialog">
+                    <div class="modal__content">
+                        <h1>Quickly Note</h1>
+                        <input type="text" placeholder="Search for quick note..." />
+                        <div class="row">
+                            <div class=" col-lg-12 bs-md">
+                                <div class="book-list">
+                                    <h3>Quickly Note:</h3>
+                                    <ul>
+                                        <li class="detail-quick-note"><span class="name">Name of the Wind</span>
+                                            <span class="delete">delete</span>
+                                        </li>
+            
+                                        <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
+                                            <span class="delete">delete</span>
+                                        </li>
+            
+                                        <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
+                                            <span class="delete">delete</span>
+                                        </li>
+            
+                                        <li class="detail-quick-note"><span class="name">The Master and the Margharita</span>
+                                            <span class="delete">delete</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- modal close button -->
+                        <a href="" class="modal__close demo-close">
+                            <svg class="" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
+                                <path d="M0 0h24v24h-24z" fill="none" /></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
     <div class="p-slope-left" style="background-color: #FFFFFF;">
         <br>
 
-        <div class="">
+        <div class="quick-note">
             <div class="row list-note">
                 <div class="col-lg-2">
                     <span class="custom-dropdown big">
                         <select id="ListNotes_category">
-
+                            <option active>--- Select---</option>
                         </select>
                     </span>
-                    <!-- <div class="nav nav-pills faq-nav" id="listCategory" role="tablist" aria-orientation="vertical">
 
-
-                    </div> -->
                 </div>
                 <div class="col-lg-10">
                     <div id="listNotes">
@@ -84,75 +166,73 @@
 
     </div>
     <div>
-        <div class="">
-            <div class="quick-note">
-                <header class="header-quick">
-                    <div class="page-banner ">
-                        <h1>Quickly Notes</h1>
-                        <br>
-                        <div class="p-divider mb32"></div>
-                        <h6>My note</h6>
-                        <br>
-                        <input type="text" placeholder="Search for quick note..." />
+        <div class="quick-note">
+            <header class="header-quick">
+                <div class="page-banner ">
+                    <h1>Quickly Notes</h1>
+                    <br>
+                    <div class="p-divider mb32"></div>
+                    <h6>My note</h6>
+                    <br>
+                    <input type="text" placeholder="Search for quick note..." />
+                </div>
+            </header>
+            <div class="row">
+                <div class=" col-lg-6 bs-md">
+                    <div class="book-list">
+                        <h3>Quickly Note:</h3>
+                        <ul>
+                            <li class="detail-quick-note"><span class="name">Name of the Wind</span>
+                                <span class="delete">delete</span>
+                            </li>
+
+                            <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
+                                <span class="delete">delete</span>
+                            </li>
+
+                            <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
+                                <span class="delete">delete</span>
+                            </li>
+
+                            <li class="detail-quick-note"><span class="name">The Master and the Margharita</span>
+                                <span class="delete">delete</span>
+                            </li>
+                        </ul>
                     </div>
-                </header>
-                <div class="row">
-                    <div class=" col-lg-6 bs-md">
-                        <div class="book-list">
-                            <h3>Quickly Note:</h3>
-                            <ul>
-                                <li class="detail-quick-note"><span class="name">Name of the Wind</span>
-                                    <span class="delete">delete</span>
-                                </li>
-
-                                <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
-                                    <span class="delete">delete</span>
-                                </li>
-
-                                <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
-                                    <span class="delete">delete</span>
-                                </li>
-
-                                <li class="detail-quick-note"><span class="name">The Master and the Margharita</span>
-                                    <span class="delete">delete</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="add-book">
-                            <input type="text" placeholder="Add a book"><span class="add-input"><button
-                                    class="addbtn">Add</button></span>
-                        </div>
+                    <div class="add-book">
+                        <input type="text" placeholder="Add a book"><span class="add-input"><button
+                                class="addbtn">Add</button></span>
                     </div>
-                    <div class=" col-lg-6">
-                        <section class="block">
-                            <div class='calc-wrap'>
-                                <div id="calc">
-                                    <div class="top">
-                                        <span class="clear">c</span>
-                                        <div class="result"></div>
-                                    </div>
-                                    <div class="keys">
-                                        <span>7</span>
-                                        <span>8</span>
-                                        <span>9</span>
-                                        <span class="op">+</span>
-                                        <span>4</span>
-                                        <span>5</span>
-                                        <span>6</span>
-                                        <span class="op">-</span>
-                                        <span>1</span>
-                                        <span>2</span>
-                                        <span>3</span>
-                                        <span class="op">÷</span>
-                                        <span>0</span>
-                                        <span>.</span>
-                                        <span class="eval">=</span>
-                                        <span class="op mult">x</span>
-                                    </div>
+                </div>
+                <div class=" col-lg-6">
+                    <section class="block">
+                        <div class='calc-wrap'>
+                            <div id="calc">
+                                <div class="top">
+                                    <span class="clear">c</span>
+                                    <div class="result"></div>
+                                </div>
+                                <div class="keys">
+                                    <span>7</span>
+                                    <span>8</span>
+                                    <span>9</span>
+                                    <span class="op">+</span>
+                                    <span>4</span>
+                                    <span>5</span>
+                                    <span>6</span>
+                                    <span class="op">-</span>
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span class="op">÷</span>
+                                    <span>0</span>
+                                    <span>.</span>
+                                    <span class="eval">=</span>
+                                    <span class="op mult">x</span>
                                 </div>
                             </div>
-                        </section>
-                    </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -197,7 +277,11 @@
     <script src='components/js/homepage/calc.js'></script>
     <script src='components/js/homepage/menu.js'></script>
     <script src='components/js/homepage/effect.js'></script>
+    <script src='components/js/homepage/btn-quick-new-note.js'></script>
+
     <link rel="stylesheet" href="components/css/homepage/card.css">
+    <link rel="stylesheet" href="components/css/homepage/btn-quick-new-note.css">
+
 
 </body>
 
