@@ -1,5 +1,4 @@
-
-   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
 
 .footer #button {
     width: 35px;
@@ -102,11 +101,11 @@
     padding: 5px;
     font-size: 20px;
   }
-  .footer_center .modal-body{
+  .footer_center .modal_body{
     font-size: 15px;
     color: black;
     margin-left: 0px;
-    margin-top: 5px;
+    margin-top: 50px;
     z-index:99;
     border-style: 1px solid;
     border-radius: 7px;
@@ -116,7 +115,7 @@
 .footer_center .add-show{
     z-index:100px;
 }
-.footer_center .modal-body .custom-file{
+.footer_center .modal_body .custom-file{
     font-size: 15px;
     margin-left: 0px;
     margin-top: 5px;
@@ -137,7 +136,7 @@
     width:100px;
     border-radius: 7px;
 }
-.footer_center .form-group-notification #NewNotes_checkTime{
+.footer_center .form_notification #NewNotes_checkTime{
     font-size: 15px;
     color: black;
     margin-left: 0px;
@@ -149,7 +148,110 @@
 .modal-backdrop.fade.show {
 z-index:0;
 }
-.footer_center .btnShowInfo .modal-body .form-group-avatar{
+.footer_center .btnShowInfo .modal_body .form-group-avatar{
     width: 150px;
     height: 70px;
+}
+#add-new-note .modal_body .form_category{
+    margin-left:0px;
+}
+#add-new-note .modal_body .form_location{
+    margin-left: 0px;
+    }
+.modal_body .form_location{
+     font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 5px;
+    z-index:99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align:left;
+}
+.modal_body .form_title{
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index:99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align:left;
+}
+.modal_body .form_content{
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index:99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align:left;
+}
+.modal_body .form_notification{
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index:99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align:left;
+}
+.modal_body .form_category{
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index:99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align:left;
+}
+.buttons .modal__trigger{
+     width: 150px;
+    height: 70px;
+    float: left;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    background-color: #9932CC;
+    color: white;
+    border-style: 1px solid;
+    border-radius: 7px;
+    padding: 5px;
+    font-size: 20px;
+    padding-top: 25px;
+}
+.modal_body .btn-secondary{
+    width: 80px;
+    height: 60px;
+     font-size: 15px;
+    color: white;
+    background-color: purple;
+    margin-left: 0px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    z-index:99;
+    border-style: 1px solid;
+    border-radius: 7px;
+  
+    font-size: 20px;
+}
+
+.modal_body {
+  padding-left: 30px;
+}
+
+.modal__content {
+    width: 400px;
+    margin-top: 100px;
+    border-radius: 20px;
+}
+.modal_title {
+  font-size: 36px;
+}
+
+.delete:hover {
+  cursor: pointer;
+  background: purple;
 }
