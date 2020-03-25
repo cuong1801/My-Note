@@ -57,6 +57,7 @@
                     <div class="buttons">
                         <p>
                             <a href="" data-modal="#add-new-note" class="modal__trigger">Add New Note</a>
+
                             <a href="" data-modal="#quick-note" class="modal__trigger">Quickly Note</a>
 
                         </p>
@@ -71,19 +72,98 @@
             <div id="add-new-note" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
                 <div class="modal__dialog">
                     <div class="modal__content">
-                        <h1>Big Modal</h1>
-                        <h3>This modal is pretty tall.</h3>
-                        <p>Selfies normcore four dollar toast four loko listicle artisan. Hoodie Marfa authentic,
-                            wayfarers church-key tofu Banksy pop-up Kickstarter Brooklyn heirloom swag synth. Echo Park
-                            cray synth mixtape. Tofu gastropub squid readymade, trust fund Wes Anderson DIY PBR 8-bit
-                            try-hard +1 Shoreditch lo-fi tote bag.</p>
-                        <p><img src="http://unsplash.it/600/300" alt="" /></p>
-                        <p>Mumblecore cred selfies fingerstache. Tousled skateboard plaid lo-fi shabby chic salvia, swag
-                            Odd Future Etsy art party Austin cronut. Crucifix whatever Pinterest food truck, pickled
-                            viral cray 90's DIY chambray keffiyeh biodiesel Vice blog. Cred meh yr tofu.</p>
-                        <p>Mumblecore cred selfies fingerstache. Tousled skateboard plaid lo-fi shabby chic salvia, swag
-                            Odd Future Etsy art party Austin cronut. Crucifix whatever Pinterest food truck, pickled
-                            viral cray 90's DIY chambray keffiyeh biodiesel Vice blog. Cred meh yr tofu.</p>
+                       <div class ="modal_header">               
+                           <h5 class ="modal_title">Add New Note </h5>
+                       </div>
+                       <div class ="modal_body">
+                           <form>
+                               <div class="form_title">
+                                   <label for="title" class="form_label">Title : &nbsp; &nbsp; &nbsp; &nbsp; </label>
+                                   <input type="text" class="form_control" id="title" placeholder="Write something...">
+                               </div>
+                               <div class="form_content">
+                                   <label for="content" class="form_label">Content :&nbsp;</label>
+                                   <input type="text" class="form_control" id="content" placeholder="Write something...">
+                               </div>
+                               <div class="form_location">
+                                   <label for="location" class="form_label">Location :</label>
+                                   <body>
+                                        
+                                        <div class="btn_location">
+                                        <button type="button" class ="btn_location" onclick="getLocation()" 
+                                        style="background-color:purple; height: auto; margin: 10px;">Lấy vị trí</button>
+                                        </div>
+                                        <p id="demo"></p>
+
+                                        <script>
+                                        var x = document.getElementById("demo");
+
+                                        function getLocation() {
+                                        if (navigator.geolocation) {
+                                        navigator.geolocation.getCurrentPosition(showPosition, showError);
+                                        } else {
+                                        x.innerHTML = "Geolocation không được hỗ trợ bởi trình duyệt này.";
+                                        }
+                                        }
+
+                                        function showPosition(position) {
+                                        x.innerHTML = "Vĩ độ: " + position.coords.latitude +
+                                        "<br>Kinh độ: " + position.coords.longitude;
+                                        }
+
+                                        function showError(error) {
+                                        switch(error.code) {
+                                        case error.PERMISSION_DENIED:
+                                        x.innerHTML = "Người sử dụng từ chối cho xác định vị trí."
+                                        break;
+                                        case error.POSITION_UNAVAILABLE:
+                                        x.innerHTML = "Thông tin vị trí không có sẵn."
+                                        break;
+                                        case error.TIMEOUT:
+                                        x.innerHTML = "Yêu cầu vị trí người dùng vượt quá thời gian quy định."
+                                        break;
+                                        case error.UNKNOWN_ERROR:
+                                        x.innerHTML = "Một lỗi xảy ra không rõ nguyên nhân."
+                                        break;
+                                        }
+                                        }
+                                        </script>
+
+                                    </body>
+                               </div>
+                               <br>
+                                    <div class="custom-file">
+                                        <input type="file" value="upload" id="fileButton" multiple />
+                                    </div>
+                                <br>
+                                <div class="form_category">
+                                    <div class="form-group-category">
+                                        <label class="text-category" for="danhmuc">Category</label>
+                                            <select id="ListNotes_category1" class="form-control cursor form-select select-category" style="width:auto; height:auto;">
+                                                <option selected>No Categories</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="form_notification">
+                                    <div class="form-check">
+                                        <input class="" type="checkbox" id="NewNotes_checkTime">
+                                        <label for="thongbao">Notification</label>
+                                            <div id="notification" class="row" style="display: none;">
+                                                <div class="col-md-6">
+                                                    <input id="day_no" type="date" class="form-control " name="bday">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input id="time_no" type="time" class="form-control " name="bday">
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form_save">
+                                   <button type="button" class="btn-secondary">Save</button>
+                                </div>  
+                           </form>
+                           
+                       </div>
                         <!-- modal close button -->
                         <a href="" class="modal__close demo-close">
                             <svg class="" viewBox="0 0 24 24">
@@ -92,6 +172,7 @@
                                 <path d="M0 0h24v24h-24z" fill="none" /></svg>
                         </a>
                     </div>
+                    
                 </div>
             </div>
             <div id="quick-note" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
