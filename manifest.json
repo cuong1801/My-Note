@@ -1,7 +1,7 @@
 {
     "name": "T-NoteList",
     "short_name":"Note List",
-    "start_url": "/login_register.html",
+    "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#FFE9D2",
     "theme_color": "#FFE1C4",
