@@ -20,6 +20,6 @@
     box-shadow: var(--bs-md) !important;
 }
 .py128 {
-    padding-top: 128px !important;
-    padding-bottom: 108px !important;
+    padding-top: 16px !important;
+    padding-bottom: 52px !important;
 }
