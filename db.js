@@ -131,7 +131,7 @@ function deleteNote() {
 var NewNotes_name = document.getElementById("NewNotes_name");
 var NewNotes_location = document.getElementById("location_Name");
 var NewNotes_content = document.getElementById("NewNotes_content");
-// var category_Name = document.getElementById("category_Name");add new category input
+var category_Name = document.getElementById("category_Name");
 var ListNotes_category = document.getElementById("ListNotes_category");
 
 function addnewcategory() {
@@ -170,7 +170,7 @@ function checkTime(i) {
     }
     return i;
 }
-document.getElementById('NewNotes_checkTime').onclick = function (e) {
+document.getElementById('NewNotes_checkTime').onclick = function(e) {
     var check = false;
     if (this.checked) {
         document.getElementById('notification').style.display = 'block';
@@ -180,8 +180,8 @@ document.getElementById('NewNotes_checkTime').onclick = function (e) {
 
 };
 
-function save(id,image) {
-    
+function save(id, image) {
+
     var today = new Date();
     var timepost;
 
@@ -285,22 +285,22 @@ function writeNotesData() {
     } else {
         var n = 0;
         db.collection('notelist').add({
-            name: document.getElementById("NewNotes_name").value,
-            location: document.getElementById("location_Name").value,
-            timepost: Note_timepost,
-            timepostShow: timepost,
-            timenotification: timepost2,
-            timepostNotification: Note_timepost2,
-            content: document.getElementById("NewNotes_content").value,
-            category: document.getElementById("ListNotes_category1").value,
-            userID: firebase.auth().currentUser.uid,
-            // image: temp
+                name: document.getElementById("NewNotes_name").value,
+                location: document.getElementById("location_Name").value,
+                timepost: Note_timepost,
+                timepostShow: timepost,
+                timenotification: timepost2,
+                timepostNotification: Note_timepost2,
+                content: document.getElementById("NewNotes_content").value,
+                category: document.getElementById("ListNotes_category1").value,
+                userID: firebase.auth().currentUser.uid,
+                // image: temp
 
-        })
-            .then(function (docRef) {
+            })
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
@@ -311,7 +311,7 @@ function writeNotesData() {
 //listen for image profile selection
 var tempProfile = "";
 var userImg = document.getElementById('profile-image-upload');
-userImg.addEventListener('change', function (e) {
+userImg.addEventListener('change', function(e) {
     //get file
     var file = e.target.files[0];
     //create a storage ref
@@ -335,3 +335,441 @@ userImg.addEventListener('change', function (e) {
         }
     );
 });
+var category_selected = "";
+
+function Category_select(category) {
+    // document.getElementById("search").value = "";
+    var options = category.children;
+    for (var i = 0; i < options.length; i++) {
+        if (options[i].selected) {
+            category_selected = options[i].value;
+            // category_Name.value = category_selected;
+            $('#listNotes').load('show_not.html');
+            if (finish) { done(); } else if (notYet) { doing(); } else if (notificationCheck) { Notificationshow(); } else {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+
+                        var user = firebase.auth().currentUser;
+
+                        if (user != null) {
+                            var idUser = firebase.auth().currentUser.uid;
+                            // var listcategory = document.getElementById("ListNotes_category").value;
+
+
+                            db.collection("notelist").where('category', '==', category_selected).orderBy("timepost", "desc").get().then(snapshot => {
+                                snapshot.docs.forEach(doc => {
+
+                                    if (doc.data().userID == idUser) {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
+            }
+        }
+    }
+}
+
+function search() {
+    $('#listNotes').load('show_not.html');
+    var tim = document.getElementById("search").value;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            var user = firebase.auth().currentUser;
+
+            if (user != null) {
+                var idUser = firebase.auth().currentUser.uid;
+                // var listcategory = document.getElementById("ListNotes_category").value;
+                db.collection("notelist").orderBy("timepost", "desc").get().then(snapshot => {
+                    snapshot.docs.forEach(doc => {
+                        var tim2 = "" + (doc.data().name).toLowerCase();
+                        if (finish) {
+                            if (doc.data().userID == idUser) {
+                                var des = doc.data().content;
+                                var tit = doc.data().name;
+                                var subTit = tit.slice(0, 30);
+                                var subDes = des.slice(0, 30);
+                                var curDay = new Date();
+                                var linhDay = new Date(doc.data().timenotification);
+                                if (linhDay < curDay) {
+                                    if (tim == "" && category_selected == "") {
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim == "" && category_selected == doc.data().category) {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    }
+                                }
+                            }
+                        } else if (notYet) {
+                            if (doc.data().userID == idUser) {
+                                var des = doc.data().content;
+                                var tit = doc.data().name;
+                                var subTit = tit.slice(0, 30);
+                                var subDes = des.slice(0, 30);
+                                var curDay = new Date();
+                                var linhDay = new Date(doc.data().timenotification);
+                                if (linhDay >= curDay) {
+                                    if (tim == "" && category_selected == "") {
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim == "" && category_selected == doc.data().category) {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    }
+                                }
+                            }
+                        } else if (notificationCheck) {
+                            if (doc.data().userID == idUser) {
+                                var curDay = new Date();
+                                var linhDay = new Date(doc.data().timenotification);
+                                var des = doc.data().content;
+                                var tit = doc.data().name;
+                                var subTit = tit.slice(0, 30);
+                                var subDes = des.slice(0, 30);
+                                if (curDay.getFullYear() == linhDay.getFullYear() && curDay.getMonth() == linhDay.getMonth() && curDay.getDate() == linhDay.getDate() && linhDay.getTime() >= curDay.getTime()) {
+                                    if (tim == "" && category_selected == "") {
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim == "" && category_selected == doc.data().category) {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
+                                        var des = doc.data().content;
+                                        var tit = doc.data().name;
+                                        var subTit = tit.slice(0, 30);
+                                        var subDes = des.slice(0, 30);
+                                        $("#name_notes").append(
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                            '  <p class="card__text">' + subDes + '</p>' +
+                                            '  <div class="card__action-bar">' +
+                                            '    <button class="card__button">OPEN</button>' +
+                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                            '  </div>' +
+                                            '</div>'
+
+                                        );
+
+                                        var imgNote = document.getElementById("imgNote" + doc.id);
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                            imgNote.src = url;
+                                        }).catch(function(error) {});
+                                    }
+                                }
+                            }
+                        } else {
+                            var des = doc.data().content;
+                            var tit = doc.data().name;
+                            var subTit = tit.slice(0, 30);
+                            var subDes = des.slice(0, 30);
+                            if (tim == "" && category_selected == "") {
+                                $("#name_notes").append(
+                                    '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                    '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                    '  <p class="card__text">' + subDes + '</p>' +
+                                    '  <div class="card__action-bar">' +
+                                    '    <button class="card__button">OPEN</button>' +
+                                    '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                    '  </div>' +
+                                    '</div>'
+
+                                );
+
+                                var imgNote = document.getElementById("imgNote" + doc.id);
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                    imgNote.src = url;
+                                }).catch(function(error) {});
+                            } else if (tim == "" && category_selected == doc.data().category) {
+                                var des = doc.data().content;
+                                var tit = doc.data().name;
+                                var subTit = tit.slice(0, 30);
+                                var subDes = des.slice(0, 30);
+                                $("#name_notes").append(
+                                    '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                    '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                    '  <p class="card__text">' + subDes + '</p>' +
+                                    '  <div class="card__action-bar">' +
+                                    '    <button class="card__button">OPEN</button>' +
+                                    '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                    '  </div>' +
+                                    '</div>'
+
+                                );
+
+                                var imgNote = document.getElementById("imgNote" + doc.id);
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                    imgNote.src = url;
+                                }).catch(function(error) {});
+                            } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
+                                var des = doc.data().content;
+                                var tit = doc.data().name;
+                                var subTit = tit.slice(0, 30);
+                                var subDes = des.slice(0, 30);
+                                $("#name_notes").append(
+                                    '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                    '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                    '  <p class="card__text">' + subDes + '</p>' +
+                                    '  <div class="card__action-bar">' +
+                                    '    <button class="card__button">OPEN</button>' +
+                                    '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                    '  </div>' +
+                                    '</div>'
+
+                                );
+
+                                var imgNote = document.getElementById("imgNote" + doc.id);
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                    imgNote.src = url;
+                                }).catch(function(error) {});
+                            } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
+                                var des = doc.data().content;
+                                var tit = doc.data().name;
+                                var subTit = tit.slice(0, 30);
+                                var subDes = des.slice(0, 30);
+                                $("#name_notes").append(
+                                    '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
+                                    '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
+                                    '  <p class="card__text">' + subDes + '</p>' +
+                                    '  <div class="card__action-bar">' +
+                                    '    <button class="card__button">OPEN</button>' +
+                                    '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
+                                    '  </div>' +
+                                    '</div>'
+
+                                );
+
+                                var imgNote = document.getElementById("imgNote" + doc.id);
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                    imgNote.src = url;
+                                }).catch(function(error) {});
+                            }
+                        }
+                    });
+                });
+            }
+        }
+    });
+}
