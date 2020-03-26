@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>T-NoteList</title>
+  
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <!-- <link rel="stylesheet" href="assets/css/Login.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|PT+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|PT+Serif|Shadows+Into+Light&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|PT+Serif|Satisfy|Shadows+Into+Light&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+      
+    <link rel="stylesheet" href="assets\css\index1.css"/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="assets/css/PWA-NotesList-calendar.css">
+    <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="manifest" href="/manifest.json">
+     <!-- <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'> -->
+
+     <link rel="stylesheet" href="assets/css/PWA-NotesList-calendar.css">
+     <link rel="manifest" href="/manifest.json">
+     <!-- ios support -->
+     <link rel="manifest" href="/assets/img/icons">
+     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+     <meta name="theme-color" content="#FFE1C4">
+
+</head>
+<body>
+
+              <div id="user_div" class="loggedin-div">
+                    <div class="page-wrapper chiller-theme toggled">
+                            <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+                                <i class="material-icons">menu_open</i>
+                            </a>
+                            <nav id="sidebar" class="sidebar-wrapper">
+                                <div class="sidebar-content">
+                                    <div class="sidebar-brand">
+                                        <a href="#">T-NoteList</a>
+                                        <div id="close-sidebar">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                    <div class="sidebar-header">
+                                        <div class="user-pic">
+                                            <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
+                                        </div>
+                                        <div class="user-info ">
+                                            <span class="user-name">User
+                                            <strong>1</strong>
+                                            </span>
+                                            <!-- Trigger/Open The Modal -->
+                                            <!-- button thêm ghi chú mới-->
+                                            <i type="button" class="btn-dark material-icons" data-toggle="modal" data-target="#myModal">note_add</i>
+                                            <!-- The Modal -->
+                                            <div class="modal" id="myModal">
+                                                <div class="modal-dialog  modal-lg">
+                                                    <div class="modal-content">
+                    
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Add new note</h4>
+                                                        </div>
+                    
+                                                        <!-- Modal body -->
+                                                        <div class="modal-body">
+                                                            <form class="modal-content animate modal-dialog modal-lg" action="/action_page.php">
+                                                                <!-- form thêm ghi chú mới-->
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <input id="NewNotes_name" type="Title" class="form-control" id="tenghichu" placeholder="Title">
+                                                                    </div>
+                                                                    <div class="form-group col-md-5">
+                                                                        <div>
+                    
+                                                                            <div class="input-group">
+                                                                                <input id="NewNotes_location" type="text" class="form-control " placeholder="location...">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="input-group-text">
+                                                                                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <textarea id="NewNotes_content" type="ghichu" name="message" placeholder="What are you doing..." style="width:auto; height:auto;"></textarea>
+                                                                <br>
+                                                                <div class="custom-file">
+                                                                    <input type="file" class="custom-file-input" id="customFile NewNotes_image">
+                                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="danhmuc">Category</label>
+                                                                        <select id="NewNotes_category" class="form-control">
+                                                                            <!-- <option selected>Choose...</option>
+                                                                            <option>...</option> -->
+                                                                        </select>
+                                                                    </div>
+                   
+                                                                    <div class="form-group col-md-4">
+                                                                        <div class="form-check">
+                                                                            <input class="" type="checkbox" id="gridCheck NewNotes_checkTime">
+                                                                            <label for="thongbao">Notification</label>
+                                                                            <input type="datetime-local" class="form-control" id="thongbao NewNotes_timeclock" name="bdaytime">
+                    
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                    
+                                                        <!-- Modal footer -->
+                                                        <div class="modal-footer">
+                                                            <button onclick="writeNotesData()" type="button" style="width: 70px;height: 50px;" class="btn btn-outline-info">Add</button>
+                                                            <button type="button" style="width: 70px;height: 50px;" class="btn btn-outline-info" data-dismiss="modal">Close</button>
+                                                        </div>
+                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                    
+                                            <i type="button" class="btn-dark material-icons" data-toggle="modal" data-target="#alarm-form">alarm_add</i>
+                                            <div class="modal" id="alarm-form">
+                                                    <div class="modal-dialog  modal-lg">
+                                                        <div class="modal-content" style="width: 0;padding: 0;">
+                                                               
+                                                                
+                                                                    <div class="alarm-wrap">
+                                                                            <div class="alarm">
+                                                                              
+                                                                                <div class="slide-date">
+                                                                                    <div class="alarm-prev"><span></span></div>
+                                                                                    <div class="date">
+                                                                                        <div class="dd">18</div>
+                                                                                        <div class="mm-yy">July 2015</div>
+                                                                                    </div>
+                                                                                    <div class="alarm-next"><span></span></div>
+                                                                                </div>
+                                                                                <div class="day">Monday</div>
+                                                                                <input id="main-toggle" type="checkbox" class="tgl"><label for="main-toggle" class="toggle"></label>
+                                                                                <div class="alarm-content">
+                                                                                    <div class="calendar-wrap">
+                                                                                        <div class="calendar">
+                                                                                            <div class="calendar-day">
+                                                                                                <input class="tgl-dd" id="tgl-day-1" type="checkbox" checked><label class="tgl-day" for="tgl-day-1">SU</label>
+                                                                                                <input class="tgl-dd" id="tgl-day-2" type="checkbox" checked><label class="tgl-day" for="tgl-day-2">MO</label>
+                                                                                                <input class="tgl-dd" id="tgl-day-3" type="checkbox"><label class="tgl-day" for="tgl-day-3">TU</label>
+                                                                                                <input class="tgl-dd" id="tgl-day-4" type="checkbox" checked><label class="tgl-day" for="tgl-day-4">WE</label>
+                                                                                                <input class="tgl-dd" id="tgl-day-5" type="checkbox"><label class="tgl-day" for="tgl-day-5">TH</label>
+                                                                                                <input class="tgl-dd" id="tgl-day-6" type="checkbox"><label class="tgl-day" for="tgl-day-6">FR</label>
+                                                                                                <input class="tgl-dd" id="tgl-day-7" type="checkbox"><label class="tgl-day" for="tgl-day-7">SA</label>
+                                                                                            </div>
+                                                                                            <div class="calendar-time">
+                                                                                                <div class="time-hh">
+                                                                                                    <div class="text">H</div>
+                                                                                                    <select>
+                                                                                                <option>01</option>
+                                                                                                <option>02</option>
+                                                                                                <option>03</option>
+                                                                                                <option>04</option>
+                                                                                                <option>05</option>
+                                                                                                <option>06</option>
+                                                                                                <option>07</option>
+                                                                                                <option>08</option>
+                                                                                                <option>09</option>
+                                                                                                <option>10</option>
+                                                                                                <option>11</option>
+                                                                                                <option>12</option>
+                                                                                            </select>
+                                                                                                </div>
+                                                                                                <div class="time-mm">
+                                                                                                    <div class="text">M</div>
+                                                                                                    <select>
+                                                                                                <option>10</option>
+                                                                                                <option>20</option>
+                                                                                                <option selected>30</option>
+                                                                                                <option>40</option>
+                                                                                                <option>50</option>
+                                                                                                <option>60</option>
+                                                                                            </select>
+                                                                                                </div>
+                                                                                                <div class="time-ss">
+                                                                                                    <div class="text">S</div>
+                                                                                                    <select>
+                                                                                                <option>00</option>
+                                                                                                <option>10</option>
+                                                                                                <option>20</option>
+                                                                                                <option>30</option>
+                                                                                                <option>40</option>
+                                                                                                <option>50</option>
+                                                                                                <option>60</option>
+                                                                                            </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="calendar-action clearfix">
+                                                                                                <div class="button"><label for="main-toggle" class="btn btn-default pull-left">Begin</label></div>
+                                                                                                <div class="button"><label for="main-toggle" class="btn btn-danger pull-right">Cancel</label></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="alarm-ul">
+                                                                                        <div class="alarm-li">
+                                                                                            <input id="alarm-1" type="checkbox" class="on-off" checked>
+                                                                                            <div class="alarm-list-inf clearfix">
+                                                                                                <div class="pull-left">
+                                                                                                    <span class="alarm-bell"></span>
+                                                                                                </div>
+                                                                                                <div class="pull-left">
+                                                                                                    <div class="alarm-info">
+                                                                                                        <div class="alarm-time">06:30</div>
+                                                                                                        <div class="alarm-repeat">
+                                                                                                            <span class="active">SU</span>
+                                                                                                            <span>MO</span>
+                                                                                                            <span class="active">TU</span>
+                                                                                                            <span class="active">WE</span>
+                                                                                                            <span>TH</span>
+                                                                                                            <span class="active">FR</span>
+                                                                                                            <span class="active">SA</span>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="pull-right">
+                                                                                                    <label class="alarm-toggle" for="alarm-1"></label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="alarm-li">
+                                                                                            <input id="alarm-2" type="checkbox" class="on-off">
+                                                                                            <div class="alarm-list-inf clearfix">
+                                                                                                <div class="pull-left">
+                                                                                                    <span class="alarm-bell"></span>
+                                                                                                </div>
+                                                                                                <div class="pull-left">
+                                                                                                    <div class="alarm-info">
+                                                                                                        <div class="alarm-time">09:30</div>
+                                                                                                        <div class="alarm-repeat">
+                                                                                                            <span>SU</span>
+                                                                                                            <span>MO</span>
+                                                                                                            <span>TU</span>
+                                                                                                            <span class="active">WE</span>
+                                                                                                            <span>TH</span>
+                                                                                                            <span>FR</span>
+                                                                                                            <span>SA</span>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="pull-right">
+                                                                                                    <label class="alarm-toggle" for="alarm-2"></label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="alarm-li">
+                                                                                            <input id="alarm-3" type="checkbox" class="on-off" checked>
+                                                                                            <div class="alarm-list-inf clearfix">
+                                                                                                <div class="pull-left">
+                                                                                                    <span class="alarm-bell"></span>
+                                                                                                </div>
+                                                                                                <div class="pull-left">
+                                                                                                    <div class="alarm-info">
+                                                                                                        <div class="alarm-time">15:30</div>
+                                                                                                        <div class="alarm-repeat">
+                                                                                                            <span class="active">SU</span>
+                                                                                                            <span>MO</span>
+                                                                                                            <span>TU</span>
+                                                                                                            <span>WE</span>
+                                                                                                            <span>TH</span>
+                                                                                                            <span>FR</span>
+                                                                                                            <span>SA</span>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="pull-right">
+                                                                                                    <label class="alarm-toggle" for="alarm-3"></label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                    </div>
+                                                               
+                                                                
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            
+                                                    
+                                                
+                                        </div>
+                                    </div>
+                                    <!-- sidebar-header  -->
+                                    <div class="sidebar-search">
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control search-menu" placeholder="Search...">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons" >
+                                                            search
+                                                            </i>
+                                        </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- sidebar-search  -->
+                                    <div class="sidebar-menu">
+                                        <ul>
+                                            <li class="header-menu">
+                                                <span>General</span>
+                                            </li>
+                                            <li class="sidebar-dropdown categoryList">
+                                                <a href="#">
+                                                    <i class="material-icons">menu</i>
+                                                    <span>Category</span>
+                    
+                                                </a>
+                                                <div class="sidebar-submenu">
+                                                    <ul id="categoryList" class="show_category ">           
+                                                         <!-- <a>Tuần</a> -->
+                                                         <div class="khung">
+                                                             <div class="inputcategory">
+                                                                
+                                                                <input id="category_Name" class="input1" type="text" placeholder="add new note" aria-label="addnewcategory" aria-describedby="button-addon2">
+                                                             </div>
+                                                             <div class="editcategory">
+                                                                <i class="material-icons button" onclick="addnewcategory()">add_box</i>
+                                                             </div>
+                                                             <div class="deletecategory">
+                                                                <i class="material-icons button "  onclick="deleteCategory()">delete_outline</i>
+                                                             </div>
+                                                         </div>
+                                                         
+                                                         <li>
+                                                             <table>
+                                                                 <tr>
+                                                                     <td>
+                                                                         <a href="" onclick="shownote_category()">Chung</a>
+                                                                        </td>
+                                                                        <td>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </li>
+                                                         
+                                                    </ul>
+                    
+                                                </div>
+                                            </li>
+                                            <li class="sidebar-dropdown">
+                                                <a href="#">
+                                                    <i class="material-icons">question_answer</i>
+                                                    <span>Mission</span>
+                                                   
+                                                </a>
+                                                <div class="sidebar-submenu">
+                                                    <ul>
+                                                            
+                                                        <li>
+                                                            <table>
+                                                                <tr>
+                                                                        
+                                                                        <td>
+                                                                                <a href="#">Day</a>
+                                                                        </td>
+                                                                        <td>
+
+                                                                        </td>
+                                                                        <td>
+                                                                         
+                                                                          <i class="material-icons button edit">edit</i>
+                                                                          <i class="material-icons button delete" >delete</i>
+                                                                        </td>
+                                                                </tr>
+                                                            </table>
+                                                            
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Week</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Month</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="sidebar-dropdown">
+                                                <a href="#">
+                                                    <i class="material-icons">playlist_add_check</i>
+                                                    <span>Memory</span>
+                                                </a>
+                                                <div class="sidebar-submenu">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">General
+                                                                
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Panels</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Tables</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Icons</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Forms</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="sidebar-dropdown">
+                                                <a href="#">
+                                                    <i class="material-icons">equalizer</i>
+                                                    <span>Analysis</span>
+                                                </a>
+                                                <div class="sidebar-submenu">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Pie chart</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Line chart</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Bar chart</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Histogram</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="sidebar-dropdown">
+                                                <a href="#">
+                                                    <i class="material-icons">navigation</i>
+                                                    <span>Maps</span>
+                                                </a>
+                                                <div class="sidebar-submenu">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Google maps</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Open street map</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                    
+                                            <li class="sidebar-dropdown">
+                                                <a href="#">
+                                                    <i class="material-icons">add_to_queue</i>
+                                                    <span>Add New Note</span>
+                                                </a>
+                                                <div class="sidebar-submenu">
+                                                    <ul>
+                                                        <div class="input-group ">
+    
+                                                                <input id="category_Name" type="text" class="form-control" placeholder="Add new category" aria-label="addnewcategory" aria-describedby="button-addon2">
+                                                                <div class="input-group-append">
+                                                                    <button id="submit-btn" class="btn btn-outline-secondary" type="button"  onclick="addnewcategory()">Add</button>
+                                                                </div>
+                                                            
+                                                                <!-- <input type="text" class="form-control" id="giatridm" placeholder="Thêm danh mục" aria-label="themdanhmuc" aria-describedby="button-addon2">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-outline-secondary" id="themdanhmuc" type="button" id="button-addon2" onclick="themdm();">Thêm</button>
+                                                            </div> -->
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="material-icons">info</i>
+                                                    <span>About</span>
+                                                </a>
+                                            </li>
+                                            <br>
+                                       
+                                            <li>
+                                                
+                                                    <a href="#">
+                                                       
+                                                        </a>
+                                                        
+                                                
+                                            </li>
+                                          
+                                        </ul>
+                                    </div>
+                                    <!--lịch xem-->
+                    
+                                    <!-- sidebar-menu  -->
+                                </div>
+                    
+                                <div>
+                    
+                                    
+                                </div>
+                                <!-- sidebar-content  -->
+                                <div class="sidebar-footer">
+                                    <a href="#">
+                                        <i class="material-icons">alarm_on</i>
+                                        <span class="badge badge-pill badge-warning notification">3</span>
+                                    </a>
+                                    <a href="#">
+                                        <i class="material-icons">move_to_inbox</i>
+                                        <span class="badge badge-pill badge-success notification">7</span>
+                                    </a>
+                                    <a href="#">
+                                        <i class="material-icons">settings_applications</i>
+                                        <span class="badge-sonar"></span>
+                                    </a>
+                                    <a href="#">
+                                        <i class="material-icons">calendar_today</i>
+                                    </a>
+                                    <a href="#">
+                                        <i onclick="logout()" class="material-icons">power_settings_new</i>
+                                    </a>
+                                    
+                                </div>
+                            </nav>
+                            <!-- sidebar-wrapper  -->
+                            <main class="page-content">
+                                <div class="container-fluid">
+                                    <h2>T-NoteList</h2>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <p>Là nơi giúp bạn lưu lại những ghi chú nhiệm vụ hằng ngày</p>
+                                            <p> Bạn là một sinh viên, bạn đã đi làm, bạn thường hay quên những thứ hằng ngày. Chúng tôi sẽ giúp bạn
+                                                <!--<a href="https://github.com/azouaoui-med/pro-sidebar-template" target="_blank">
+                                        Github</a>, it contains more themes and background image option</p>-->
+                                        </div>
+                    
+                                    </div>
+                                    <!-- Danh sách các nhiệm vụ mới nhất-->
+                                    <h5>Nhiệm vụ gần đây</h5>
+                                    <h6 id=aaa></h6>
+                                    <hr>
+                                    <div  id="name_notes" class="row">
+                                        
+                                       
+                                       
+                    
+                                    </div>
+                                </div>
+                            </main>
+                            <!-- page-content" -->
+                        </div>
+                        <!-- page-wrapper -->
+                    
+                               
+                            <div  data-toggle="tooltip" data-placement="left" id="back-to-top" class="back-to-top" >
+                                <!--button trở về đầu trang-->
+                    
+                                <button class="btn material-icons">keyboard_arrow_up</button>      
+                            </div>    
+                  </div>
+       
+                  <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+                  <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyD17r7mphJ8Vh_rXYHG8WAHgnTfCa2RgaE",
+    authDomain: "t-notelist.firebaseapp.com",
+    databaseURL: "https://t-notelist.firebaseio.com",
+    projectId: "t-notelist",
+    storageBucket: "t-notelist.appspot.com",
+    messagingSenderId: "135435269388",
+    appId: "1:135435269388:web:768027188dd226fd79c529"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+          <!-- <script src="/__/firebase/init.js"></script> -->
+          <script src="/app.js"></script>
+          <script src="/db.js"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="assets/js/login.js"></script>
+        <script src="assets/js/index1.js"></script>
+        <script src="Nhiemvu/shownote_category.js"></script>
+</body>
+</html>
