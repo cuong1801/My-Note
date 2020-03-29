@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "pwatnotelist"
+    "default": "pwatnotelist",
+    "y": "t-notelist"
   }
 }
