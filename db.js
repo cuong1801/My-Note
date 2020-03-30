@@ -76,13 +76,44 @@ window.onload = function () {
 
 
                                 '</div>' +
-                                '<div id="mySidebar" class="sidebar">' +
+                                '<div id="mySidebar'+doc.id+'" class="sidebar">' +
                                 '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
-                                '<a href="#">About</a>' +
-                                '<a href="#">Services</a>' +
-                                '<a href="#">Clients</a>' +
-                                '<a href="#">Contact</a>' +
-                                '</div>'
+                                '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
+                              
+                                '<h1 id="' + doc.id + 'Linhname" class="modal-title">' + doc.data().name + '</h1>' +
+                                '<small style="padding: 15px;"><em>' + doc.data().category + '</em></small>' +
+
+                                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '</button>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                '<small><em>' + doc.data().timepostShow + '</em></small>' +
+                                '<div class="dimmer"> <h6 id="' + doc.id + 'Linhnotification" class="h6">' + doc.data().timenotification + '</h6></div>' +
+                                '<small ><em id="' + doc.id + 'Linhlocation"> ' + doc.data().location + '</em></small><br>' +
+                                // '<pre>' + doc.data().content + '</pre>' +
+
+                                '<textarea id="' + doc.id + 'Linhcontent"class="form-control" rows="7">' + doc.data().content + '</textarea>' +
+                                '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+
+                                '</div>' +
+                                '<div class="modal-footer">' +
+                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal">Close</button>' +
+                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
+                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
+                                '</div>'+
+                                '<script>'+
+                                ' function openNav() {'+
+                                     '  document.getElementById("mySidebar'+doc.id+'").style.width = "80%";'+
+                                       'document.getElementById("main").style.marginLeft = "250px";'+
+                                    ' }'+
+                                     
+                                     /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+                                    ' function closeNav() {'+
+                                       'document.getElementById("mySidebar'+doc.id+'").style.width = "0";'+
+                                     '  document.getElementById("main").style.marginLeft = "0";'+
+                                    ' }'+
+                                 '</script>'
                                 // '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
                                 // '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
                                 // '  <p class="card__text">' + subDes + '</p>' +

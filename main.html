@@ -22,7 +22,7 @@
 
     <!-- ios support -->
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -235,15 +235,40 @@
                     <input class="search__input" type="text" placeholder="Search" id="search"
                         onkeyup="search() "></input>
                     <hr>
+
                 </div>
                 <div class="col-lg-6">
-                    <span class="custom-dropdown big ">
-                        <select id="ListNotes_category" onchange="Category_select(this)">
-                            <option active>--- Select---</option>
-                        </select>
-                    </span>
-                </div>
+                    <div class="accordion" id="accordionExample">
+                        <div>
+                            <div id="headingOne">
+                                <h2 class="mb-0">
+                                    <h2 type="button" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne">
+                                        Category
+                                    </h2>
+                                </h2>
+                            </div>
 
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <!-- <span class="custom-dropdown big ">
+                                    <select id="ListNotes_category" onchange="Category_select(this)">
+                                        <option active>--- Select---</option>
+                                    </select>
+                                </span> -->
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="new category..."
+                                        aria-label="Recipient's username with two button addons"
+                                        aria-describedby="button-addon4">
+                                    <div class="input-group-append" id="button-addon4">
+                                        <button class="btn btn-outline-secondary" type="button">Save</button>
+                                        <button class="btn btn-outline-secondary" type="button">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -256,45 +281,45 @@
             <div class="col-lg-5">
                 <div class="quick-note">
                     <header class="header-quick">
-                        <div class="page-banner ">
-                            <h1>Quickly Notes</h1>
+                        <div>
+                            <h3>Quickly Notes</h3>
                             <br>
                             <div class="p-divider mb32"></div>
                             <h6>My note</h6>
-                            <br>
-                            <input id="search" type="search " onkeyup="search() "
-                                placeholder="Search for quick note..." />
+                            <input class="search__input" type="text" placeholder="Search" id="search" onkeyup="search()"
+                                style="width: 70%;" />
+
                         </div>
-                    </header>
-                    <div class="row">
-                        <div class=" col-lg-6 bs-md">
-                            <div class="book-list">
-                                <h3>Quickly Note:</h3>
-                                <ul>
-                                    <li class="detail-quick-note"><span class="name">Name of the Wind</span>
-                                        <span class="delete">delete</span>
-                                    </li>
 
-                                    <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
-                                        <span class="delete">delete</span>
-                                    </li>
+                </div>
+                </header>
+                <div class="bs-md">
+                    <div class="book-list">
+                        <ul>
+                            <li class="detail-quick-note"><span class="name">Name of the Wind</span>
+                                <span class="delete">delete</span>
+                            </li>
 
-                                    <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
-                                        <span class="delete">delete</span>
-                                    </li>
+                            <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
+                                <span class="delete">delete</span>
+                            </li>
 
-                                    <li class="detail-quick-note"><span class="name">The Master and the
-                                            Margharita</span>
-                                        <span class="delete">delete</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-book">
-                                <input type="text" placeholder="Add a book"><span class="add-input"><button
-                                        class="addbtn">Add</button></span>
-                            </div>
-                        </div>
-                        <div class=" col-lg-6">
+                            <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
+                                <span class="delete">delete</span>
+                            </li>
+
+                            <li class="detail-quick-note"><span class="name">The Master and the
+                                    Margharita</span>
+                                <span class="delete">delete</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="text" placeholder="Add a book">
+                    <span class="add-input">
+                        <button class="addbtn">Add</button>
+                    </span>
+
+                    <!-- <div class=" col-lg-6">
                             <section class="block">
                                 <div class='calc-wrap'>
                                     <div id="calc">
@@ -323,14 +348,14 @@
                                     </div>
                                 </div>
                             </section>
-                        </div>
-                    </div>
+                        </div> -->
                 </div>
             </div>
         </div>
+    </div>
 
-        <br>
-        <br>
+    <br>
+    <br>
     </div>
 
     </div>
