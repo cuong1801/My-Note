@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="components/css/homepage/dropdown.css">
     <link rel="stylesheet" href="components/css/homepage/logout.css">
 
+    <link rel="stylesheet" href="components/css/homepage/category.css">
 
     <!-- ios support -->
 
@@ -231,135 +232,97 @@
         <br>
         <div class="quick-note">
             <div class="row list-note">
-                <div class="col-lg-6">
-                    <input class="search__input" type="text" placeholder="Search" id="search"
-                        onkeyup="search() "></input>
-                    <hr>
+                <!-- <div class="col-lg-6"> -->
+                <input class="search__input" type="text" placeholder="Search" id="search" onkeyup="search() "></input>
 
-                </div>
-                <div class="col-lg-6">
-                    <div class="accordion" id="accordionExample">
-                        <div>
-                            <div id="headingOne">
-                                <h2 class="mb-0">
-                                    <h2 type="button" data-toggle="collapse" data-target="#collapseOne"
-                                        aria-expanded="true" aria-controls="collapseOne">
-                                        Category
-                                    </h2>
-                                </h2>
-                            </div>
+                <!-- </div> -->
 
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                data-parent="#accordionExample">
-                                <!-- <span class="custom-dropdown big ">
-                                    <select id="ListNotes_category" onchange="Category_select(this)">
-                                        <option active>--- Select---</option>
-                                    </select>
-                                </span> -->
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="new category..."
-                                        aria-label="Recipient's username with two button addons"
-                                        aria-describedby="button-addon4">
-                                    <div class="input-group-append" id="button-addon4">
-                                        <button class="btn btn-outline-secondary" type="button">Save</button>
-                                        <button class="btn btn-outline-secondary" type="button">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <hr>
+
+
         </div>
         <div class="row">
             <div class="col-lg-6">
-
+                <select class="form-control" id="ListNotes_category" onchange="Category_select(this)"
+                    style="width: auto;">
+                    <option active>--- Select---</option>
+                </select>
                 <div id="listNotes">
                 </div>
 
             </div>
-            <div class="col-lg-5">
-                <div class="quick-note">
-                    <header class="header-quick">
-                        <div>
-                            <h3>Quickly Notes</h3>
-                            <br>
-                            <div class="p-divider mb32"></div>
-                            <h6>My note</h6>
-                            <input class="search__input" type="text" placeholder="Search" id="search" onkeyup="search()"
-                                style="width: 70%;" />
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionExample">
+                    <div>
+                        <div id="headingOne">
+                            <h2 class="mb-0">
+                                <h3 style="text-align:left; margin-top: 10px;" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Category
+                                </h3>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordionExample" style="text-align: left;margin-left: 40px;">
+                            <form>
+                                <div class="group-category">
+                                    <input id="category_Name" class="input-category" type="text" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="label-category">Category</label>
+                                </div>
+                                <button class="btn btn-primary" onclick="addnewcategory()"> Add</button>
+                                <ul id="list-category" class="list-group" style="margin-bottom: 27px;">
+                                </ul>
+                            </form>
 
                         </div>
 
-                </div>
-                </header>
-                <div class="bs-md">
-                    <div class="book-list">
-                        <ul>
-                            <li class="detail-quick-note"><span class="name">Name of the Wind</span>
-                                <span class="delete">delete</span>
-                            </li>
 
-                            <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
-                                <span class="delete">delete</span>
-                            </li>
-
-                            <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
-                                <span class="delete">delete</span>
-                            </li>
-
-                            <li class="detail-quick-note"><span class="name">The Master and the
-                                    Margharita</span>
-                                <span class="delete">delete</span>
-                            </li>
-                        </ul>
                     </div>
-                    <input type="text" placeholder="Add a book">
-                    <span class="add-input">
-                        <button class="addbtn">Add</button>
-                    </span>
+                    
+                    <div>
+                        <div id="headingTwo">
+                            <h2 class="mb-0">
+                                <h3 style="text-align:left; margin-top: 10px;" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Quick Note
+                                </h3>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                            data-parent="#accordionExample" style="text-align: left;margin-left: 40px;">
+                            <form>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                                  
+                                    
+                                    <li class="list-group-item list-group-item-primary">A simple primary list group item</li>
+                                    <li class="list-group-item list-group-item-secondary">A simple secondary list group item</li>
+                                    <li class="list-group-item list-group-item-success">A simple success list group item</li>
+                                    <li class="list-group-item list-group-item-danger">A simple danger list group item</li>
+                                    <li class="list-group-item list-group-item-warning">A simple warning list group item</li>
+                                    <li class="list-group-item list-group-item-info">A simple info list group item</li>
+                                    <li class="list-group-item list-group-item-light">A simple light list group item</li>
+                                    <li class="list-group-item list-group-item-dark">A simple dark list group item</li>
+                                  </ul>
+                            </form>
 
-                    <!-- <div class=" col-lg-6">
-                            <section class="block">
-                                <div class='calc-wrap'>
-                                    <div id="calc">
-                                        <div class="top">
-                                            <span class="clear">c</span>
-                                            <div class="result"></div>
-                                        </div>
-                                        <div class="keys">
-                                            <span>7</span>
-                                            <span>8</span>
-                                            <span>9</span>
-                                            <span class="op">+</span>
-                                            <span>4</span>
-                                            <span>5</span>
-                                            <span>6</span>
-                                            <span class="op">-</span>
-                                            <span>1</span>
-                                            <span>2</span>
-                                            <span>3</span>
-                                            <span class="op">÷</span>
-                                            <span>0</span>
-                                            <span>.</span>
-                                            <span class="eval">=</span>
-                                            <span class="op mult">x</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div> -->
+                        </div>
+
+
+                    </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 
     <br>
     <br>
-    </div>
-
-    </div>
-
     <div id="footer" class="cf"></div>
 
     <!-- page-wrapper -->

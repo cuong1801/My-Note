@@ -65,55 +65,48 @@ window.onload = function () {
                             $("#name_notes").append(
                                 '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
                                 '<p>' + subTit + '...</p>' +
-                                '<div class="row">'+
-                                '<div class="col-lg-6">'+
+                                '<div class="row">' +
+                                '<div class="col-lg-6">' +
                                 '<p class="text-muted">' + doc.data().category + '.</p>' +
-                                '</div>'+
-                                '<div class="col-lg-6">'+
+                                '</div>' +
+                                '<div class="col-lg-6">' +
                                 '<p class="text-muted">' + doc.data().timepostShow + '</p>' +
-                                '</div>'+
-                                '</div>'+
+                                '</div>' +
+                                '</div>' +
 
 
                                 '</div>' +
-                                '<div id="mySidebar'+doc.id+'" class="sidebar">' +
-                                '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
+                                '<div id="mySidebar' + doc.id + '" class="sidebar">' +
+                                // '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
                                 '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
-                              
-                                '<h1 id="' + doc.id + 'Linhname" class="modal-title">' + doc.data().name + '</h1>' +
-                                '<small style="padding: 15px;"><em>' + doc.data().category + '</em></small>' +
 
-                                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
-                                '<span aria-hidden="true">&times;</span>' +
-                                '</button>' +
+                                '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="    border-left: #000000 solid 8px;color: #f60000;">' + doc.data().name + '</h1>' +
+                                '<small style="padding: 15px;"><em>' + doc.data().category + '/' + doc.data().location + '</em></small>' +
+                                '<small style="padding: 15px;"><em>' + doc.data().timepostShow + '</em></small>' +
+
                                 '</div>' +
                                 '<div class="modal-body">' +
-                                '<small><em>' + doc.data().timepostShow + '</em></small>' +
-                                '<div class="dimmer"> <h6 id="' + doc.id + 'Linhnotification" class="h6">' + doc.data().timenotification + '</h6></div>' +
-                                '<small ><em id="' + doc.id + 'Linhlocation"> ' + doc.data().location + '</em></small><br>' +
                                 // '<pre>' + doc.data().content + '</pre>' +
-
-                                '<textarea id="' + doc.id + 'Linhcontent"class="form-control" rows="7">' + doc.data().content + '</textarea>' +
+                                '<pre id="' + doc.id + 'Linhcontent"class="form-control" rows="7">' + doc.data().content + '</pre>' +
                                 '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
-
                                 '</div>' +
                                 '<div class="modal-footer">' +
-                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal">Close</button>' +
+                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
-                                '</div>'+
-                                '<script>'+
-                                ' function openNav() {'+
-                                     '  document.getElementById("mySidebar'+doc.id+'").style.width = "80%";'+
-                                       'document.getElementById("main").style.marginLeft = "250px";'+
-                                    ' }'+
-                                     
-                                     /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-                                    ' function closeNav() {'+
-                                       'document.getElementById("mySidebar'+doc.id+'").style.width = "0";'+
-                                     '  document.getElementById("main").style.marginLeft = "0";'+
-                                    ' }'+
-                                 '</script>'
+                                '</div>' +
+                                '<script>' +
+                                ' function openNav() {' +
+                                '  document.getElementById("mySidebar' + doc.id + '").style.width = "80%";' +
+                                'document.getElementById("main").style.marginLeft = "250px";' +
+                                ' }' +
+
+                                /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+                                ' function closeNav() {' +
+                                'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
+                                '  document.getElementById("main").style.marginLeft = "0";' +
+                                ' }' +
+                                '</script>'
                                 // '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
                                 // '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
                                 // '  <p class="card__text">' + subDes + '</p>' +
@@ -134,6 +127,32 @@ window.onload = function () {
                     });
 
                 });
+                db.collection("category").get().then(snapshot => {
+
+                    snapshot.docs.forEach(doc => {
+                        if (doc.data().userID == idUser) {
+
+                            var category = doc.data().category;
+                            $("#ListNotes_category").append(
+                                '<option id="list1' + doc.id + '">' + category + '</option>'
+                            );
+                            $("#ListNotes_category1").append(
+                                '<option id="list2' + doc.id + '">' + category + '</option>'
+                            );
+                            $("#list-category").append(
+                                '<div id="list3' + doc.id + '">'+
+                                ' <li class="list-group-item d-flex justify-content-between align-items-center" style="display: block;">' + category + '<ul>' +
+                                '<span class="badge badge-primary badge-pill">Edit</span>' +
+                                '<span id="'+doc.id+'" class="badge badge-primary badge-pill" onclick="deleteCategory()">Del</span>' +
+                                '</ul>' +
+                                '</li>'+
+                                '</div>'
+
+                            );
+                        }
+                    });
+
+                });
             }
         }
     });
@@ -143,34 +162,21 @@ $(document).ready(function () {
         $(".menu-bar").toggleClass("open");
     })
 })
-// In your Javascript (external .js resource or <script> tag)
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-
-        var user = firebase.auth().currentUser;
-
-        if (user != null) {
-
-            var idUser = firebase.auth().currentUser.uid;
-            db.collection('category').onSnapshot(snapshot => {
-                snapshot.docChanges().forEach(change => {
-                    if (change.type === 'added' && change.doc.data().userID === idUser) {
-                        $("#ListNotes_category").append('<option>' + change.doc.data().category + '</option>');
-                        $("#ListNotes_category1").append('<option ">' + change.doc.data().category + '</option>');
-                    }
-                });
-            });
-        }
-    }
-});
 
 function deleteNote() {
     // event.stopPropagation();
     if (confirm('You want to delete note?')) {
         var id = event.target.id;
+        alert(id);
         db.collection('notelist').doc(id).delete();
-        var hidden = 'del' + id;
-        document.getElementById(hidden).style.display = 'none';
+        var hidden1 = 'list1' + id;
+        var hidden2 = 'list2' + id;
+        var hidden3 = 'list3' + id;
+
+        document.getElementById(hidden1).style.display = 'none';
+        document.getElementById(hidden2).style.display = 'none';
+        document.getElementById(hidden3).style.display = 'none';
+
     } else {
 
 
@@ -187,30 +193,54 @@ var ListNotes_category = document.getElementById("ListNotes_category");
 function addnewcategory() {
     var category_Name_text = category_Name.value;
     var category_Name_text_value = category_Name_text.trim();
-    if (category_Name_text_value.length === 0 || category_Name_text_value.length > 15) {
-        alert('Comments are required to continue!');
-        return false;
+    // if (category_Name_text_value.length === 0 || category_Name_text_value.length > 15) {
+    //     alert('Comments are required to continue!');
+    //     return false;
+    // } else {
+    //     var idUser = firebase.auth().currentUser.uid;
+    //     db.collection("category").doc(document.getElementById("category_Name").value + idUser).set({
+    //         category: document.getElementById("category_Name").value,
+    //         userID: idUser
+    //     })
+    // }
+    if (category_Name_text_value.length === 0 || category_Name_text_value.length > 20) {
+        alert('Title are required to continue!');
     } else {
-        var idUser = firebase.auth().currentUser.uid;
-        db.collection("category").doc(document.getElementById("category_Name").value + idUser).set({
-            category: document.getElementById("category_Name").value,
-            userID: idUser
-        })
-        alert("Add to category");
+        var n = 0;
+        db.collection('category').add({
+                category: document.getElementById("category_Name").value,
+                userID: firebase.auth().currentUser.uid,
+                // image: temp
+
+            })
+            .then(function (docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function (error) {
+                alert(error);
+                console.error("Error adding document: ", error);
+            });
     }
 }
 
 function deleteCategory() {
-    var category_Name_text = category_Name.value;
-    var category_Name_text_value = category_Name_text.trim();
+    if (confirm('You want to delete note?')) {
+        var id = event.target.id;
+        alert(id);
+        db.collection('category').doc(id).delete();
+        var hidden = 'list1' + id;
+        var hidden2 = 'list2' + id;
+        var hidden3 = 'list3' + id;
 
-    if (category_Name_text_value.length === 0 || category_Name_text_value.length > 150) {
-        alert('Comments are required to continue!');
+        document.getElementById(hidden).style.display = 'none';
+        document.getElementById(hidden2).style.display = 'none';
+        document.getElementById(hidden3).style.display = 'none';
 
     } else {
-        db.collection("category").doc(document.getElementById("category_Name").value + firebase.auth().currentUser.uid).delete();
-        category_Name.value = "";
+
+
     }
+
 }
 
 
