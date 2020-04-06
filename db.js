@@ -64,13 +64,16 @@ window.onload = function () {
                             var subDes = des.slice(0, 30);
                             $("#name_notes").append(
                                 '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
-                                '<p>' + subTit + '...</p>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
+
+                                '<p style="margin-bottom: -0.5rem;">' + subTit + '...</p>' +
+
                                 '<div class="row">' +
-                                '<div class="col-lg-6">' +
-                                '<p class="text-muted">' + doc.data().category + '.</p>' +
+                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
                                 '</div>' +
-                                '<div class="col-lg-6">' +
-                                '<p class="text-muted">' + doc.data().timepostShow + '</p>' +
+                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<small class="text-muted">' + doc.data().timepostShow + '</small>' +
                                 '</div>' +
                                 '</div>' +
 
@@ -97,24 +100,15 @@ window.onload = function () {
                                 '</div>' +
                                 '<script>' +
                                 ' function openNav() {' +
-                                '  document.getElementById("mySidebar' + doc.id + '").style.width = "80%";' +
+                                '  document.getElementById("mySidebar' + doc.id + '").style.width = "34%";' +
                                 'document.getElementById("main").style.marginLeft = "250px";' +
                                 ' }' +
-
-                                /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
                                 ' function closeNav() {' +
                                 'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
                                 '  document.getElementById("main").style.marginLeft = "0";' +
                                 ' }' +
                                 '</script>'
-                                // '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
-                                // '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
-                                // '  <p class="card__text">' + subDes + '</p>' +
-                                // '  <div class="card__action-bar">' +
-                                // '    <button class="card__button">OPEN</button>' +
-                                // '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
-                                // '  </div>' +
-                                // '</div>'
+
 
 
                             );
@@ -140,12 +134,31 @@ window.onload = function () {
                                 '<option id="list2' + doc.id + '">' + category + '</option>'
                             );
                             $("#list-category").append(
-                                '<div id="list3' + doc.id + '">'+
+                                '<div id="list3' + doc.id + '">' +
                                 ' <li class="list-group-item d-flex justify-content-between align-items-center" style="display: block;">' + category + '<ul>' +
-                                '<span class="badge badge-primary badge-pill">Edit</span>' +
-                                '<span id="'+doc.id+'" class="badge badge-primary badge-pill" onclick="deleteCategory()">Del</span>' +
+                                '<span style="cursor: pointer;" class="badge badge-primary badge-pill" data-toggle="modal" data-target="#editcategory' + doc.id + '">Edit</span>' +
+                                ' <div class="modal fade" id="editcategory' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="editcategoryLabel" aria-hidden="true">' +
+                                '<div class="modal-dialog" role="document">' +
+                                ' <div class="modal-content">' +
+                                ' <div class="modal-header">' +
+                                '<h5 class="modal-title" id="editcategoryLabel">Edit Category</h5>' +
+                                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                                ' <span aria-hidden="true">&times;</span>' +
+                                ' </button>' +
+                                ' </div>' +
+                                ' <div class="modal-body">' +
+                                ' <input class="input input-control form-control" type="text" placeholder="' + category + '"id="input'+ doc.id + '" ></input>' +
+                                ' </div>' +
+                                '<div class="modal-footer">' +
+                                '  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                                ' <button id="' + doc.id + '" type="button" class="btn btn-primary" onclick= "editCategory()">Save changes</button>' +
+                                ' </div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<span style="cursor: pointer;" id="' + doc.id + '" class="badge badge-primary badge-pill" onclick="deleteCategory()">Del</span>' +
                                 '</ul>' +
-                                '</li>'+
+                                '</li>' +
                                 '</div>'
 
                             );
@@ -153,6 +166,7 @@ window.onload = function () {
                     });
 
                 });
+
             }
         }
     });
@@ -169,13 +183,15 @@ function deleteNote() {
         var id = event.target.id;
         alert(id);
         db.collection('notelist').doc(id).delete();
-        var hidden1 = 'list1' + id;
-        var hidden2 = 'list2' + id;
-        var hidden3 = 'list3' + id;
+        var hidden1 = 'del' + id;
+
 
         document.getElementById(hidden1).style.display = 'none';
-        document.getElementById(hidden2).style.display = 'none';
-        document.getElementById(hidden3).style.display = 'none';
+        // document.getElementById(hidden2).style.display = 'none';
+        // document.getElementById(hidden3).style.display = 'none';
+        // setTimeout(function () {
+        //     window.location.href = "index.html";
+        // }, 2000);
 
     } else {
 
@@ -189,20 +205,12 @@ var NewNotes_location = document.getElementById("location_Name");
 var NewNotes_content = document.getElementById("NewNotes_content");
 var category_Name = document.getElementById("category_Name");
 var ListNotes_category = document.getElementById("ListNotes_category");
+var quicknote_content = document.getElementById("new-quick-note")
 
 function addnewcategory() {
     var category_Name_text = category_Name.value;
     var category_Name_text_value = category_Name_text.trim();
-    // if (category_Name_text_value.length === 0 || category_Name_text_value.length > 15) {
-    //     alert('Comments are required to continue!');
-    //     return false;
-    // } else {
-    //     var idUser = firebase.auth().currentUser.uid;
-    //     db.collection("category").doc(document.getElementById("category_Name").value + idUser).set({
-    //         category: document.getElementById("category_Name").value,
-    //         userID: idUser
-    //     })
-    // }
+
     if (category_Name_text_value.length === 0 || category_Name_text_value.length > 20) {
         alert('Title are required to continue!');
     } else {
@@ -221,6 +229,34 @@ function addnewcategory() {
                 console.error("Error adding document: ", error);
             });
     }
+    setTimeout(function () {
+        window.location.href = "index.html";
+    }, 3000);
+}
+
+function addquicknote() {
+    var quick_name_note = quicknote_content.value;
+    var quick_name_note_text_value = quick_name_note.trim();
+
+    if (quick_name_note_text_value.length === 0 || quick_name_note_text_value.length > 10) {
+        alert('Title are required to continue!');
+    } else {
+        var n = 0;
+        db.collection('quicknote').add({
+                content: document.getElementById("new-quick-note").value,
+                userID: firebase.auth().currentUser.uid,
+                // image: temp
+
+            })
+            .then(function (docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function (error) {
+                alert(error);
+                console.error("Error adding document: ", error);
+            });
+    }
+
 }
 
 function deleteCategory() {
@@ -228,18 +264,40 @@ function deleteCategory() {
         var id = event.target.id;
         alert(id);
         db.collection('category').doc(id).delete();
-        var hidden = 'list1' + id;
+        var hidden1 = 'list1' + id;
         var hidden2 = 'list2' + id;
         var hidden3 = 'list3' + id;
 
-        document.getElementById(hidden).style.display = 'none';
         document.getElementById(hidden2).style.display = 'none';
+        document.getElementById(hidden1).style.display = 'none';
         document.getElementById(hidden3).style.display = 'none';
 
+        // setTimeout(function () {
+        //     window.location.href = "index.html";
+        // }, 3000);
     } else {
 
 
     }
+
+}
+
+function editCategory() {
+    var batch = db.batch();
+    // alert("ssd")
+    var id = event.target.id;
+    var inputedit = document.getElementById("input"+id).value;
+    // console.log(inputedit);
+    // alert(document.getElementById( "editcategory"+id).value)
+
+    var newUserRef = db.collection("category").doc(id);
+    batch.update(newUserRef, {
+        "category": inputedit,
+    });
+    batch.commit();
+    setTimeout(function () {
+        window.location.href = "index.html";
+    }, 1500);
 
 }
 
@@ -385,6 +443,9 @@ function writeNotesData() {
                 console.error("Error adding document: ", error);
             });
     }
+    setTimeout(function () {
+        window.location.href = "index.html";
+    }, 3000);
     //window.location="index.html";
 }
 
@@ -451,14 +512,48 @@ function Category_select(category) {
                                         var subTit = tit.slice(0, 30);
                                         var subDes = des.slice(0, 30);
                                         $("#name_notes").append(
-                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="card card--medium">' +
-                                            '  <h2 class="card__title">' + subTit + '</h2><span class="card__subtitle">By Mattia Astorino</span>' +
-                                            '  <p class="card__text">' + subDes + '</p>' +
-                                            '  <div class="card__action-bar">' +
-                                            '    <button class="card__button">OPEN</button>' +
-                                            '    <button id="' + doc.id + '" class="card__button" onclick="deleteNote()">DELETE</button>' +
-                                            '  </div>' +
-                                            '</div>'
+                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
+                                            '<p style="margin-bottom: -0.5rem;">' + subTit + '...</p>' +
+                                            '<div class="row">' +
+                                            '<div class="col-lg-6" style="width: auto;">' +
+                                            '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
+                                            '</div>' +
+                                            '<div class="col-lg-6" style="width: auto;">' +
+                                            '<small class="text-muted">' + doc.data().timepostShow + '</small>' +
+                                            '</div>' +
+                                            '</div>' +
+
+
+                                            '</div>' +
+                                            '<div id="mySidebar' + doc.id + '" class="sidebar">' +
+                                            // '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
+                                            '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
+
+                                            '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="    border-left: #000000 solid 8px;color: #f60000;">' + doc.data().name + '</h1>' +
+                                            '<small style="padding: 15px;"><em>' + doc.data().category + '/' + doc.data().location + '</em></small>' +
+                                            '<small style="padding: 15px;"><em>' + doc.data().timepostShow + '</em></small>' +
+
+                                            '</div>' +
+                                            '<div class="modal-body">' +
+                                            // '<pre>' + doc.data().content + '</pre>' +
+                                            '<pre id="' + doc.id + 'Linhcontent"class="form-control" rows="7">' + doc.data().content + '</pre>' +
+                                            '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                            '</div>' +
+                                            '<div class="modal-footer">' +
+                                            '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                            '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
+                                            '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
+                                            '</div>' +
+                                            '<script>' +
+                                            ' function openNav() {' +
+                                            '  document.getElementById("mySidebar' + doc.id + '").style.width = "34%";' +
+                                            'document.getElementById("main").style.marginLeft = "250px";' +
+                                            ' }' +
+                                            ' function closeNav() {' +
+                                            'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
+                                            '  document.getElementById("main").style.marginLeft = "0";' +
+                                            ' }' +
+                                            '</script>'
 
                                         );
 
