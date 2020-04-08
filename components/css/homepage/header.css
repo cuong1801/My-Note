@@ -55,10 +55,10 @@
     }
 }
 
-nav {
+/* nav {
     float: right;
     width: 60%;
-}
+} */
 
 @media only screen and (max-width: 766px) {
     nav {
@@ -66,21 +66,21 @@ nav {
     }
 }
 
-nav ul {
+/* nav ul {
     list-style: none;
     overflow: hidden;
     text-align: right;
     float: right;
-}
+} */
 
 @media only screen and (max-width: 766px) {
-    nav ul {
+    /* nav ul {
         padding-top: 10px;
         margin-bottom: 22px;
         float: left;
         text-align: center;
         width: 100%;
-    }
+    } */
 }
 
 nav ul li {
@@ -145,7 +145,7 @@ nav ul a {
 
 body {
     color: #8f8f8f;
-    background: white;
+    background: #F0F2F5;
     font-family: "Cardo", serif;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 
     <link rel="stylesheet" href="components/css/homepage/home.css">
-    <link rel="stylesheet" href="components/css/homepage/quickly-note.css">
+    <!-- <link rel="stylesheet" href="components/css/homepage/quickly-note.css"> -->
     <link rel="stylesheet" href="components/css/homepage/calc.css">
     <link rel="stylesheet" href="components/css/homepage/background.css">
     <link rel="stylesheet" href="components/css/homepage/footer.css">
@@ -41,22 +41,80 @@
 
 <body>
 
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="pos-f-t" style=" position: fixed; height: auto;width: 100%;margin-top: -35;z-index: 200;">
-        <div class="collapse show" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
-                <ul><a href="">Profile</a></ul>
-                <ul><a href="" data-toggle="modal" data-target="#addnewnoteModal">New Note</a></ul>
-
-                <ul><a href="" data-toggle="modal" data-target="#logoutModal">logout</a></ul>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-        <nav class="navbar navbar-dark bg-dark" style="width: 100%;">
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    </nav> -->
+    <div class="pos-f-t"
+        style=" position: fixed; height: auto;width: 100%;margin-top: -35;z-index: 200; border-top:solid 3px #DA670B">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="float:left; width:100%;">
+            <div class="container">
+                <a class="navbar-brand" href="#">My Note</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse show" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#addnewnoteModal">Add New
+                                Note</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="" data-toggle="modal" data-target="#logoutModal">Log Out</a>
+                            <!-- <a href="" data-toggle="modal" data-target="#logoutModal">logout</a></ul> -->
+                        </li>
+
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="search__input" type="text" placeholder="Search" id="search"
+                            onkeyup="search()"></input>
+                    </form>
+                </div>
+            </div>
         </nav>
     </div>
     <!-- add new note modal -->
@@ -87,6 +145,10 @@
                     <select class="form-control" id="ListNotes_category1">
                         <option active="">--- Select---</option>
                     </select>
+
+                    <div id="color">
+                    </div>
+
                     <br>
 
                     <input class="form-control" type="file" value="upload" id="fileButton" style="border:none" />
@@ -146,188 +208,71 @@
             </div>
         </div>
     </div>
-    <div class="">
-        <div class="py128 product-background">
-            <h1 class="title">Wellcome To My Note</h1>
-            </br>
-
-            <p class="title-note">Chỗ này chúng ta sẽ ghi cái gì đó để chú thích rằng đây là chú thích.
-            </p>
-            <p class="title-note">Và đây là một chú thích bằng tiếng anh.</p>
+    <br>
+    <br>
+    <div class="jumbotron" style="margin-bottom: 0;">
+        <h1>What to write today?</h1>
+        <p>Bootstrap is the most popular HTML, CSS...</p>
+    </div>
+    <div style="background-image: url(../../../assets/img/770bf25799f672d3cd69a6d3ffb4ea13.jpg);  background-repeat: repeat;">
+        <div class="p-slope-left container" style="background-color: F0F2F5;">
             <br>
 
-            <div class="demo-btns">
-                <div class="info">
-                    <div class="buttons">
-                        <p>
-                            <a href="" data-modal="#add-new-note" class="modal__trigger btn-quick-note ">Quick Note<div
-                                    id="modal__temp"></div></a>
-                        </p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <select class="form-control" id="ListNotes_category" onchange="Category_select(this)"
+                        style="width: auto;">
+                        <option active>--- Select---</option>
+                    </select>
+                    <br>
+                    <div id="listNotes">
                     </div>
 
                 </div>
-            </div>
+                <div class="col-lg-6">
+                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne"
+                        style="text-align: left;background-color: #ffffff; border-radius: 0.9rem !important; padding: 16px;">
+                        <main>
+                            <section id="to-do-app">
+                                <form action="">
+                                    <input id="category_Name" type="text" required placeholder="Add new topic ??" />
+                                    <button style="display:none;" class="btn btn-primary" onclick="addnewcategory()">
+                                        Add</button>
+                                </form>
+                                <div class="todos" style="    min-height: auto;max-height: 33vh;overflow: auto;">
+                                    <ul id="todos">
 
-            <!-- Modal -->
-
-            <div id="quick-note" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
-                <div class="modal__dialog">
-                    <div class="modal__content">
-                        <h1>Quickly Note</h1>
-                        <input id="search " type="search " onkeyup="search() " placeholder="Search.... "></input>
-                        <div class="row">
-                            <div class=" col-lg-12 bs-md">
-                                <div class="book-list">
-                                    <h3>Quickly Note:</h3>
-                                    <ul>
-                                        <li class="detail-quick-note"><span class="name">Name of the Wind</span>
-                                            <span class="delete">delete</span>
-                                        </li>
-
-                                        <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
-                                            <span class="delete">delete</span>
-                                        </li>
-
-                                        <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
-                                            <span class="delete">delete</span>
-                                        </li>
-
-                                        <li class="detail-quick-note"><span class="name">The Master and the
-                                                Margharita</span>
-                                            <span class="delete">delete</span>
-                                        </li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- modal close button -->
-                        <a href="" class="modal__close demo-close">
-                            <svg class="" viewBox="0 0 24 24">
-                                <path
-                                    d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
-                                <path d="M0 0h24v24h-24z" fill="none" /></svg>
-                        </a>
+                            </section>
+                        </main>
                     </div>
+                    <br>
+                    <hr>
+                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne"
+                        style="text-align: left; background-color: #ffffff; border-radius: 0.9rem !important;padding: 16px; ">
+                        <main>
+                            <section id="to-do-app">
+                                <button class="btn btn-primary" onclick="addnewcategory()">
+                                    Add</button>
+                                <textarea style="width: 100%; height: 140px;" name="" id="" cols="30"
+                                    rows="10"></textarea>
+                                <!-- <div class="todos">
+                                <ul id="todos">
+
+                                </ul>
+                            </div> -->
+                            </section>
+                        </main>
+                    </div>
+
+
                 </div>
+
             </div>
-
-
-
         </div>
-    </div>
-    <div class="p-slope-left container" style="background-color: #FFFFFF;">
         <br>
-        <div class="quick-note">
-            <div class="row list-note">
-                <!-- <div class="col-lg-6"> -->
-                <input class="search__input" type="text" placeholder="Search" id="search" onkeyup="search() "></input>
-
-                <!-- </div> -->
-
-            </div>
-            <hr>
-
-
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <select class="form-control" id="ListNotes_category" onchange="Category_select(this)"
-                    style="width: auto;">
-                    <option active>--- Select---</option>
-                </select>
-                <br>
-                <div id="listNotes">
-                </div>
-
-            </div>
-            <div class="col-lg-6">
-                <div class="accordion">
-                    <div>
-                        <div id="headingOne">
-                            <h2 class="mb-0">
-                                <h3 style="text-align:left; margin-top: 10px;" type="button" data-toggle="collapse"
-                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Category
-                                </h3>
-                            </h2>
-                        </div>
-
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                            style="text-align: left;margin-left: 40px;">
-                            <form>
-                                <div class="group-category">
-                                    <input id="category_Name" class="input-category" type="text" required>
-                                    <span class="highlight"></span>
-                                    <label class="label-category">Category</label>
-                                </div>
-                                <button class="btn btn-primary" onclick="addnewcategory()"> Add</button>
-                                <hr>
-
-                                <ul id="list-category" class="list-group" style="margin-bottom: 27px;">
-                                </ul>
-                            </form>
-
-                        </div>
-
-
-                    </div>
-
-                    <div>
-                        <div id="headingTwo">
-                            <h2 class="mb-0">
-                                <h3 style="text-align:left; margin-top: 10px;" type="button" data-toggle="collapse"
-                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Quick Note
-                                </h3>
-                            </h2>
-                        </div>
-                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
-                            style="text-align: left;margin-left: 40px;">
-                            <form>
-                                <ul>
-                                    <li style="border: none; border-bottom: 6px solid red;"><span class="name">Add
-                                            new</span>
-                                        <input id="new-quick-note" class="input-category" type="text" required="">
-                                        <button style="margin-top:10px;" class="btn btn-primary"
-                                            onclick="addquicknote()"> Add</button>
-                                    </li>
-                                    <li class="detail-quick-note"><span class="name">Name of the Wind</span>
-                                        <span style="cursor: pointer; margin-left: 10px; " class="delete">delete</span>
-                                        <span style="cursor: pointer;" class="delete">Edit</span>
-
-                                    </li>
-
-                                    <li class="detail-quick-note"><span class="name">The Wise Man's Fear</span>
-                                        <span class="delete">delete</span>
-                                    </li>
-
-                                    <li class="detail-quick-note"><span class="name">Kafka on the Shore</span>
-                                        <span class="delete">delete</span>
-                                    </li>
-
-                                    <li class="detail-quick-note"><span class="name">The Master and the
-                                            Margharita</span>
-                                        <span class="delete">delete</span>
-                                    </li>
-                                </ul>
-                                <input class="search__input" type="text" placeholder="Search" id="search"
-                                    onkeyup="search() ">
-                            </form>
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
     </div>
-
-    <br>
-    <br>
     <div id="footer" class="cf"></div>
 
     <!-- page-wrapper -->
