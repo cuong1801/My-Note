@@ -63,7 +63,7 @@ window.onload = function () {
                             var subTit = tit.slice(0, 30);
                             var subDes = des.slice(0, 30);
                             $("#name_notes").append(
-                                '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
+                                '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
                                 '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
 
                                 '<p style="margin-bottom: -0.5rem;">' + subTit + '...</p>' +
@@ -71,6 +71,7 @@ window.onload = function () {
                                 '<div class="row">' +
                                 '<div class="col-lg-6" style="width: auto;">' +
                                 '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
+
                                 '</div>' +
                                 '<div class="col-lg-6" style="width: auto;">' +
                                 '<small class="text-muted">' + doc.data().timepostShow + '</small>' +
@@ -79,7 +80,7 @@ window.onload = function () {
 
 
                                 '</div>' +
-                                '<div id="mySidebar' + doc.id + '" class="sidebar">' +
+                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 0px">' +
                                 // '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
                                 '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
 
@@ -94,19 +95,34 @@ window.onload = function () {
                                 '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
                                 '</div>' +
                                 '<div class="modal-footer">' +
-                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                '<button id="'+doc.id+'" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
                                 '</div>' +
                                 '<script>' +
-                                ' function openNav() {' +
-                                '  document.getElementById("mySidebar' + doc.id + '").style.width = "34%";' +
-                                'document.getElementById("main").style.marginLeft = "250px";' +
-                                ' }' +
+                                '  function openNav() {' +
+                                ' var id = "mySidebar"+event.target.id;' +
+                                ' document.getElementById(id).style.width = "34%";' +
+                                // ' document.getElementById("main").style.marginLeft = "250px";' +
+                                '}' +
+
                                 ' function closeNav() {' +
-                                'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
-                                '  document.getElementById("main").style.marginLeft = "0";' +
-                                ' }' +
+                                ' var id = event.target.id;' +
+                                    // 'alert(id)'+
+                                ' document.getElementById("mySidebar"+id).style.width = "0%";' +
+
+                                // '  document.getElementById("main").style.marginLeft = "0";' +
+                                '}' +
+                                // ' function openNav() {' +
+                                // ' var id =event.target.id ;' +
+                                // 'alert(id)'+
+                                // // '  document.getElementById("mySidebar" + id ).style.width = "34%";' +
+                                // // 'document.getElementById("main").style.marginLeft = "250px";' +
+                                // ' }' +
+                                // ' function closeNav() {' +
+                                // 'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
+                                // '  document.getElementById("main").style.marginLeft = "0";' +
+                                // ' }' +
                                 '</script>'
 
 
@@ -132,11 +148,55 @@ window.onload = function () {
                             );
                             $("#ListNotes_category1").append(
                                 '<option id="list2' + doc.id + '">' + category + '</option>'
+
+
                             );
-                            $("#list-category").append(
-                                '<div id="list3' + doc.id + '">' +
-                                ' <li class="list-group-item d-flex justify-content-between align-items-center" style="display: block;">' + category + '<ul>' +
-                                '<span style="cursor: pointer;" class="badge badge-primary badge-pill" data-toggle="modal" data-target="#editcategory' + doc.id + '">Edit</span>' +
+                            $("#color").append(
+                                '<span class="badge badge-primary badge-pill">color</span>'
+
+
+                            );
+                            // // $("#list-category").append(
+
+                            // //     '<div id="list3' + doc.id + '">' +
+                            // //     ' <li class="list-group-item d-flex justify-content-between align-items-center" style="display: block;">' + category + '<ul>' +
+                            // //     '<span style="cursor: pointer;" class="badge badge-primary badge-pill" data-toggle="modal" data-target="#editcategory' + doc.id + '">Edit</span>' +
+                            // //     ' <div class="modal fade" id="editcategory' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="editcategoryLabel" aria-hidden="true">' +
+                            // //     '<div class="modal-dialog" role="document">' +
+                            // //     ' <div class="modal-content">' +
+                            // //     ' <div class="modal-header">' +
+                            // //     '<h5 class="modal-title" id="editcategoryLabel">Edit Category</h5>' +
+                            // //     '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                            // //     ' <span aria-hidden="true">&times;</span>' +
+                            // //     ' </button>' +
+                            // //     ' </div>' +
+                            // //     ' <div class="modal-body">' +
+                            // //     ' <input class="input input-control form-control" type="text" placeholder="' + category + '"id="input' + doc.id + '" ></input>' +
+                            // //     ' </div>' +
+                            // //     '<div class="modal-footer">' +
+                            // //     '  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                            // //     ' <button id="' + doc.id + '" type="button" class="btn btn-primary" onclick= "editCategory()">Save changes</button>' +
+                            // //     ' </div>' +
+                            // //     '</div>' +
+                            // //     '</div>' +
+                            // //     '</div>' +
+                            // //     '</ul>' +
+                            // //     '</li>' +
+                            // //     '</div>'
+
+                            // );
+                            $("#todos").append(
+
+                                '<li id="list3' + doc.id + '">' +
+                                ' <input id="checkbox-1" type="checkbox">' +
+                                '<label for="checkbox-1">' +
+                                category +
+                                '<span style="background-color: #EEF7FF" class="box"></span>' +
+                                '<span style="cursor: pointer; float: right" id="' + doc.id + '" class="badge badge-primary badge-pill" onclick="deleteCategory()">Del</span>' +
+                                '<span style="cursor: pointer;pointer; float: right" class="badge badge-primary badge-pill" data-toggle="modal" data-target="#editcategory' + doc.id + '">Edit</span>' +
+                                '</label>' +
+                                '</li>' +
+
                                 ' <div class="modal fade" id="editcategory' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="editcategoryLabel" aria-hidden="true">' +
                                 '<div class="modal-dialog" role="document">' +
                                 ' <div class="modal-content">' +
@@ -147,19 +207,15 @@ window.onload = function () {
                                 ' </button>' +
                                 ' </div>' +
                                 ' <div class="modal-body">' +
-                                ' <input class="input input-control form-control" type="text" placeholder="' + category + '"id="input'+ doc.id + '" ></input>' +
+                                ' <input class="input input-control form-control" type="text" placeholder="' + category + '"id="input' + doc.id + '" ></input>' +
                                 ' </div>' +
                                 '<div class="modal-footer">' +
                                 '  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
                                 ' <button id="' + doc.id + '" type="button" class="btn btn-primary" onclick= "editCategory()">Save changes</button>' +
                                 ' </div>' +
                                 '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<span style="cursor: pointer;" id="' + doc.id + '" class="badge badge-primary badge-pill" onclick="deleteCategory()">Del</span>' +
-                                '</ul>' +
-                                '</li>' +
                                 '</div>'
+
 
                             );
                         }
@@ -217,6 +273,7 @@ function addnewcategory() {
         var n = 0;
         db.collection('category').add({
                 category: document.getElementById("category_Name").value,
+                color: '',
                 userID: firebase.auth().currentUser.uid,
                 // image: temp
 
@@ -286,7 +343,7 @@ function editCategory() {
     var batch = db.batch();
     // alert("ssd")
     var id = event.target.id;
-    var inputedit = document.getElementById("input"+id).value;
+    var inputedit = document.getElementById("input" + id).value;
     // console.log(inputedit);
     // alert(document.getElementById( "editcategory"+id).value)
 
@@ -545,14 +602,15 @@ function Category_select(category) {
                                             '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
                                             '</div>' +
                                             '<script>' +
-                                            ' function openNav() {' +
-                                            '  document.getElementById("mySidebar' + doc.id + '").style.width = "34%";' +
-                                            'document.getElementById("main").style.marginLeft = "250px";' +
-                                            ' }' +
-                                            ' function closeNav() {' +
-                                            'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
-                                            '  document.getElementById("main").style.marginLeft = "0";' +
-                                            ' }' +
+                                            // ' function openNav() {' +
+                                            // ' var id = event.target.id;'+
+                                            // '  document.getElementById("mySidebar' + id + '").style.width = "34%";' +
+                                            // 'document.getElementById("main").style.marginLeft = "250px";' +
+                                            // ' }' +
+                                            // ' function closeNav() {' +
+                                            // 'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
+                                            // '  document.getElementById("main").style.marginLeft = "0";' +
+                                            // ' }' +
                                             '</script>'
 
                                         );
@@ -570,6 +628,20 @@ function Category_select(category) {
             }
         }
     }
+}
+
+function openNav() {
+    var id = "mySidebar" + event.target.id;
+    document.getElementById(id).style.width = "34%";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    var id = "mySidebar" + event.target.id;
+
+    document.getElementById(id).style.width = "0%";
+
+    document.getElementById("main").style.marginLeft = "0";
 }
 
 function search() {
@@ -953,4 +1025,8 @@ function search() {
             }
         }
     });
+}
+
+function lammo() {
+
 }
