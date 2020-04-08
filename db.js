@@ -80,7 +80,8 @@ window.onload = function () {
 
 
                                 '</div>' +
-                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 0px">' +
+                                '<div id="myOverlay' + doc.id + '" data-id="'+doc.id+'" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 34%; display:none">' +
                                 // '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
                                 '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
 
@@ -95,35 +96,10 @@ window.onload = function () {
                                 '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
                                 '</div>' +
                                 '<div class="modal-footer">' +
-                                '<button id="'+doc.id+'" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
-                                '</div>' +
-                                '<script>' +
-                                '  function openNav() {' +
-                                ' var id = "mySidebar"+event.target.id;' +
-                                ' document.getElementById(id).style.width = "34%";' +
-                                // ' document.getElementById("main").style.marginLeft = "250px";' +
-                                '}' +
-
-                                ' function closeNav() {' +
-                                ' var id = event.target.id;' +
-                                    // 'alert(id)'+
-                                ' document.getElementById("mySidebar"+id).style.width = "0%";' +
-
-                                // '  document.getElementById("main").style.marginLeft = "0";' +
-                                '}' +
-                                // ' function openNav() {' +
-                                // ' var id =event.target.id ;' +
-                                // 'alert(id)'+
-                                // // '  document.getElementById("mySidebar" + id ).style.width = "34%";' +
-                                // // 'document.getElementById("main").style.marginLeft = "250px";' +
-                                // ' }' +
-                                // ' function closeNav() {' +
-                                // 'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
-                                // '  document.getElementById("main").style.marginLeft = "0";' +
-                                // ' }' +
-                                '</script>'
+                                '</div>' 
 
 
 
@@ -233,6 +209,28 @@ $(document).ready(function () {
     })
 })
 
+function openNav() {
+    var id = "mySidebar" + event.target.id;
+    var myOverlay = "myOverlay" + event.target.id;
+    document.getElementById(id).style.display = "block";
+    document.getElementById(myOverlay).style.display = "block";
+}
+
+function closeNav() {
+    var id = "mySidebar" + event.target.id;
+    var myOverlay = "myOverlay" + event.target.id;
+    document.getElementById(id).style.display = "none";
+    document.getElementById(myOverlay).style.display = "none";
+}
+function closeNav2() {
+    var id = event.target.id;
+    var myOverlay = document.getElementById(id).dataset.id;
+    var mySidebar = "mySidebar" + myOverlay;
+    var myOverlay = "myOverlay" + myOverlay;
+    document.getElementById(mySidebar).style.display = "none";
+    document.getElementById(myOverlay).style.display = "none";
+}
+
 function deleteNote() {
     // event.stopPropagation();
     if (confirm('You want to delete note?')) {
@@ -240,8 +238,6 @@ function deleteNote() {
         alert(id);
         db.collection('notelist').doc(id).delete();
         var hidden1 = 'del' + id;
-
-
         document.getElementById(hidden1).style.display = 'none';
         // document.getElementById(hidden2).style.display = 'none';
         // document.getElementById(hidden3).style.display = 'none';
@@ -630,19 +626,7 @@ function Category_select(category) {
     }
 }
 
-function openNav() {
-    var id = "mySidebar" + event.target.id;
-    document.getElementById(id).style.width = "34%";
-    document.getElementById("main").style.marginLeft = "250px";
-}
 
-function closeNav() {
-    var id = "mySidebar" + event.target.id;
-
-    document.getElementById(id).style.width = "0%";
-
-    document.getElementById("main").style.marginLeft = "0";
-}
 
 function search() {
     $('#listNotes').load('show_not.html');

@@ -1,0 +1,27 @@
+.w3-animate-left {
+    position: relative;
+    animation: animateleft 0.4s;
+}
+.w3-sidebar {
+    height: 100%;
+    width: 200px;
+    background-color: #fff;
+    position: fixed!important;
+    z-index: 1;
+    overflow: auto;
+}
+.w3-animate-opacity {
+    animation: opac 0.8s;
+}
+.w3-overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+}
