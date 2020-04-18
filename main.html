@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>T-NoteList</title>
+    <!-- <link rel='stylesheet' href='https://cdn.3up.dk/bootstrap@4.1.3/dist/css/bootstrap.min.css'> -->
+    <link rel='stylesheet' href='https://cdn.3up.dk/mdi@2.2.43/css/materialdesignicons.min.css'>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="components/css/homepage/home.css">
+    <!-- <link rel="stylesheet" href="components/css/homepage/calc.css"> -->
+    <link rel="stylesheet" href="components/css/homepage/background.css">
+    <link rel="stylesheet" href="components/css/homepage/footer.css">
+    <link rel="stylesheet" href="components/css/homepage/menu.css">
+    <link rel="stylesheet" href="components/css/homepage/header.css">
+    <link rel="stylesheet" href="components/css/homepage/effect.css">
+    <link rel="stylesheet" href="components/css/homepage/dropdown.css">
+    <link rel="stylesheet" href="components/css/homepage/logout.css">
+    <link rel="stylesheet" href="components/css/homepage/w3school.css">
+    <link rel="stylesheet" href="components/css/homepage/category.css">
+    <!-- ios support -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat|Cardo' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav> -->
+    <div class="pos-f-t"
+        style=" position: fixed; height: auto;width: 100%;margin-top: -35;z-index: 200; border-top:solid 3px #DA670B">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="float:left; width:100%;">
+            <div class="container">
+                <a class="navbar-brand" href="#">My Note</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse show" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#addnewnoteModal">Add New
+                                Note</a>
+
+                        </li>
+                        <li id="logout" class="nav-item">
+                            <a class="nav-link " href="" data-toggle="modal" data-target="#logoutModal">Log Out</a>
+                        </li>
+                        <li id="register" class="nav-item" onclick="logout()">
+                            <a class="nav-link " href="" data-toggle="modal" data-target="#register">Register</a>
+                        </li>
+                        <li id="login" class="nav-item" onclick="logout()">
+                            <a class="nav-link " href="" data-toggle="modal" data-target="#login">Login</a>
+                        </li>
+
+                    </ul>
+                    <form class="page-banner form-inline my-2 my-lg-0">
+                        <input class="search__input" type="text" placeholder="Search" id="search"
+                            onkeyup="search()"></input>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- add new note modal -->
+    <div class="modal fade-show" id="addnewnoteModal" tabindex="-1" role="dialog" aria-labelledby="addnewnoteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h class="modal-title" id="addnewnoteModalLabel">My Note</h>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="NewNotes_name" type="Title" class="form-control" id="tenghichu" placeholder="Title">
+                    <br>
+
+                    <textarea class="form-control" id="NewNotes_content" type="ghichu" name="message"
+                        placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>
+                    <br>
+                    <div class="input-group mb-3">
+                        <input id="location_Name" type="text" class="form-control" placeholder="Location"
+                            aria-label="Location" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">Map</span>
+                        </div>
+                    </div>
+                    <select class="form-control" id="ListNotes_category1">
+                        <option active="">--- Select---</option>
+                    </select>
+
+                    <div id="color">
+                    </div>
+
+                    <br>
+
+                    <input class="form-control" type="file" value="upload" id="fileButton" style="border:none" multiple/>
+                    <!-- <input type="checkbox" id="NewNotes_checkTime" style="float: left;">
+                    <label style="float: left; for="thongbao">Notification</label>
+                    <div id="notification" class="row" style="display: none;">
+                        <div class="col-md-6">
+                            <input id="day_no" type="date" class="form-control " name="bday">
+                        </div>
+                        <div class="col-md-4">
+                            <input id="time_no" type="time" class="form-control " name="bday">
+                        </div>
+                    </div> -->
+                    <form>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <input type="checkbox" id="NewNotes_checkTime">
+                                <label for="thongbao">Notification</label>
+                            </div>
+                            <br>
+                            <input id="day_no" type="date" class="form-control " name="bday">
+                            <input id="time_no" type="time" class="form-control " name="bday">
+                        </div>
+                    </form>
+
+
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button onclick="writeNotesData()" type="button" style="width: 70px;height: 50px;"
+                        class="btn btn-outline-info">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Small modal -->
+    <div class="modal" id="logoutModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Log Out <i class="fa fa-lock"></i></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <p><i class="fa fa-question-circle"></i> Are you sure you want to log-off? <br /></p>
+                    <div class="actionsBtns">
+                        <form action="/logout" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            <input type="submit" class="btn btn-default btn-primary" data-dismiss="modal" value="Logout"
+                                onclick="logout()" />
+                            <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="jumbotron"
+        style="height: 450px;margin-bottom: 0;background-color: #68AEC0; background-image: url(../../../assets/img/Untitled-4.jpg); background-position: top center; background-repeat: no-repeat; ">
+        <h1 style="font-weight: 700; font-size:40px;text-transform: uppercase; font-family: auto; margin-top:90px"
+            class="text-dark">What to write
+            today?</h1>
+        <p style=" font-family: auto;" class="text-dark">Are you oke, Are you Oke?...</p>
+    </div>
+    <div>
+        <div class="p-slope-left container" style="background-color: F0F2F5;">
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <select class="form-control" id="ListNotes_category" onchange="Category_select(this)"
+                        style="width: auto;">
+                        <option active>No category</option>
+                    </select>
+                    <br>
+                    <div id="listNotes">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne"
+                        style="text-align: left;background-color: #ffffff; border-radius: 0.9rem !important; padding: 16px;">
+                        <main>
+                            <section id="to-do-app">
+                                <form action="">
+                                    <input id="category_Name" type="text" required placeholder="Add new topic ??" />
+                                    <button style="display:none;" class="btn btn-primary" onclick="addnewcategory()">
+                                        Add</button>
+                                </form>
+                                <div class="todos" style="    min-height: auto;max-height: 33vh;overflow: auto;">
+                                    <ul id="todos">
+
+                                    </ul>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                    <br>
+                    <hr>
+                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne"
+                        style="text-align: left; background-color: #ffffff; border-radius: 0.9rem !important;padding: 16px; ">
+                        <main>
+                            <section id="to-do-app">
+                                                                
+                            </section>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div id="footer" class="cf"></div>
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-messaging.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyD17r7mphJ8Vh_rXYHG8WAHgnTfCa2RgaE",
+            authDomain: "t-notelist.firebaseapp.com",
+            databaseURL: "https://t-notelist.firebaseio.com",
+            projectId: "t-notelist",
+            storageBucket: "t-notelist.appspot.com",
+            messagingSenderId: "135435269388",
+            appId: "1:135435269388:web:768027188dd226fd79c529"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    <!-- <script src="https://www.gstatic.com/firebase/init.js"></script> -->
+    <!-- <script src="/app.js"></script> -->
+    <script src="/db.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="login-register-master/signin.js"></script>
+    <script src="login-register-master/notUser.js"></script>
+    <script src="assets/js/index1.js"></script>
+    <script src="Nhiemvu/shownote_category.js"></script>
+    <!-- <script src='components/js/homepage/quickly-note.js'></script> -->
+    <!-- <script src='components/js/homepage/calc.js'></script> -->
+    <script src='components/js/homepage/menu.js'></script>
+    <script src='components/js/homepage/effect.js'></script>
+    <!-- <script src='components/js/homepage/btn-quick-new-note.js'></script> -->
+    <script src='components/js/homepage/header.js'></script>
+    <script src='components/js/homepage/card.js'></script>
+
+    <link rel="stylesheet" href="components/css/homepage/card.css">
+    <link rel="stylesheet" href="components/css/homepage/btn-quick-new-note.css">
+
+
+</body>
+
+</html>

@@ -1,0 +1,278 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+.footer #button {
+    width: 35px;
+    height: 35px;
+    border: #727172 12px solid;
+    border-radius: 35px;
+    margin: 0 auto;
+    position: relative;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.footer #button:hover {
+    width: 35px;
+    height: 35px;
+    border: #3a3a3a 12px solid;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    position: relative;
+}
+
+.footer {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 2em;
+    overflow: hidden;
+    margin: 0 auto;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    z-index: 999;
+}
+
+.footer:hover {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    height: 10em;
+}
+
+.footer #container {
+    margin-top: 5px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    background: #2bb1ff;
+}
+
+.footer #cont {
+    position: relative;
+    top: -45px;
+    right: 190px;
+    width: 150px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.footer_center {
+    width: 500px;
+    float: left;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.footer h3 {
+    font-family: "Helvetica";
+    font-size: 30px;
+    font-weight: 100;
+    margin-top: 70px;
+    margin-left: 40px;
+}
+
+.footer_center .add-show .btnAddnote {
+    width: 150px;
+    height: 70px;
+    float: left;
+    margin-left: 50px;
+    background-color: #9932CC;
+    color: white;
+    border-style: 1px solid;
+    border-radius: 7px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.footer_center .add-show .btnShowInfo {
+    width: 150px;
+    height: 70px;
+    float: left;
+    margin-left: 50px;
+    background-color: #9932CC;
+    color: white;
+    border-style: 1px solid;
+    border-radius: 7px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.footer_center .modal_body {
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 50px;
+    z-index: 99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align: left;
+}
+
+.footer_center .add-show {
+    z-index: 100px;
+}
+
+.footer_center .modal_body .custom-file {
+    font-size: 15px;
+    margin-left: 0px;
+    margin-top: 5px;
+    color: blue;
+    float: left;
+    border-style: 1px solid;
+    text-align: left;
+}
+
+.footer_center .modal-footer .btn-secondary {
+    text-align: center;
+    font-size: 15px;
+    width: 100px;
+    border-radius: 7px;
+}
+
+.footer_center .modal-footer .btn-primary {
+    text-align: center;
+    font-size: 15px;
+    width: 100px;
+    border-radius: 7px;
+}
+
+.footer_center .form_notification #NewNotes_checkTime {
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 5px;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align: left;
+}
+
+.modal-backdrop.fade.show {
+    z-index: 0;
+}
+
+.footer_center .btnShowInfo .modal_body .form-group-avatar {
+    width: 150px;
+    height: 70px;
+}
+
+#add-new-note .modal_body .form_category {
+    margin-left: 0px;
+}
+
+#add-new-note .modal_body .form_location {
+    margin-left: 0px;
+}
+
+.modal_body .form_location {
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 5px;
+    z-index: 99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align: left;
+}
+
+.modal_body .form_title {
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index: 99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align: left;
+}
+
+.modal_body .form_content {
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index: 99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align: left;
+}
+
+.modal_body .form_notification {
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index: 99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align: left;
+}
+
+.modal_body .form_category {
+    font-size: 15px;
+    color: black;
+    margin-left: 0px;
+    margin-top: 25px;
+    z-index: 99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    text-align: left;
+}
+
+.buttons .modal__trigger {
+    width: 150px;
+    height: 60px;
+    float: left;
+    color: orange;
+    border-style: 1px solid;
+    border-radius: 7px;
+    padding: 5px;
+    font-size: 20px;
+    padding-top: 25px;
+}
+
+.modal_body .btn-secondary {
+    width: 80px;
+    height: 60px;
+    font-size: 15px;
+    color: white;
+    background-color: purple;
+    margin-left: 0px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    z-index: 99;
+    border-style: 1px solid;
+    border-radius: 7px;
+    font-size: 20px;
+}
+
+.modal_body {
+    padding-left: 30px;
+}
+
+.modal__content {
+    width: 400px;
+    margin-top: 100px;
+    border-radius: 20px;
+}
+
+.modal_title {
+    font-size: 36px;
+}
+
+.delete:hover {
+    cursor: pointer;
+    background: purple;
+}

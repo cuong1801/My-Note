@@ -1,0 +1,26 @@
+.product-background{
+    background-color: #ffcf10;
+    /* background-image: url(../../../image/background.png); */
+    background-repeat: no-repeat;
+    background-position: top center;
+
+    /* background-size: 1500px 600px; */
+}
+.p-slope-left {
+    /* -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%); */
+    /* clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%); */
+}
+.p-divider {
+    margin: 0 auto;
+    background: #f2720c;
+    display: block;
+    width: 80px;
+    height: 6px;
+}
+.bs-md {
+    box-shadow: var(--bs-md) !important;
+}
+.py128 {
+    padding-top: 16px !important;
+    padding-bottom: 52px !important;
+}
