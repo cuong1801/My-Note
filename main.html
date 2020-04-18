@@ -9,10 +9,8 @@
     <!-- <link rel='stylesheet' href='https://cdn.3up.dk/bootstrap@4.1.3/dist/css/bootstrap.min.css'> -->
     <link rel='stylesheet' href='https://cdn.3up.dk/mdi@2.2.43/css/materialdesignicons.min.css'>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-
     <link rel="stylesheet" href="components/css/homepage/home.css">
-    <!-- <link rel="stylesheet" href="components/css/homepage/quickly-note.css"> -->
-    <link rel="stylesheet" href="components/css/homepage/calc.css">
+    <!-- <link rel="stylesheet" href="components/css/homepage/calc.css"> -->
     <link rel="stylesheet" href="components/css/homepage/background.css">
     <link rel="stylesheet" href="components/css/homepage/footer.css">
     <link rel="stylesheet" href="components/css/homepage/menu.css">
@@ -21,11 +19,8 @@
     <link rel="stylesheet" href="components/css/homepage/dropdown.css">
     <link rel="stylesheet" href="components/css/homepage/logout.css">
     <link rel="stylesheet" href="components/css/homepage/w3school.css">
-
     <link rel="stylesheet" href="components/css/homepage/category.css">
-
     <!-- ios support -->
-
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -36,12 +31,9 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat|Cardo' rel='stylesheet' type='text/css'>
-
-
 </head>
 
 <body>
-
     <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -81,7 +73,6 @@
     </nav> -->
     <div class="pos-f-t"
         style=" position: fixed; height: auto;width: 100%;margin-top: -35;z-index: 200; border-top:solid 3px #DA670B">
-
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="float:left; width:100%;">
             <div class="container">
                 <a class="navbar-brand" href="#">My Note</a>
@@ -104,13 +95,18 @@
                                 Note</a>
 
                         </li>
-                        <li class="nav-item">
+                        <li id="logout" class="nav-item">
                             <a class="nav-link " href="" data-toggle="modal" data-target="#logoutModal">Log Out</a>
-                            <!-- <a href="" data-toggle="modal" data-target="#logoutModal">logout</a></ul> -->
+                        </li>
+                        <li id="register" class="nav-item" onclick="logout()">
+                            <a class="nav-link " href="" data-toggle="modal" data-target="#register">Register</a>
+                        </li>
+                        <li id="login" class="nav-item" onclick="logout()">
+                            <a class="nav-link " href="" data-toggle="modal" data-target="#login">Login</a>
                         </li>
 
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
+                    <form class="page-banner form-inline my-2 my-lg-0">
                         <input class="search__input" type="text" placeholder="Search" id="search"
                             onkeyup="search()"></input>
                     </form>
@@ -152,7 +148,7 @@
 
                     <br>
 
-                    <input class="form-control" type="file" value="upload" id="fileButton" style="border:none" />
+                    <input class="form-control" type="file" value="upload" id="fileButton" style="border:none" multiple/>
                     <!-- <input type="checkbox" id="NewNotes_checkTime" style="float: left;">
                     <label style="float: left; for="thongbao">Notification</label>
                     <div id="notification" class="row" style="display: none;">
@@ -213,14 +209,14 @@
     <br>
     <div class="jumbotron"
         style="height: 450px;margin-bottom: 0;background-color: #68AEC0; background-image: url(../../../assets/img/Untitled-4.jpg); background-position: top center; background-repeat: no-repeat; ">
-        <h1 style="font-weight: 700; font-size:40px;text-transform: uppercase; font-family: auto; margin-top:90px" class="text-dark">What to write
+        <h1 style="font-weight: 700; font-size:40px;text-transform: uppercase; font-family: auto; margin-top:90px"
+            class="text-dark">What to write
             today?</h1>
         <p style=" font-family: auto;" class="text-dark">Are you oke, Are you Oke?...</p>
     </div>
     <div>
         <div class="p-slope-left container" style="background-color: F0F2F5;">
             <br>
-
             <div class="row">
                 <div class="col-lg-6">
                     <select class="form-control" id="ListNotes_category" onchange="Category_select(this)"
@@ -230,7 +226,6 @@
                     <br>
                     <div id="listNotes">
                     </div>
-
                 </div>
                 <div class="col-lg-6">
                     <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne"
@@ -256,31 +251,17 @@
                         style="text-align: left; background-color: #ffffff; border-radius: 0.9rem !important;padding: 16px; ">
                         <main>
                             <section id="to-do-app">
-                                <button class="btn btn-primary" onclick="addnewcategory()">
-                                    Add</button>
-                                <textarea style="width: 100%; height: 140px;" name="" id="" cols="30"
-                                    rows="10"></textarea>
-                                <!-- <div class="todos">
-                                <ul id="todos">
-
-                                </ul>
-                            </div> -->
+                                                                
                             </section>
                         </main>
                     </div>
-
-
                 </div>
-
             </div>
         </div>
         <br>
     </div>
     <div id="footer" class="cf"></div>
 
-    <!-- page-wrapper -->
-
-    <!-- </div> -->
     <!-- <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
@@ -290,7 +271,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-messaging.js"></script>
     <script>
-        // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyD17r7mphJ8Vh_rXYHG8WAHgnTfCa2RgaE",
             authDomain: "t-notelist.firebaseapp.com",
@@ -300,7 +280,6 @@
             messagingSenderId: "135435269388",
             appId: "1:135435269388:web:768027188dd226fd79c529"
         };
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
     </script>
@@ -312,11 +291,11 @@
     <script src="login-register-master/notUser.js"></script>
     <script src="assets/js/index1.js"></script>
     <script src="Nhiemvu/shownote_category.js"></script>
-    <script src='components/js/homepage/quickly-note.js'></script>
-    <script src='components/js/homepage/calc.js'></script>
+    <!-- <script src='components/js/homepage/quickly-note.js'></script> -->
+    <!-- <script src='components/js/homepage/calc.js'></script> -->
     <script src='components/js/homepage/menu.js'></script>
     <script src='components/js/homepage/effect.js'></script>
-    <script src='components/js/homepage/btn-quick-new-note.js'></script>
+    <!-- <script src='components/js/homepage/btn-quick-new-note.js'></script> -->
     <script src='components/js/homepage/header.js'></script>
     <script src='components/js/homepage/card.js'></script>
 
