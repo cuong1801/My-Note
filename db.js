@@ -3,6 +3,7 @@ var notificationCheck = false;
 var finish = false;
 var notYet = false;
 var storageRef = firebase.storage().ref();
+var temp = "";
 
 db.enablePersistence()
     .catch(function (err) {
@@ -15,17 +16,39 @@ db.enablePersistence()
         }
     });
 
+var searchBar = document.querySelector(".page-banner .search__input");
+console.log(searchBar)
+searchBar.onkeyup = function () {
+    // console.log(searchBar)
+
+    var searchItem = searchBar.value.toLowerCase();
+    // console.log(searchItem)
+
+    var books = document.querySelectorAll(".alert");
+    // console.log(books)
+
+    books.forEach(book => {
+        var title = book.textContent;
+        //indexOf returns -1 if an element can't be found in an array. So if the result is not -1, the elemnt exist and should be shown. Otherwise, it is hidden. 
+        if (title.toLowerCase().indexOf(searchItem) != -1) {
+            book.style.display = 'block';
+        } else {
+            book.style.display = "none";
+        }
+    });
+};
 window.onload = function () {
     var dem = 0;
     $('#listNotes').load('show_not.html');
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-
             var user = firebase.auth().currentUser;
-
             if (user != null) {
                 var idUser = firebase.auth().currentUser.uid;
                 var docRef = db.collection('users').doc(idUser);
+                document.getElementById("register").style.display = "none";
+                document.getElementById("login").style.display = "none";
+
                 docRef.get().then(function (doc) {
 
                     if (doc.exists) {
@@ -63,43 +86,37 @@ window.onload = function () {
                             var subTit = tit.slice(0, 30);
                             var subDes = des.slice(0, 30);
                             $("#name_notes").append(
-                                '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
+                                '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
                                 '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
-
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
                                 '<p style="margin-bottom: -0.5rem;">' + subTit + '...</p>' +
-
                                 '<div class="row">' +
                                 '<div class="col-lg-6" style="width: auto;">' +
                                 '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
-
                                 '</div>' +
                                 '<div class="col-lg-6" style="width: auto;">' +
                                 '<small class="text-muted">' + doc.data().timepostShow + '</small>' +
                                 '</div>' +
                                 '</div>' +
-
-
                                 '</div>' +
-                                '<div id="myOverlay' + doc.id + '" data-id="'+doc.id+'" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
-                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 34%; display:none">' +
-                                // '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
+                                '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
+                                '<div>'+
                                 '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
-
-                                '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="    border-left: #000000 solid 8px;color: #f60000;">' + doc.data().name + '</h1>' +
-                                '<small style="padding: 15px;"><em>' + doc.data().category + '/' + doc.data().location + '</em></small>' +
-                                '<small style="padding: 15px;"><em>' + doc.data().timepostShow + '</em></small>' +
-
+                                '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().name + '</h1>' +
+                                '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timepostShow + '</em></div>' +
                                 '</div>' +
                                 '<div class="modal-body">' +
-                                // '<pre>' + doc.data().content + '</pre>' +
-                                '<pre id="' + doc.id + 'Linhcontent"class="form-control" rows="7">' + doc.data().content + '</pre>' +
+                                '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().content + '</textarea>' +
                                 '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                '<em style="float: right;">' + doc.data().location + '</em>' +
                                 '</div>' +
                                 '<div class="modal-footer">' +
                                 '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
-                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
-                                '</div>' 
+                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
+                                '</div>'+
+                                '</div>'
 
 
 
@@ -132,35 +149,7 @@ window.onload = function () {
 
 
                             );
-                            // // $("#list-category").append(
 
-                            // //     '<div id="list3' + doc.id + '">' +
-                            // //     ' <li class="list-group-item d-flex justify-content-between align-items-center" style="display: block;">' + category + '<ul>' +
-                            // //     '<span style="cursor: pointer;" class="badge badge-primary badge-pill" data-toggle="modal" data-target="#editcategory' + doc.id + '">Edit</span>' +
-                            // //     ' <div class="modal fade" id="editcategory' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="editcategoryLabel" aria-hidden="true">' +
-                            // //     '<div class="modal-dialog" role="document">' +
-                            // //     ' <div class="modal-content">' +
-                            // //     ' <div class="modal-header">' +
-                            // //     '<h5 class="modal-title" id="editcategoryLabel">Edit Category</h5>' +
-                            // //     '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
-                            // //     ' <span aria-hidden="true">&times;</span>' +
-                            // //     ' </button>' +
-                            // //     ' </div>' +
-                            // //     ' <div class="modal-body">' +
-                            // //     ' <input class="input input-control form-control" type="text" placeholder="' + category + '"id="input' + doc.id + '" ></input>' +
-                            // //     ' </div>' +
-                            // //     '<div class="modal-footer">' +
-                            // //     '  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
-                            // //     ' <button id="' + doc.id + '" type="button" class="btn btn-primary" onclick= "editCategory()">Save changes</button>' +
-                            // //     ' </div>' +
-                            // //     '</div>' +
-                            // //     '</div>' +
-                            // //     '</div>' +
-                            // //     '</ul>' +
-                            // //     '</li>' +
-                            // //     '</div>'
-
-                            // );
                             $("#todos").append(
 
                                 '<li id="list3' + doc.id + '">' +
@@ -200,6 +189,8 @@ window.onload = function () {
                 });
 
             }
+        } else {
+            document.getElementById("logout").style.display = "none";
         }
     });
 }
@@ -222,6 +213,7 @@ function closeNav() {
     document.getElementById(id).style.display = "none";
     document.getElementById(myOverlay).style.display = "none";
 }
+
 function closeNav2() {
     var id = event.target.id;
     var myOverlay = document.getElementById(id).dataset.id;
@@ -232,25 +224,17 @@ function closeNav2() {
 }
 
 function deleteNote() {
-    // event.stopPropagation();
     if (confirm('You want to delete note?')) {
         var id = event.target.id;
         alert(id);
         db.collection('notelist').doc(id).delete();
         var hidden1 = 'del' + id;
         document.getElementById(hidden1).style.display = 'none';
-        // document.getElementById(hidden2).style.display = 'none';
-        // document.getElementById(hidden3).style.display = 'none';
         // setTimeout(function () {
         //     window.location.href = "index.html";
         // }, 2000);
 
-    } else {
-
-
-    }
-
-
+    } else {}
 }
 var NewNotes_name = document.getElementById("NewNotes_name");
 var NewNotes_location = document.getElementById("location_Name");
@@ -262,7 +246,6 @@ var quicknote_content = document.getElementById("new-quick-note")
 function addnewcategory() {
     var category_Name_text = category_Name.value;
     var category_Name_text_value = category_Name_text.trim();
-
     if (category_Name_text_value.length === 0 || category_Name_text_value.length > 20) {
         alert('Title are required to continue!');
     } else {
@@ -271,8 +254,6 @@ function addnewcategory() {
                 category: document.getElementById("category_Name").value,
                 color: '',
                 userID: firebase.auth().currentUser.uid,
-                // image: temp
-
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
@@ -284,13 +265,12 @@ function addnewcategory() {
     }
     setTimeout(function () {
         window.location.href = "index.html";
-    }, 3000);
+    }, 1500);
 }
 
 function addquicknote() {
     var quick_name_note = quicknote_content.value;
     var quick_name_note_text_value = quick_name_note.trim();
-
     if (quick_name_note_text_value.length === 0 || quick_name_note_text_value.length > 10) {
         alert('Title are required to continue!');
     } else {
@@ -298,8 +278,7 @@ function addquicknote() {
         db.collection('quicknote').add({
                 content: document.getElementById("new-quick-note").value,
                 userID: firebase.auth().currentUser.uid,
-                // image: temp
-
+                image: temp
             })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
@@ -327,7 +306,7 @@ function deleteCategory() {
 
         // setTimeout(function () {
         //     window.location.href = "index.html";
-        // }, 3000);
+        // }, 1500);
     } else {
 
 
@@ -371,53 +350,23 @@ document.getElementById('NewNotes_checkTime').onclick = function (e) {
 
 };
 
-function save(id, image) {
+function save() {
 
-    var today = new Date();
-    var timepost;
+    var batch = db.batch();
+    // alert("ssd")
+    var id = event.target.id;
+    var inputedit = document.getElementById("textarea" + id).value;
+    // console.log(id);
+    // alert(document.getElementById( "editcategory"+id).value)
 
-    var DD = today.getDate();
-    var MM = today.getMonth() + 1;
-    var YYYY = today.getFullYear();
-
-    var h = today.getHours();
-    var m = today.getMinutes();
-    DD = checkTime(DD);
-    MM = checkTime(MM);
-    YYYY = checkTime(YYYY);
-
-    h = checkTime(h);
-    m = checkTime(m);
-    timepost = MM + "/" + DD + "/" + YYYY + " " + h + ":" + m;
-    var Note_timepost = new Date(timepost);
-
-    var name = document.getElementById(id + "Linhname").innerHTML;
-    var category = document.getElementById(id + "Linhcategory").innerHTML;
-    var location = document.getElementById(id + "Linhlocation").innerHTML;
-    var notificationTime = document.getElementById(id + "Linhnotification").innerHTML;
-    var Note_timepost2;
-    if (notificationTime === "") {
-        notificationTime = "";
-        Note_timepost2 = "";
-    } else {
-        Note_timepost2 = new Date(notificationTime);
-    }
-
-    db.collection('notelist').doc(id).set({
-        name: name,
-        location: location,
-        timepost: Note_timepost,
-        timepostShow: timepost,
-        timenotification: notificationTime,
-        timepostNotification: Note_timepost2,
-        content: document.getElementById(id + "Linhcontent").value,
-        category: category,
-        userID: firebase.auth().currentUser.uid,
-        image: image
-    })
-
-    // alert(name);
-    // alert(location);
+    var newUserRef = db.collection("notelist").doc(id);
+    batch.update(newUserRef, {
+        "content": inputedit,
+    });
+    batch.commit();
+    setTimeout(function () {
+        window.location.href = "index.html";
+    }, 1500);
 
 }
 
@@ -485,7 +434,7 @@ function writeNotesData() {
                 content: document.getElementById("NewNotes_content").value,
                 category: document.getElementById("ListNotes_category1").value,
                 userID: firebase.auth().currentUser.uid,
-                // image: temp
+                image: temp
 
             })
             .then(function (docRef) {
@@ -498,7 +447,7 @@ function writeNotesData() {
     }
     setTimeout(function () {
         window.location.href = "index.html";
-    }, 3000);
+    }, 2000);
     //window.location="index.html";
 }
 
@@ -565,7 +514,8 @@ function Category_select(category) {
                                         var subTit = tit.slice(0, 30);
                                         var subDes = des.slice(0, 30);
                                         $("#name_notes").append(
-                                            '<div id="del' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
+                                            '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
+                                            '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
                                             '<p style="margin-bottom: -0.5rem;">' + subTit + '...</p>' +
                                             '<div class="row">' +
                                             '<div class="col-lg-6" style="width: auto;">' +
@@ -575,39 +525,24 @@ function Category_select(category) {
                                             '<small class="text-muted">' + doc.data().timepostShow + '</small>' +
                                             '</div>' +
                                             '</div>' +
-
-
                                             '</div>' +
-                                            '<div id="mySidebar' + doc.id + '" class="sidebar">' +
-                                            // '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>' +
+                                            '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                            '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 70%; display:none">' +
                                             '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
-
-                                            '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="    border-left: #000000 solid 8px;color: #f60000;">' + doc.data().name + '</h1>' +
-                                            '<small style="padding: 15px;"><em>' + doc.data().category + '/' + doc.data().location + '</em></small>' +
-                                            '<small style="padding: 15px;"><em>' + doc.data().timepostShow + '</em></small>' +
-
+                                            '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().name + '</h1>' +
+                                            '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timepostShow + '</em></div>' +
                                             '</div>' +
                                             '<div class="modal-body">' +
-                                            // '<pre>' + doc.data().content + '</pre>' +
-                                            '<pre id="' + doc.id + 'Linhcontent"class="form-control" rows="7">' + doc.data().content + '</pre>' +
+                                            '<textarea id="textarea' + doc.id + '"class="form-control" rows="7" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().content + '</textarea>' +
                                             '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                            '<em style="float: right;">' + doc.data().location + '</em>' +
                                             '</div>' +
                                             '<div class="modal-footer">' +
-                                            '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                            '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                             '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
-                                            '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save(\'' + doc.id + '\',\'' + doc.data().image + '\')">Save</button>' +
-                                            '</div>' +
-                                            '<script>' +
-                                            // ' function openNav() {' +
-                                            // ' var id = event.target.id;'+
-                                            // '  document.getElementById("mySidebar' + id + '").style.width = "34%";' +
-                                            // 'document.getElementById("main").style.marginLeft = "250px";' +
-                                            // ' }' +
-                                            // ' function closeNav() {' +
-                                            // 'document.getElementById("mySidebar' + doc.id + '").style.width = "0";' +
-                                            // '  document.getElementById("main").style.marginLeft = "0";' +
-                                            // ' }' +
-                                            '</script>'
+                                            '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
+                                            '</div>'
+
 
                                         );
 
@@ -626,7 +561,23 @@ function Category_select(category) {
     }
 }
 
-
+var searchBar = document.querySelector(".search__input");
+console.log(document.querySelector(".search__input"))
+// alert("ád")
+// searchBar.onkeyup = function(){      
+//   var searchItem = searchBar.value.toLowerCase(); 
+//  var books = document.querySelectorAll("li"); 
+//   books.forEach(book =>{
+//     var title = book.textContent;
+//     //indexOf returns -1 if an element can't be found in an array. So if the result is not -1, the elemnt exist and should be shown. Otherwise, it is hidden. 
+//     if(title.toLowerCase().indexOf(searchItem)!= -1){
+// book.style.display = 'block';      
+//     }
+//      else{
+//       book.style.display = "none";
+//     }
+//   });
+// };
 
 function search() {
     $('#listNotes').load('show_not.html');
@@ -1011,6 +962,30 @@ function search() {
     });
 }
 
-function lammo() {
+var uploader = document.getElementById('uploader');
+var fileButton = document.getElementById('fileButton');
+//listen for file selection
+fileButton.addEventListener('change', function (e) {
+    //get file
+    var file = e.target.files[0];
+    //create a storage ref
+    console.log(file);
+    var storageRef = firebase.storage().ref('NoteImage/' + file.name);
+    //upload file
+    var task = storageRef.put(file);
+    temp = file.name;
+    alert(temp);
+    // upload progress bar
+    task.on('state_changed',
+        function progress(snapshot) {
+            var percentage = (snapshot.bytedTransferred / snapshot.totalByles) * 100;
+            // uploader.value = percentage;
+        },
+        function error(err) {
 
-}
+        },
+        function complete() {
+
+        }
+    );
+});
