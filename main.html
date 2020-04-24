@@ -135,9 +135,10 @@
                     <div class="input-group mb-3">
                         <input id="location_Name" type="text" class="form-control" placeholder="Location"
                             aria-label="Location" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">Map</span>
-                        </div>
+                            <div>
+                                <input id="submit" type="button" value="Location">
+                            </div>
+                        <div id="map"></div>
                     </div>
                     <select class="form-control" id="ListNotes_category1">
                         <option active="">--- Select---</option>
@@ -282,9 +283,10 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const messaging = firebase.messaging();
     </script>
     <!-- <script src="https://www.gstatic.com/firebase/init.js"></script> -->
-    <!-- <script src="/app.js"></script> -->
+    <script src="/app.js"></script>
     <script src="/db.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="login-register-master/signin.js"></script>
@@ -298,6 +300,10 @@
     <!-- <script src='components/js/homepage/btn-quick-new-note.js'></script> -->
     <script src='components/js/homepage/header.js'></script>
     <script src='components/js/homepage/card.js'></script>
+    <script src="/pushNotification.js"></script>
+    <script  src="/location.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChjOHi6n7hXLQrvT2hX7KOEVc7HAC9Z8Y&callback=initMap"
+  type="text/javascript"></script>
 
     <link rel="stylesheet" href="components/css/homepage/card.css">
     <link rel="stylesheet" href="components/css/homepage/btn-quick-new-note.css">
