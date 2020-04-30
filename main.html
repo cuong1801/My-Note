@@ -20,13 +20,12 @@
     <link rel="stylesheet" href="components/css/homepage/logout.css">
     <link rel="stylesheet" href="components/css/homepage/w3school.css">
     <link rel="stylesheet" href="components/css/homepage/category.css">
+
     <!-- ios support -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
@@ -34,51 +33,11 @@
 </head>
 
 <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav> -->
-    <div class="pos-f-t"
-        style=" position: fixed; height: auto;width: 100%;margin-top: -35;z-index: 200; border-top:solid 3px #DA670B">
+    <div class="pos-f-t" style=" position: fixed; height: auto;width: 100%;margin-top: -35;z-index: 200; border-top:solid 3px #DA670B">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="float:left; width:100%;">
             <div class="container">
                 <a class="navbar-brand" href="#">My Note</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -107,16 +66,14 @@
 
                     </ul>
                     <form class="page-banner form-inline my-2 my-lg-0">
-                        <input class="search__input" type="text" placeholder="Search" id="search"
-                            onkeyup="search()"></input>
+                        <input class="search__input" type="text" placeholder="Search" id="search" onkeyup="search()"></input>
                     </form>
                 </div>
             </div>
         </nav>
     </div>
     <!-- add new note modal -->
-    <div class="modal fade-show" id="addnewnoteModal" tabindex="-1" role="dialog" aria-labelledby="addnewnoteModalLabel"
-        aria-hidden="true">
+    <div class="modal fade-show" id="addnewnoteModal" tabindex="-1" role="dialog" aria-labelledby="addnewnoteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -129,27 +86,26 @@
                     <input id="NewNotes_name" type="Title" class="form-control" id="tenghichu" placeholder="Title">
                     <br>
 
-                    <textarea class="form-control" id="NewNotes_content" type="ghichu" name="message"
-                        placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>
+                    <textarea class="form-control" id="NewNotes_content" type="ghichu" name="message" placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>
                     <br>
                     <div class="input-group mb-3">
-                        <input id="location_Name" type="text" class="form-control" placeholder="Location"
-                            aria-label="Location" aria-describedby="basic-addon2">
-                            <div>
-                                <input id="submit" type="button" value="Location">
-                            </div>
+                        <input id="location_Name" type="text" class="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2">
+                        <div>
+                            <button class="btn btn-primary">My Location</button>
+                        </div>
                         <div id="map"></div>
                     </div>
                     <select class="form-control" id="ListNotes_category1">
                         <option active="">--- Select---</option>
                     </select>
-
+                    <!-- 
                     <div id="color">
                     </div>
 
+                    <br> -->
                     <br>
 
-                    <input class="form-control" type="file" value="upload" id="fileButton" style="border:none" multiple/>
+                    <input class="form-control" type="file" value="upload" id="fileButton" style="border:none" multiple />
                     <!-- <input type="checkbox" id="NewNotes_checkTime" style="float: left;">
                     <label style="float: left; for="thongbao">Notification</label>
                     <div id="notification" class="row" style="display: none;">
@@ -160,7 +116,7 @@
                             <input id="time_no" type="time" class="form-control " name="bday">
                         </div>
                     </div> -->
-                    <form>
+                    <!-- <form>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <input type="checkbox" id="NewNotes_checkTime">
@@ -170,15 +126,14 @@
                             <input id="day_no" type="date" class="form-control " name="bday">
                             <input id="time_no" type="time" class="form-control " name="bday">
                         </div>
-                    </form>
+                    </form> -->
 
 
                     <br>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button onclick="writeNotesData()" type="button" style="width: 70px;height: 50px;"
-                        class="btn btn-outline-info">Add</button>
+                    <button onclick="writeNotesData()" type="button" style="width: 70px;height: 50px;" class="btn btn-outline-info">Add</button>
                 </div>
             </div>
         </div>
@@ -197,8 +152,7 @@
                     <div class="actionsBtns">
                         <form action="/logout" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                            <input type="submit" class="btn btn-default btn-primary" data-dismiss="modal" value="Logout"
-                                onclick="logout()" />
+                            <input type="submit" class="btn btn-default btn-primary" data-dismiss="modal" value="Logout" onclick="logout()" />
                             <button class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </form>
                     </div>
@@ -208,11 +162,9 @@
     </div>
     <br>
     <br>
-    <div class="jumbotron"
-        style="height: 450px;margin-bottom: 0;background-color: #68AEC0; background-image: url(../../../assets/img/Untitled-4.jpg); background-position: top center; background-repeat: no-repeat; ">
-        <h1 style="font-weight: 700; font-size:40px;text-transform: uppercase; font-family: auto; margin-top:90px"
-            class="text-dark">What to write
-            today?</h1>
+    <div class="jumbotron" style="height: 450px;margin-bottom: 0;background-color: #68AEC0; background-image: url(../../../assets/img/Untitled-4.jpg); background-position: top center; background-repeat: no-repeat; ">
+        <h1 style="font-weight: 700; font-size:40px;text-transform: uppercase; font-family: auto; margin-top:90px" class="text-dark">What to write today?
+        </h1>
         <p style=" font-family: auto;" class="text-dark">Are you oke, Are you Oke?...</p>
     </div>
     <div>
@@ -220,8 +172,7 @@
             <br>
             <div class="row">
                 <div class="col-lg-6">
-                    <select class="form-control" id="ListNotes_category" onchange="Category_select(this)"
-                        style="width: auto;">
+                    <select class="form-control" id="ListNotes_category" onchange="Category_select(this)" style="width: auto;">
                         <option active>No category</option>
                     </select>
                     <br>
@@ -229,8 +180,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne"
-                        style="text-align: left;background-color: #ffffff; border-radius: 0.9rem !important; padding: 16px;">
+                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne" style="text-align: left;background-color: #ffffff; border-radius: 0.9rem !important; padding: 16px;">
                         <main>
                             <section id="to-do-app">
                                 <form action="">
@@ -248,11 +198,66 @@
                     </div>
                     <br>
                     <hr>
-                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne"
-                        style="text-align: left; background-color: #ffffff; border-radius: 0.9rem !important;padding: 16px; ">
+                    <div id="collapseOne" class=" shadow bg-white collapse rounded" aria-labelledby="headingOne" style="text-align: left; background-color: #ffffff; border-radius: 0.9rem !important;padding: 16px; ">
                         <main>
                             <section id="to-do-app">
-                                                                
+                                <p>Task:</p>
+                                <textarea class="form-control" id="NewNotes_content" type="ghichu" name="message" placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>
+                                <hr>
+                                <div class="container row">
+                                    <div class="col-md-2">
+                                        <p>Begin:</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input id="day_no" type="date" class="form-control " name="bday">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input id="time_no" type="time" class="form-control " name="bday">
+                                    </div>
+                                </div>
+                                <div class="container row">
+                                    <div class="col-md-2">
+                                        <p>End:</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input id="day_no" type="date" class="form-control " name="bday">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input id="time_no" type="time" class="form-control " name="bday">
+                                    </div>
+                                </div>
+                                <div class="container row">
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="ListNotes_category1">
+                                            <option active="">--- Select---</option>
+                                        </select> <br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- <input id="location_Name" type="text" class="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2">
+                                        <div>
+                                            <button class="btn btn-primary">My Location</button>
+                                        </div> -->
+                                        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                                            <div class="input-group">
+                                                <input id="location_Name" type="text" class="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2">
+                                                <div>
+                                                    <button class="btn btn-primary">My Location</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-outline-primary">
+                                    View All <span class="badge badge-light">4</span>
+                                </button>
+
+                                <button style="float:right;" class="btn btn-outline-success">
+                                    NEW
+                                </button>
+
+                                <br>
                             </section>
                         </main>
                     </div>
@@ -286,7 +291,7 @@
         const messaging = firebase.messaging();
     </script>
     <!-- <script src="https://www.gstatic.com/firebase/init.js"></script> -->
-    <script src="/app.js"></script>
+    <!-- <script src="/app.js"></script> -->
     <script src="/db.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="login-register-master/signin.js"></script>
@@ -301,14 +306,9 @@
     <script src='components/js/homepage/header.js'></script>
     <script src='components/js/homepage/card.js'></script>
     <script src="/pushNotification.js"></script>
-    <script  src="/location.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChjOHi6n7hXLQrvT2hX7KOEVc7HAC9Z8Y&callback=initMap"
-  type="text/javascript"></script>
-
+    <script src="/location.js"></script>
     <link rel="stylesheet" href="components/css/homepage/card.css">
     <link rel="stylesheet" href="components/css/homepage/btn-quick-new-note.css">
-
-
 </body>
 
 </html>
