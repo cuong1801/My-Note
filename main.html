@@ -173,7 +173,7 @@
                         <main>
                             <section id="to-do-app">
                                 <p>Task:</p>
-                                <textarea class="form-control" id="NewNotes_content" type="ghichu" name="message" placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>
+                                <textarea class="form-control" id="NewTask_content" type="ghichu" name="message" placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>
                                 <hr>
                                 <div class="container row">
                                     <div class="col-md-2">
@@ -186,7 +186,7 @@
                                         <input id="time_no" type="time" class="form-control " name="bday">
                                     </div>
                                 </div>
-                                <div class="container row">
+                                <!-- <div class="container row">
                                     <div class="col-md-2">
                                         <p>End:</p>
                                     </div>
@@ -196,19 +196,20 @@
                                     <div class="col-md-4">
                                         <input id="time_no" type="time" class="form-control " name="bday">
                                     </div>
-                                </div>
-                                <div class="container row">
+                                </div> -->
+                                <div class="row">
                                     <div class="col-md-6">
-                                        <select class="form-control" id="ListNotes_category1">
+                                        <select class="form-control" id="ListNotes_categorytask">
                                             <option active="">--- Select---</option>
-                                        </select> <br>
+                                        </select>
+                                        <br>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                                             <div class="input-group">
                                                 <input id="location_Name" type="text" class="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2">
                                                 <div>
-                                                    <button class="btn btn-primary">My Location</button>
+                                                    <button class="btn btn-primary">+</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +219,7 @@
                                 <button onclick="task()" type="button" class="btn btn-outline-primary">
                                     View All <span class="badge badge-light">4</span>
                                 </button>
-                                <button style="float:right;" class="btn btn-outline-success">
+                                <button style="float:right;" class="btn btn-outline-success" onclick="addtask()">
                                     NEW
                                 </button>
                                 <br>
