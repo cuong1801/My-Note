@@ -1022,6 +1022,4 @@ function addtask() {
             window.location.href = "index.html";
         }, 1500);
     }
-
-    // console.log(Note_timeExecute)
 }
