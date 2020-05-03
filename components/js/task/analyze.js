@@ -52,6 +52,103 @@ window.onload = function() {
                     console.log("Error getting document:", error);
                     alert(error);
                 });
+                db.collection("task").orderBy("time", "desc").get().then(snapshot => {
+
+                    snapshot.docs.forEach(doc => {
+                        var status = "" + (doc.data().status);
+                        if (doc.data().userID == idUser && status == "done") {
+
+                            var des = doc.data().task;
+                            var subDes = des.slice(0, 30);
+                            $("#listDones").append(
+                                '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
+                                '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
+                                '<div class="row">' +
+                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
+                                '</div>' +
+                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<small class="text-muted">' + doc.data().timeTaskShow + '</small>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
+                                '<div>' +
+                                '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
+                                '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().task + '</h1>' +
+                                '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timeTaskShow + '</em></div>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().task + '</textarea>' +
+                                '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                '<em style="float: right;">' + doc.data().location + '</em>' +
+                                '</div>' +
+                                '<div class="modal-footer">' +
+                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
+                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
+                                '</div>' +
+                                '</div>'
+
+
+
+                            );
+
+                            var imgNote = document.getElementById("imgNote" + doc.id);
+                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                imgNote.src = url;
+                            }).catch(function(error) {});
+                        } else if (doc.data().userID == idUser && status == "doing") {
+                            var des = doc.data().task;
+                            var subDes = des.slice(0, 30);
+                            $("#listDoings").append(
+                                '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
+                                '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
+                                '<div class="row">' +
+                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
+                                '</div>' +
+                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<small class="text-muted">' + doc.data().time + '</small>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
+                                '<div>' +
+                                '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
+                                '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().task + '</h1>' +
+                                '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().time + '</em></div>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().task + '</textarea>' +
+                                '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                '<em style="float: right;">' + doc.data().location + '</em>' +
+                                '</div>' +
+                                '<div class="modal-footer">' +
+                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
+                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
+                                '</div>' +
+                                '</div>'
+
+
+
+                            );
+
+                            var imgNote = document.getElementById("imgNote" + doc.id);
+                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                                imgNote.src = url;
+                            }).catch(function(error) {});
+                        }
+                    });
+
+                });
                 // var listcategory = document.getElementById("ListNotes_category").value;
                 db.collection("category").get().then(snapshot => {
                     snapshot.docs.forEach(doc => {
@@ -128,3 +225,4 @@ function logout() {
     });
 
 }
+

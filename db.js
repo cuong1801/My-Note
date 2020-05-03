@@ -998,17 +998,34 @@ fileButton.addEventListener('change', function(e) {
 function addtask() {
     var NewTask_content_text = NewTask_content.value;
     var NewTask_content_text_value = NewTask_content_text.trim();
-    var notification = day_no.value + " " + time_no.value;
-    var Note_timeExecute = new Date(notification);
+    var taskDateExecute = document.getElementById("day_no").value;
+    var taskTimeExecute = document.getElementById("time_no").value;
+    var taskDateTimeExecute = taskDateExecute + " " + taskTimeExecute;
+    var task_timeExecute = new Date(taskDateTimeExecute);
+    var DDtask = task_timeExecute.getDate();
+    var MMtask = task_timeExecute.getMonth() + 1;
+    var YYYYtask = task_timeExecute.getFullYear();
+
+    var htask = task_timeExecute.getHours();
+    var mtask = task_timeExecute.getMinutes();
+    DDtask = checkTime(DDtask);
+    MMtask = checkTime(MMtask);
+    YYYYtask = checkTime(YYYYtask);
+
+    htask = checkTime(htask);
+    mtask = checkTime(mtask);
+    var taskTimeShow = MMtask + "/" + DDtask + "/" + YYYYtask + " " + htask + ":" + mtask;
     if (NewTask_content_text_value.length === 0) {
         alert('Title are required to continue!');
     } else {
         var n = 0;
         db.collection('task').add({
                 task: document.getElementById("NewTask_content").value,
-                time: Note_timeExecute,
+                time: task_timeExecute,
+                timeTaskShow: taskTimeShow,
                 category: document.getElementById("ListNotes_categorytask").value,
                 location: document.getElementById("location_Name").value,
+                status: "doing",
                 userID: firebase.auth().currentUser.uid,
             })
             .then(function(docRef) {
@@ -1019,7 +1036,7 @@ function addtask() {
                 console.error("Error adding document: ", error);
             });
         setTimeout(function() {
-            window.location.href = "index.html";
+            window.location.href = "main.html";
         }, 1500);
     }
 }
