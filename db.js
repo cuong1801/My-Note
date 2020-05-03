@@ -6,7 +6,7 @@ var storageRef = firebase.storage().ref();
 var temp = "";
 
 db.enablePersistence()
-    .catch(function (err) {
+    .catch(function(err) {
         if (err.code == 'failed-precondition') {
             // probably multible tabs open at once
             console.log('persistance failed');
@@ -18,7 +18,7 @@ db.enablePersistence()
 
 var searchBar = document.querySelector(".page-banner .search__input");
 console.log(searchBar)
-searchBar.onkeyup = function () {
+searchBar.onkeyup = function() {
     // console.log(searchBar)
 
     var searchItem = searchBar.value.toLowerCase();
@@ -37,10 +37,10 @@ searchBar.onkeyup = function () {
         }
     });
 };
-window.onload = function () {
+window.onload = function() {
     var dem = 0;
     $('#listNotes').load('show_not.html');
-    firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             var user = firebase.auth().currentUser;
             if (user != null) {
@@ -49,7 +49,7 @@ window.onload = function () {
                 document.getElementById("register").style.display = "none";
                 document.getElementById("login").style.display = "none";
 
-                docRef.get().then(function (doc) {
+                docRef.get().then(function(doc) {
 
                     if (doc.exists) {
                         console.log("Document user profile:", doc.data());
@@ -61,9 +61,9 @@ window.onload = function () {
                         $('#DropDownTimezone').val(doc.data().timeZone);
 
                         var imgProfile = document.getElementById("profile-image1");
-                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function (url) {
+                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function(url) {
                             imgProfile.src = url;
-                        }).catch(function (error) {
+                        }).catch(function(error) {
                             // Handle any errors
                         });
 
@@ -71,7 +71,7 @@ window.onload = function () {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
                     }
-                }).catch(function (error) {
+                }).catch(function(error) {
                     console.log("Error getting document:", error);
                     alert(error);
                 });
@@ -101,7 +101,7 @@ window.onload = function () {
                                 '</div>' +
                                 '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
                                 '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
-                                '<div>'+
+                                '<div>' +
                                 '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
                                 '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().name + '</h1>' +
                                 '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timepostShow + '</em></div>' +
@@ -115,7 +115,7 @@ window.onload = function () {
                                 '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
                                 '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
-                                '</div>'+
+                                '</div>' +
                                 '</div>'
 
 
@@ -123,9 +123,9 @@ window.onload = function () {
                             );
 
                             var imgNote = document.getElementById("imgNote" + doc.id);
-                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                 imgNote.src = url;
-                            }).catch(function (error) {});
+                            }).catch(function(error) {});
                         }
                     });
 
@@ -144,11 +144,16 @@ window.onload = function () {
 
 
                             );
-                            $("#color").append(
-                                '<span class="badge badge-primary badge-pill">color</span>'
+                            $("#ListNotes_categorytask").append(
+                                '<option id="list3' + doc.id + '">' + category + '</option>'
 
 
                             );
+                            // $("#color").append(
+                            //     '<span class="badge badge-primary badge-pill">color</span>'
+
+
+                            // );
 
                             $("#todos").append(
 
@@ -194,8 +199,8 @@ window.onload = function () {
         }
     });
 }
-$(document).ready(function () {
-    $(".menu-button").click(function () {
+$(document).ready(function() {
+    $(".menu-button").click(function() {
         $(".menu-bar").toggleClass("open");
     })
 })
@@ -255,15 +260,15 @@ function addnewcategory() {
                 color: '',
                 userID: firebase.auth().currentUser.uid,
             })
-            .then(function (docRef) {
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
     }
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "index.html";
     }, 1500);
 }
@@ -280,10 +285,10 @@ function addquicknote() {
                 userID: firebase.auth().currentUser.uid,
                 image: temp
             })
-            .then(function (docRef) {
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
@@ -327,7 +332,7 @@ function editCategory() {
         "category": inputedit,
     });
     batch.commit();
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "index.html";
     }, 1500);
 
@@ -340,7 +345,7 @@ function checkTime(i) {
     }
     return i;
 }
-document.getElementById('NewNotes_checkTime').onclick = function (e) {
+document.getElementById('NewNotes_checkTime').onclick = function(e) {
     var check = false;
     if (this.checked) {
         document.getElementById('notification').style.display = 'block';
@@ -364,7 +369,7 @@ function save() {
         "content": inputedit,
     });
     batch.commit();
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "index.html";
     }, 1500);
 
@@ -437,15 +442,15 @@ function writeNotesData() {
                 image: temp
 
             })
-            .then(function (docRef) {
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
     }
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "index.html";
     }, 2000);
     //window.location="index.html";
@@ -454,7 +459,7 @@ function writeNotesData() {
 //listen for image profile selection
 var tempProfile = "";
 var userImg = document.getElementById('profile-image-upload');
-userImg.addEventListener('change', function (e) {
+userImg.addEventListener('change', function(e) {
     //get file
     var file = e.target.files[0];
     //create a storage ref
@@ -495,7 +500,7 @@ function Category_select(category) {
             } else if (notificationCheck) {
                 Notificationshow();
             } else {
-                firebase.auth().onAuthStateChanged(function (user) {
+                firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
 
                         var user = firebase.auth().currentUser;
@@ -547,9 +552,9 @@ function Category_select(category) {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 });
                             });
@@ -563,26 +568,26 @@ function Category_select(category) {
 
 var searchBar = document.querySelector(".search__input");
 console.log(document.querySelector(".search__input"))
-// alert("ád")
-// searchBar.onkeyup = function(){      
-//   var searchItem = searchBar.value.toLowerCase(); 
-//  var books = document.querySelectorAll("li"); 
-//   books.forEach(book =>{
-//     var title = book.textContent;
-//     //indexOf returns -1 if an element can't be found in an array. So if the result is not -1, the elemnt exist and should be shown. Otherwise, it is hidden. 
-//     if(title.toLowerCase().indexOf(searchItem)!= -1){
-// book.style.display = 'block';      
-//     }
-//      else{
-//       book.style.display = "none";
-//     }
-//   });
-// };
+    // alert("ád")
+    // searchBar.onkeyup = function(){      
+    //   var searchItem = searchBar.value.toLowerCase(); 
+    //  var books = document.querySelectorAll("li"); 
+    //   books.forEach(book =>{
+    //     var title = book.textContent;
+    //     //indexOf returns -1 if an element can't be found in an array. So if the result is not -1, the elemnt exist and should be shown. Otherwise, it is hidden. 
+    //     if(title.toLowerCase().indexOf(searchItem)!= -1){
+    // book.style.display = 'block';      
+    //     }
+    //      else{
+    //       book.style.display = "none";
+    //     }
+    //   });
+    // };
 
 function search() {
     $('#listNotes').load('show_not.html');
     var tim = document.getElementById("search").value;
-    firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             var user = firebase.auth().currentUser;
 
@@ -615,9 +620,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim == "" && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -636,9 +641,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -657,9 +662,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -678,9 +683,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 }
                             }
@@ -707,9 +712,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim == "" && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -728,9 +733,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -749,9 +754,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -770,9 +775,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 }
                             }
@@ -799,9 +804,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim == "" && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -820,9 +825,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -841,9 +846,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -862,9 +867,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 }
                             }
@@ -887,9 +892,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             } else if (tim == "" && category_selected == doc.data().category) {
                                 var des = doc.data().content;
                                 var tit = doc.data().name;
@@ -908,9 +913,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                 var des = doc.data().content;
                                 var tit = doc.data().name;
@@ -929,9 +934,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                 var des = doc.data().content;
                                 var tit = doc.data().name;
@@ -950,9 +955,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             }
                         }
                     });
@@ -965,7 +970,7 @@ function search() {
 var uploader = document.getElementById('uploader');
 var fileButton = document.getElementById('fileButton');
 //listen for file selection
-fileButton.addEventListener('change', function (e) {
+fileButton.addEventListener('change', function(e) {
     //get file
     var file = e.target.files[0];
     //create a storage ref
@@ -989,3 +994,49 @@ fileButton.addEventListener('change', function (e) {
         }
     );
 });
+
+function addtask() {
+    var NewTask_content_text = NewTask_content.value;
+    var NewTask_content_text_value = NewTask_content_text.trim();
+    var taskDateExecute = document.getElementById("day_no").value;
+    var taskTimeExecute = document.getElementById("time_no").value;
+    var taskDateTimeExecute = taskDateExecute + " " + taskTimeExecute;
+    var task_timeExecute = new Date(taskDateTimeExecute);
+    var DDtask = task_timeExecute.getDate();
+    var MMtask = task_timeExecute.getMonth() + 1;
+    var YYYYtask = task_timeExecute.getFullYear();
+
+    var htask = task_timeExecute.getHours();
+    var mtask = task_timeExecute.getMinutes();
+    DDtask = checkTime(DDtask);
+    MMtask = checkTime(MMtask);
+    YYYYtask = checkTime(YYYYtask);
+
+    htask = checkTime(htask);
+    mtask = checkTime(mtask);
+    var taskTimeShow = MMtask + "/" + DDtask + "/" + YYYYtask + " " + htask + ":" + mtask;
+    if (NewTask_content_text_value.length === 0) {
+        alert('Title are required to continue!');
+    } else {
+        var n = 0;
+        db.collection('task').add({
+                task: document.getElementById("NewTask_content").value,
+                time: task_timeExecute,
+                timeTaskShow: taskTimeShow,
+                category: document.getElementById("ListNotes_categorytask").value,
+                location: document.getElementById("location_Name").value,
+                status: "doing",
+                userID: firebase.auth().currentUser.uid,
+            })
+            .then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                alert(error);
+                console.error("Error adding document: ", error);
+            });
+        setTimeout(function() {
+            window.location.href = "main.html";
+        }, 1500);
+    }
+}
