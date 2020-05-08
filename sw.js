@@ -5,6 +5,7 @@ const assets = [
   '/index.html',
   '/login.html',
   '/main.html',
+  '/task.html',
   '/app.js',
   '/assets/img',
   '/assets/js/PWA-NotesList-calendar.js',

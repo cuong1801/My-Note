@@ -7,16 +7,19 @@ function initMap() {
   var geocoder = new google.maps.Geocoder;
 
   document.getElementById('submit').addEventListener('click', function() {
-    geocodeLatLng(geocoder, latI, latL);
+    geocodeLatLng(geocoder, latI, latL, "location_Name");
+  });
+  document.getElementById('submit2').addEventListener('click', function() {
+    geocodeLatLng(geocoder, latI, latL, "location_NameTest");
   });
 }
 
-function geocodeLatLng(geocoder, latI, latL) {
+function geocodeLatLng(geocoder, latI, latL, string) {
   var latlng = {lat: parseFloat(latI), lng: parseFloat(latL)};
   geocoder.geocode({'location': latlng}, function(results, status) {
     if (status === 'OK') {
       if (results[0]) {
-        document.getElementById('location_Name').value = results[0].formatted_address;
+        document.getElementById(string).value = results[0].formatted_address;
         console.log(results[0].formatted_address);
       } else {
         window.alert('No results found');
