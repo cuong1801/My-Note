@@ -8,14 +8,14 @@ var today = new Date();
 var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var dateTime = date + ' ' + time;
-typeof(dateTime);
+typeof (dateTime);
 console.log(dateTime)
-window.onload = function() {
+window.onload = function () {
     var dem = 0;
     var countnote = 0;
     var counttask = 0;
     // $('#listNotes').load('show_not.html');
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var user = firebase.auth().currentUser;
             if (user != null) {
@@ -24,7 +24,7 @@ window.onload = function() {
                 // document.getElementById("register").style.display = "none";
                 // document.getElementById("login").style.display = "none";
 
-                docRef.get().then(function(doc) {
+                docRef.get().then(function (doc) {
 
                     if (doc.exists) {
                         console.log("Document user profile:", doc.data());
@@ -40,9 +40,9 @@ window.onload = function() {
                             doc.data().firstName
                         )
                         var imgProfile = document.getElementById("profile-image1");
-                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function(url) {
+                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function (url) {
                             imgProfile.src = url;
-                        }).catch(function(error) {
+                        }).catch(function (error) {
                             // Handle any errors
                         });
 
@@ -50,7 +50,7 @@ window.onload = function() {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
                     }
-                }).catch(function(error) {
+                }).catch(function (error) {
                     console.log("Error getting document:", error);
                     alert(error);
                 });
@@ -137,7 +137,7 @@ window.onload = function() {
                                 db.collection("task").where("category", "==", categorycount).get().then(snapshot => {
                                     snapshot.docs.forEach(doc => {
                                         demtask++;
-                                        console.log(demtask)
+                                        // console.log(demtask)
 
 
                                     });
@@ -177,12 +177,13 @@ window.onload = function() {
 
 
                             var imgNote = document.getElementById("imgNote" + doc.id);
-                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
+                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
                                 imgNote.src = url;
-                            }).catch(function(error) {});
+                            }).catch(function (error) {});
                         }
                     });
                 });
+          
                 // db.collection("task").get().then(snapshot => {
 
                 //     snapshot.docs.forEach(doc => {
@@ -212,7 +213,7 @@ function done() {
         "status": "done",
     });
     batch.commit();
-    setTimeout(function() {
+    setTimeout(function () {
         window.location.href = "task.html";
     }, 1000);
 }
@@ -230,7 +231,7 @@ function doing() {
         "status": "doing",
     });
     batch.commit();
-    setTimeout(function() {
+    setTimeout(function () {
         window.location.href = "task.html";
     }, 1000);
 }
@@ -250,9 +251,9 @@ function deletetask() {
 }
 
 function logout() {
-    firebase.auth().signOut().then(function() {
+    firebase.auth().signOut().then(function () {
         window.location.assign("index.html");
-    }).catch(function(error) {
+    }).catch(function (error) {
         window.alert(error.message)
     });
 
