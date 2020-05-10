@@ -137,7 +137,7 @@ window.onload = function() {
                                 db.collection("task").where("category", "==", categorycount).get().then(snapshot => {
                                     snapshot.docs.forEach(doc => {
                                         demtask++;
-                                        // console.log(dem) 
+                                        console.log(demtask)
 
 
                                     });
@@ -222,7 +222,7 @@ function doing() {
     // alert("ssd")
     var id = event.target.id;
     // var inputedit = document.getElementById("input" + id).value;
-    console.log(id);
+    // console.log(id);
     // alert(document.getElementById( "editcategory"+id).value)
 
     var newUserRef = db.collection("task").doc(id);
