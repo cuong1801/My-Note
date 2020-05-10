@@ -12,6 +12,8 @@ typeof(dateTime);
 console.log(dateTime)
 window.onload = function() {
     var dem = 0;
+    var countnote = 0;
+    var counttask = 0;
     // $('#listNotes').load('show_not.html');
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -52,7 +54,21 @@ window.onload = function() {
                     console.log("Error getting document:", error);
                     alert(error);
                 });
-                db.collection("task").orderBy("time", "desc").get().then(snapshot => {
+                db.collection("category").get().then(snapshot => {
+                    snapshot.docs.forEach(doc => {
+                        if (doc.data().userID == idUser) {
+                            countnote++;
+                        }
+                    })
+                })
+                db.collection("task").get().then(snapshot => {
+                    snapshot.docs.forEach(doc => {
+                        if (doc.data().userID == idUser) {
+                            counttask++;
+                        }
+                    })
+                })
+                db.collection("task").orderBy("time", "asc").get().then(snapshot => {
 
                     snapshot.docs.forEach(doc => {
                         var status = "" + (doc.data().status);
@@ -62,8 +78,8 @@ window.onload = function() {
                             var subDes = des.slice(0, 30);
                             $("#listDones").append(
                                 '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
-                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
-                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-danger badge-pill" style="float: right"  onclick="deletetask()">X</span>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-danger badge-pill" style="float: right"  onclick="doing()">Doing</span>' +
                                 '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
                                 '<div class="row">' +
                                 '<div class="col-lg-6" style="width: auto;">' +
@@ -73,78 +89,30 @@ window.onload = function() {
                                 '<small class="text-muted">' + doc.data().timeTaskShow + '</small>' +
                                 '</div>' +
                                 '</div>' +
-                                '</div>' +
-                                '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
-                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
-                                '<div>' +
-                                '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
-                                '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().task + '</h1>' +
-                                '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timeTaskShow + '</em></div>' +
-                                '</div>' +
-                                '<div class="modal-body">' +
-                                '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().task + '</textarea>' +
-                                '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
-                                '<em style="float: right;">' + doc.data().location + '</em>' +
-                                '</div>' +
-                                '<div class="modal-footer">' +
-                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
-                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
-                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
-                                '</div>' +
                                 '</div>'
-
-
-
                             );
-
-                            var imgNote = document.getElementById("imgNote" + doc.id);
-                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
-                                imgNote.src = url;
-                            }).catch(function(error) {});
                         } else if (doc.data().userID == idUser && status == "doing") {
                             var des = doc.data().task;
+
                             var subDes = des.slice(0, 30);
                             $("#listDoings").append(
                                 '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
-                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
-                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deletetask()">X</span>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="done()">Done</span>' +
                                 '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
                                 '<div class="row">' +
                                 '<div class="col-lg-6" style="width: auto;">' +
                                 '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
                                 '</div>' +
                                 '<div class="col-lg-6" style="width: auto;">' +
-                                '<small class="text-muted">' + doc.data().time + '</small>' +
+                                '<small class="text-muted">' + doc.data().timeTaskShow + '</small>' +
                                 '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
-                                '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
-                                '<div>' +
-                                '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
-                                '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().task + '</h1>' +
-                                '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().time + '</em></div>' +
-                                '</div>' +
-                                '<div class="modal-body">' +
-                                '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().task + '</textarea>' +
-                                '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
-                                '<em style="float: right;">' + doc.data().location + '</em>' +
-                                '</div>' +
-                                '<div class="modal-footer">' +
-                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
-                                '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
-                                '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
                                 '</div>' +
                                 '</div>'
 
 
 
                             );
-
-                            var imgNote = document.getElementById("imgNote" + doc.id);
-                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
-                                imgNote.src = url;
-                            }).catch(function(error) {});
                         }
                     });
 
@@ -169,10 +137,12 @@ window.onload = function() {
                                 db.collection("task").where("category", "==", categorycount).get().then(snapshot => {
                                     snapshot.docs.forEach(doc => {
                                         demtask++;
-                                        // console.log(dem)
+                                        console.log(demtask)
 
 
                                     });
+                                    var tisonote = demnote / countnote * 100;
+                                    var tisotask = demtask / counttask * 100;
                                     $("#count-category").append(
                                         '<div class="col-xl-3 col-md-6 mb-4">' +
                                         '<div class="card border-left-primary shadow h-100 py-2">' +
@@ -189,6 +159,19 @@ window.onload = function() {
 
 
                                     );
+                                    $("#count-chart").append(
+                                        '<h4 class="small font-weight-bold">' + categorycount + '</h4>' +
+                                        '<div class="progress mb-4">' +
+                                        '<div class="progress-bar bg-danger" role="progressbar" style="width: ' + demnote + '%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>' +
+                                        '<span class="float-right">' + tisonote.toFixed(2) + '% - (Note)</span>' +
+                                        '</div>' +
+                                        '<div class="progress mb-4">' +
+                                        '<div class="progress-bar bg-warning" role="progressbar" style="width: ' + demtask + '%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>' +
+                                        '<span class="float-right">' + tisotask.toFixed(2) + '% - (Task) </span>' +
+                                        '</div>'
+
+
+                                    );
                                 });
                             });
 
@@ -199,22 +182,71 @@ window.onload = function() {
                             }).catch(function(error) {});
                         }
                     });
-
                 });
-                db.collection("task").get().then(snapshot => {
+                // db.collection("task").get().then(snapshot => {
 
-                    snapshot.docs.forEach(doc => {
-                        // demnote++;
-                        console.log(doc.data().time)
+                //     snapshot.docs.forEach(doc => {
+                //         // demnote++;
+                //         console.log(doc.data().time)
 
 
-                    });
-                });
+                //     });
+                // });
 
 
             }
         }
     });
+}
+
+function done() {
+    var batch = db.batch();
+    // alert("ssd")
+    var id = event.target.id;
+    // var inputedit = document.getElementById("input" + id).value;
+    console.log(id);
+    // alert(document.getElementById( "editcategory"+id).value)
+
+    var newUserRef = db.collection("task").doc(id);
+    batch.update(newUserRef, {
+        "status": "done",
+    });
+    batch.commit();
+    setTimeout(function() {
+        window.location.href = "task.html";
+    }, 1000);
+}
+
+function doing() {
+    var batch = db.batch();
+    // alert("ssd")
+    var id = event.target.id;
+    // var inputedit = document.getElementById("input" + id).value;
+    // console.log(id);
+    // alert(document.getElementById( "editcategory"+id).value)
+
+    var newUserRef = db.collection("task").doc(id);
+    batch.update(newUserRef, {
+        "status": "doing",
+    });
+    batch.commit();
+    setTimeout(function() {
+        window.location.href = "task.html";
+    }, 1000);
+}
+
+function deletetask() {
+    if (confirm('You want to delete note?')) {
+        var id = event.target.id;
+        // alert(id);
+        db.collection('task').doc(id).delete();
+        // var hidden1 = 'del' + id;
+        // document.getElementById(hidden1).style.display = 'none';
+        // setTimeout(function () {
+        //     window.location.href = "index.html";
+        // }, 2000);
+
+    } else {}
 }
 
 function logout() {
@@ -225,4 +257,3 @@ function logout() {
     });
 
 }
-
