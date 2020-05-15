@@ -6,7 +6,7 @@ var storageRef = firebase.storage().ref();
 var temp = "";
 
 db.enablePersistence()
-    .catch(function (err) {
+    .catch(function(err) {
         if (err.code == 'failed-precondition') {
             // probably multible tabs open at once
             console.log('persistance failed');
@@ -18,7 +18,7 @@ db.enablePersistence()
 
 var searchBar = document.querySelector(".page-banner .search__input");
 console.log(searchBar)
-searchBar.onkeyup = function () {
+searchBar.onkeyup = function() {
     // console.log(searchBar)
 
     var searchItem = searchBar.value.toLowerCase();
@@ -37,10 +37,10 @@ searchBar.onkeyup = function () {
         }
     });
 };
-window.onload = function () {
+window.onload = function() {
     var dem = 0;
     $('#listNotes').load('show_not.html');
-    firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             var user = firebase.auth().currentUser;
             if (user != null) {
@@ -49,7 +49,7 @@ window.onload = function () {
                 document.getElementById("register").style.display = "none";
                 document.getElementById("login").style.display = "none";
 
-                docRef.get().then(function (doc) {
+                docRef.get().then(function(doc) {
 
                     if (doc.exists) {
                         console.log("Document user profile:", doc.data());
@@ -61,9 +61,9 @@ window.onload = function () {
                         $('#DropDownTimezone').val(doc.data().timeZone);
 
                         var imgProfile = document.getElementById("profile-image1");
-                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function (url) {
+                        storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function(url) {
                             imgProfile.src = url;
-                        }).catch(function (error) {
+                        }).catch(function(error) {
                             // Handle any errors
                         });
 
@@ -71,7 +71,7 @@ window.onload = function () {
                         // doc.data() will be undefined in this case
                         console.log("No such document!");
                     }
-                }).catch(function (error) {
+                }).catch(function(error) {
                     console.log("Error getting document:", error);
                     alert(error);
                 });
@@ -123,9 +123,9 @@ window.onload = function () {
                             );
 
                             var imgNote = document.getElementById("imgNote" + doc.id);
-                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                            storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                 imgNote.src = url;
-                            }).catch(function (error) {});
+                            }).catch(function(error) {});
                         }
                     });
 
@@ -149,6 +149,13 @@ window.onload = function () {
 
 
                             );
+
+                            $("#ListNotes_categorytask2").append(
+                                '<option id="list3' + doc.id + '">' + category + '</option>'
+
+
+                            );
+
                             // $("#color").append(
                             //     '<span class="badge badge-primary badge-pill">color</span>'
 
@@ -199,8 +206,8 @@ window.onload = function () {
         }
     });
 }
-$(document).ready(function () {
-    $(".menu-button").click(function () {
+$(document).ready(function() {
+    $(".menu-button").click(function() {
         $(".menu-bar").toggleClass("open");
     })
 })
@@ -235,7 +242,7 @@ function deleteNote() {
         db.collection('notelist').doc(id).delete();
         // var hidden1 =  id;
         // document.getElementById(hidden1).style.display = 'none';
-        setTimeout(function () {
+        setTimeout(function() {
             window.location.href = "index.html";
         }, 2000);
 
@@ -260,15 +267,15 @@ function addnewcategory() {
                 color: '',
                 userID: firebase.auth().currentUser.uid,
             })
-            .then(function (docRef) {
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
     }
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "index.html";
     }, 1500);
 }
@@ -285,10 +292,10 @@ function addquicknote() {
                 userID: firebase.auth().currentUser.uid,
                 image: temp
             })
-            .then(function (docRef) {
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
@@ -298,41 +305,58 @@ function addquicknote() {
 
 function deleteCategory() {
     if (confirm('You want to delete note?')) {
-        // var idUser = firebase.auth().currentUser.uid;
+        var idUser = firebase.auth().currentUser.uid;
 
         var id = event.target.id;
         // alert(id);
-        // var docRef = db.collection("category").doc(id);
-        // docRef.get().then(function (doc) {
-        //     if (doc.exists) {
-        //         if (doc.data().userID == idUser) {
-        //             var namecategory = doc.data().category;
-        //             // console.log(namecategory)
+        var docRef = db.collection("category").doc(id);
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+                if (doc.data().userID == idUser) {
+                    var namecategory = doc.data().category;
+                    // console.log(namecategory)
+                    db.collection('category').doc(id).delete();
+                    db.collection("notelist").get().then(snapshot => {
 
-        //             db.collection("notelist").get().then(snapshot => {
+                        snapshot.docs.forEach(doc => {
+                            if (doc.data().userID == idUser && doc.data().category == namecategory) {
+                                var batch = db.batch();
 
-        //                 snapshot.docs.forEach(doc => {
-        //                     if (doc.data().userID == idUser && doc.data().category == namecategory) {
-        //                         console.log("doc.data().name")
+                                var newUserRef = db.collection("notelist").doc(doc.id);
+                                batch.update(newUserRef, {
+                                    "category": 'No Category',
+                                });
+                                batch.commit();
 
-        //                     }
-        //                 });
+                            }
+                        });
+                    });
+                    db.collection("task").get().then(snapshot => {
 
-        //             });
-        //         }
-        //     } else {
-        //         // doc.data() will be undefined in this case
-        //         console.log("No such document!");
-        //     }
-        // }).catch(function (error) {
-        //     console.log("Error getting document:", error);
-        // });
-        db.collection('category').doc(id).delete();
+                        snapshot.docs.forEach(doc => {
+                            if (doc.data().userID == idUser && doc.data().category == namecategory) {
+                                var batch = db.batch();
 
+                                var newUserRef = db.collection("task").doc(doc.id);
+                                batch.update(newUserRef, {
+                                    "category": 'No Category',
+                                });
+                                batch.commit();
+
+                            }
+                        });
+                    });
+                }
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
         var hidden1 = 'list1' + id;
         var hidden2 = 'list2' + id;
         var hidden3 = 'list3' + id;
-
         document.getElementById(hidden2).style.display = 'none';
         document.getElementById(hidden1).style.display = 'none';
         document.getElementById(hidden3).style.display = 'none';
@@ -353,21 +377,70 @@ function deleteCategory() {
 }
 
 function editCategory() {
+    var idUser = firebase.auth().currentUser.uid;
     var batch = db.batch();
     // alert("ssd")
     var id = event.target.id;
     var inputedit = document.getElementById("input" + id).value;
     // console.log(inputedit);
     // alert(document.getElementById( "editcategory"+id).value)
+    var docRef = db.collection("category").doc(id);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            if (doc.data().userID == idUser) {
+                var namecategory = doc.data().category;
+                // console.log(namecategory)
+                var newUserRef = db.collection("category").doc(id);
+                batch.update(newUserRef, {
+                    "category": inputedit,
+                });
+                batch.commit();
+                db.collection("notelist").get().then(snapshot => {
 
-    var newUserRef = db.collection("category").doc(id);
-    batch.update(newUserRef, {
-        "category": inputedit,
+                    snapshot.docs.forEach(doc => {
+                        if (doc.data().userID == idUser && doc.data().category == namecategory) {
+                            var batch = db.batch();
+
+                            var newUserRef = db.collection("notelist").doc(doc.id);
+                            batch.update(newUserRef, {
+                                "category": inputedit,
+                            });
+                            batch.commit();
+
+                        }
+                    });
+                });
+                db.collection("task").get().then(snapshot => {
+
+                    snapshot.docs.forEach(doc => {
+                        if (doc.data().userID == idUser && doc.data().category == namecategory) {
+                            var batch = db.batch();
+
+                            var newUserRef = db.collection("task").doc(doc.id);
+                            batch.update(newUserRef, {
+                                "category": inputedit,
+                            });
+                            batch.commit();
+
+                        }
+                    });
+                });
+            }
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
     });
-    batch.commit();
-    setTimeout(function () {
-        window.location.href = "index.html";
-    }, 1500);
+    // var newUserRef = db.collection("category").doc(id);
+    // batch.update(newUserRef, {
+    //     "category": inputedit,
+    // });
+    // batch.commit();
+    // setTimeout(function() {
+    //     window.location.href = "index.html";
+    // }, 1500);
 
 }
 
@@ -378,7 +451,7 @@ function checkTime(i) {
     }
     return i;
 }
-document.getElementById('NewNotes_checkTime').onclick = function (e) {
+document.getElementById('NewNotes_checkTime').onclick = function(e) {
     var check = false;
     if (this.checked) {
         document.getElementById('notification').style.display = 'block';
@@ -402,7 +475,7 @@ function save() {
         "content": inputedit,
     });
     batch.commit();
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "index.html";
     }, 1500);
 
@@ -475,15 +548,15 @@ function writeNotesData() {
                 image: temp
 
             })
-            .then(function (docRef) {
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
     }
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "index.html";
     }, 2000);
     //window.location="index.html";
@@ -492,7 +565,7 @@ function writeNotesData() {
 //listen for image profile selection
 var tempProfile = "";
 var userImg = document.getElementById('profile-image-upload');
-userImg.addEventListener('change', function (e) {
+userImg.addEventListener('change', function(e) {
     //get file
     var file = e.target.files[0];
     //create a storage ref
@@ -533,7 +606,7 @@ function Category_select(category) {
             } else if (notificationCheck) {
                 Notificationshow();
             } else {
-                firebase.auth().onAuthStateChanged(function (user) {
+                firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
 
                         var user = firebase.auth().currentUser;
@@ -585,9 +658,9 @@ function Category_select(category) {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 });
                             });
@@ -601,26 +674,26 @@ function Category_select(category) {
 
 var searchBar = document.querySelector(".search__input");
 console.log(document.querySelector(".search__input"))
-// alert("ád")
-// searchBar.onkeyup = function(){      
-//   var searchItem = searchBar.value.toLowerCase(); 
-//  var books = document.querySelectorAll("li"); 
-//   books.forEach(book =>{
-//     var title = book.textContent;
-//     //indexOf returns -1 if an element can't be found in an array. So if the result is not -1, the elemnt exist and should be shown. Otherwise, it is hidden. 
-//     if(title.toLowerCase().indexOf(searchItem)!= -1){
-// book.style.display = 'block';      
-//     }
-//      else{
-//       book.style.display = "none";
-//     }
-//   });
-// };
+    // alert("ád")
+    // searchBar.onkeyup = function(){      
+    //   var searchItem = searchBar.value.toLowerCase(); 
+    //  var books = document.querySelectorAll("li"); 
+    //   books.forEach(book =>{
+    //     var title = book.textContent;
+    //     //indexOf returns -1 if an element can't be found in an array. So if the result is not -1, the elemnt exist and should be shown. Otherwise, it is hidden. 
+    //     if(title.toLowerCase().indexOf(searchItem)!= -1){
+    // book.style.display = 'block';      
+    //     }
+    //      else{
+    //       book.style.display = "none";
+    //     }
+    //   });
+    // };
 
 function search() {
     $('#listNotes').load('show_not.html');
     var tim = document.getElementById("search").value;
-    firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             var user = firebase.auth().currentUser;
 
@@ -653,9 +726,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim == "" && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -674,9 +747,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -695,9 +768,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -716,9 +789,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 }
                             }
@@ -745,9 +818,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim == "" && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -766,9 +839,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -787,9 +860,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -808,9 +881,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 }
                             }
@@ -837,9 +910,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim == "" && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -858,9 +931,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -879,9 +952,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                         var des = doc.data().content;
                                         var tit = doc.data().name;
@@ -900,9 +973,9 @@ function search() {
                                         );
 
                                         var imgNote = document.getElementById("imgNote" + doc.id);
-                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                        storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                             imgNote.src = url;
-                                        }).catch(function (error) {});
+                                        }).catch(function(error) {});
                                     }
                                 }
                             }
@@ -925,9 +998,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             } else if (tim == "" && category_selected == doc.data().category) {
                                 var des = doc.data().content;
                                 var tit = doc.data().name;
@@ -946,9 +1019,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             } else if (tim2.includes(tim.toLowerCase()) && category_selected == "") {
                                 var des = doc.data().content;
                                 var tit = doc.data().name;
@@ -967,9 +1040,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             } else if (tim2.includes(tim.toLowerCase()) && category_selected == doc.data().category) {
                                 var des = doc.data().content;
                                 var tit = doc.data().name;
@@ -988,9 +1061,9 @@ function search() {
                                 );
 
                                 var imgNote = document.getElementById("imgNote" + doc.id);
-                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
+                                storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function(url) {
                                     imgNote.src = url;
-                                }).catch(function (error) {});
+                                }).catch(function(error) {});
                             }
                         }
                     });
@@ -1003,7 +1076,7 @@ function search() {
 var uploader = document.getElementById('uploader');
 var fileButton = document.getElementById('fileButton');
 //listen for file selection
-fileButton.addEventListener('change', function (e) {
+fileButton.addEventListener('change', function(e) {
     //get file
     var file = e.target.files[0];
     //create a storage ref
@@ -1061,14 +1134,14 @@ function addtask() {
                 status: "doing",
                 userID: firebase.auth().currentUser.uid,
             })
-            .then(function (docRef) {
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 alert(error);
                 console.error("Error adding document: ", error);
             });
-        setTimeout(function () {
+        setTimeout(function() {
             window.location.href = "main.html";
         }, 1500);
     }
