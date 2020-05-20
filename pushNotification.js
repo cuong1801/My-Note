@@ -79,3 +79,14 @@ function setTokenSentToServer(sent) {
 function isTokenSentToServer() {
   return window.localStorage.getItem('sentToServer') === '1';
 }
+
+messaging.onMessage(function(payload){
+  console.log("Message receive:.... " + payload);
+  var title = payload.data.title;
+  var options = {
+    body: payload.data.body,
+    icon: payload.data.icon,
+    image: payload.data.image,
+  };
+  var myNotification = new Notification(title, options);
+});
