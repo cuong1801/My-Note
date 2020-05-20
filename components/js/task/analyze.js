@@ -156,21 +156,22 @@ window.onload = function() {
                                 '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
                                 '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right; cursor: pointer;"  onclick="deletetask()">X</span>' +
                                 '<span style="cursor: pointer;pointer; float: right" class=" btn badge badge-primary badge-pill" data-toggle="modal" data-target="#editcategory' + doc.id + '">Edit</span>' +
-
-                                // '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right; cursor: pointer;"  onclick="deletetask()">Edit</span>' +
-                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right; cursor: pointer;"  onclick="done()">Done</span>' +
+                                '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right; cursor: pointer;"  onclick="doing()">Doing</span>' +
                                 '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
                                 '<div class="row">' +
-                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<div class="col-lg-4" style="width: auto;">' +
                                 '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
                                 '</div>' +
-                                '<div class="col-lg-6" style="width: auto;">' +
+                                '<div class="col-lg-4" style="width: auto;">' +
                                 '<small class="text-muted">' + doc.data().timeTaskShow + '</small>' +
                                 '</div>' +
-                                '</div>' +
+                                '<div  class="col-lg-4" style="width: auto;">' +
+                                '<small class="text-muted">' + doc.data().location + '</small>' +
                                 '</div>' +
 
+                                '</div>' +
 
+                                '</div>' +
 
                                 ' <div class="modal fade" id="editcategory' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="editcategoryLabel" aria-hidden="true">' +
                                 '<div class="modal-dialog" role="document">' +
@@ -198,7 +199,7 @@ window.onload = function() {
 
                                 '<div class="row">' +
                                 ' <div class="col-md-6">' +
-                                '<select class="form-control" id="listtaskcategory">' +
+                                '<select class="form-control" id="listtaskcategory2">' +
                                 '<option active="">' + doc.data().category + '</option>' +
                                 '</select>' +
                                 '<br>' +
@@ -217,13 +218,10 @@ window.onload = function() {
                                 ' </div>' +
                                 '<div class="modal-footer">' +
                                 '  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
-                                ' <button id="' + doc.id + '" type="button" class="btn btn-primary" onclick= "edittaskdoing()">Save changes</button>' +
+                                ' <button id="' + doc.id + '" type="button" class="btn btn-primary" onclick= "edittask()">Save changes</button>' +
                                 ' </div>' +
                                 '</div>' +
                                 '</div>'
-
-
-
                             );
 
                         }
