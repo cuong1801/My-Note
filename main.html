@@ -31,6 +31,12 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat|Cardo' rel='stylesheet' type='text/css'>
 
+    <link rel="manifest" href="/manifest.json">
+    <!-- ios support -->
+    <link rel="manifest" href="/assets/img/icons">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#FFE1C4">
+
 </head>
 
 <body>
@@ -100,7 +106,7 @@
                         <div id="map"></div>
                     </div>
                     <select class="form-control" id="ListNotes_category1">
-                        <option active="">--- Select---</option>
+                        <option active="">No Category</option>
                     </select>
                     <br>
                     <input class="form-control" type="file" value="upload" id="fileButton" style="border:none" multiple />
@@ -202,7 +208,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <select class="form-control" id="ListNotes_categorytask">
-                                            <option active="">--- Select---</option>
+                                            <option active="">No Category</option>
                                         </select>
                                         <br>
                                     </div>
@@ -273,6 +279,7 @@
     <script src='components/js/homepage/header.js'></script>
     <script src='components/js/homepage/card.js'></script>
     <script src='components/js/homepage/quickly-note.js'></script>
+    <script src="assets/js/menu.js"></script>
 
     <script src="/pushNotification.js"></script>
     <script src="/location.js"></script>
