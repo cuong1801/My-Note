@@ -116,11 +116,7 @@ window.onload = function () {
                                 '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
                                 '</div>' +
                                 '</div>'
-
-
-
                             );
-
                             var imgNote = document.getElementById("imgNote" + doc.id);
                             storageRef.child('NoteImage/' + doc.data().image + '').getDownloadURL().then(function (url) {
                                 imgNote.src = url;
@@ -140,27 +136,13 @@ window.onload = function () {
                             );
                             $("#ListNotes_category1").append(
                                 '<option id="list2' + doc.id + '">' + category + '</option>'
-
-
                             );
                             $("#ListNotes_categorytask").append(
                                 '<option id="list3' + doc.id + '">' + category + '</option>'
-
-
                             );
-
                             $("#ListNotes_categorytask2").append(
                                 '<option id="list3' + doc.id + '">' + category + '</option>'
-
-
                             );
-
-                            // $("#color").append(
-                            //     '<span class="badge badge-primary badge-pill">color</span>'
-
-
-                            // );
-
                             $("#todos").append(
 
                                 '<li id="list3' + doc.id + '">' +
