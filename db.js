@@ -180,6 +180,123 @@ window.onload = function () {
                     });
 
                 });
+                db.collection("task").get().then(snapshot => {
+
+                    snapshot.docs.forEach(doc => {
+                        if (doc.data().userID == idUser) {
+                            var today = new Date();
+                            var taskTime = new Date(doc.data().timeTaskShow);
+
+                            var DD = today.getDate();
+                            var MM = today.getMonth() + 1;
+                            var YYYY = today.getFullYear();
+
+                            var DD2 = taskTime.getDate();
+                            var MM2 = taskTime.getMonth() + 1;
+                            var YYYY2 = taskTime.getFullYear();
+                            var des = doc.data().task;
+                            var subDes = des.slice(0, 30);
+                            if (DD2 == DD - 1 && MM2 == MM && YYYY2 == YYYY) {
+                                $("#taskYesterday").append(
+                                    '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
+                                    '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deletetask()">X</span>' +
+                                    '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
+                                    '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
+                                    '<div class="row">' +
+                                    '<div class="col-lg-6" style="width: auto;">' +
+                                    '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
+                                    '</div>' +
+                                    '<div class="col-lg-6" style="width: auto;">' +
+                                    '<small class="text-muted">' + doc.data().timeTaskShow + '</small>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                    '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
+                                    '<div>' +
+                                    '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
+                                    '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timeTaskShow + '</em></div>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+                                    '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().task + '</textarea>' +
+                                    '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                    '<em style="float: right;">' + doc.data().location + '</em>' +
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                    '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                    '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deletetask()">Delete</button>' +
+                                    '</div>' +
+                                    '</div>'
+                                );
+                            } else if(DD2 == DD && MM2 == MM && YYYY2 == YYYY){
+                                $("#taskToday").append(
+                                    '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
+                                    '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deletetask()">X</span>' +
+                                    '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
+                                    '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
+                                    '<div class="row">' +
+                                    '<div class="col-lg-6" style="width: auto;">' +
+                                    '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
+                                    '</div>' +
+                                    '<div class="col-lg-6" style="width: auto;">' +
+                                    '<small class="text-muted">' + doc.data().timeTaskShow + '</small>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                    '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
+                                    '<div>' +
+                                    '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
+                                    '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timeTaskShow + '</em></div>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+                                    '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().task + '</textarea>' +
+                                    '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                    '<em style="float: right;">' + doc.data().location + '</em>' +
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                    '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                    '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deletetask()">Delete</button>' +
+                                    '</div>' +
+                                    '</div>'
+                                );
+                            } else if(DD2 == DD +1 && MM2 == MM && YYYY2 == YYYY){
+                                $("#taskTomorrow").append(
+                                    '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
+                                    '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deletetask()">X</span>' +
+                                    '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
+                                    '<p style="margin-bottom: -0.5rem;">' + subDes + '...</p>' +
+                                    '<div class="row">' +
+                                    '<div class="col-lg-6" style="width: auto;">' +
+                                    '<small class="text-muted" style="margin-bottom: 0px;">' + doc.data().category + '.</small>' +
+                                    '</div>' +
+                                    '<div class="col-lg-6" style="width: auto;">' +
+                                    '<small class="text-muted">' + doc.data().timeTaskShow + '</small>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
+                                    '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
+                                    '<div>' +
+                                    '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
+                                    '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timeTaskShow + '</em></div>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+                                    '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().task + '</textarea>' +
+                                    '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
+                                    '<em style="float: right;">' + doc.data().location + '</em>' +
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                    '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
+                                    '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deletetask()">Delete</button>' +
+                                    '</div>' +
+                                    '</div>'
+                                );
+
+                            }
+                        }
+                    });
+                });
 
             }
         } else {
@@ -1169,4 +1286,18 @@ function addtask() {
             }
         }
     });
+}
+
+function deletetask() {
+    if (confirm('You want to delete note?')) {
+        var id = event.target.id;
+        // alert(id);
+        db.collection('task').doc(id).delete();
+        // var hidden1 = 'del' + id;
+        // document.getElementById(hidden1).style.display = 'none';
+        // setTimeout(function () {
+        //     window.location.href = "index.html";
+        // }, 2000);
+
+    } else { }
 }
