@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,69 +40,49 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-43">
-						Login to continue
-
-						<div id="loading_login" class="spinner-border" role="status" style="display: none;color: rgb(150, 40, 214);">
-							<span id="loading_login" class="sr-only">Loading...</span>
-						</div>
-						<p id="login_Error" style="display: none;color: rgb(190, 37, 37);"></p>
-					</span>
-
-					
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input id="email_field1" class="input100" type="hidden" >
-						<input id="email_field" class="input100" name="email" >
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
-					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input id="password_field" class="input100" type="password" name="pass">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-					</div>
-
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div>
-
-						<div>
-							<a href="#" onclick="forgotPass()" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
-					</div>
-			
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" onclick="login()">
-							Login
-						</button>
-                    </div>					
-					<div class="text-center p-t-46 p-b-20">
-						<a href="register.html" class="txt1">
-                            Create an account
-                        </a>
+				<form class="login100-form validate-form" >
+                    <span class="login100-form-title p-b-43">
+                        Sign up
+                        <div id="loading_SignUp" class="spinner-border" role="status" style="display: none;color: rgb(150, 40, 214);">
+                            <span id="loading_SignUp" class="sr-only">Loading...</span>
+                        </div>
+                        <p id="signUp_Error" style="display: none;color: rgb(190, 37, 37);"></p>
+                    </span>
+                
+                    
+                    
+                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                        <input id="email_field1" class="input100" type="hidden" >
+                        <input id="emailSignUp" class="input100" name="email" >
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Email</span>
                     </div>
-
-					<div class="login100-form-social flex-c-m">		
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5" onclick="signinFB()">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
-
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5" onclick="signinGG()">
-							<i class="fa fa-google" aria-hidden="true"></i>
-						</a>
+                    
+                    
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <input id="passwordSignUp" class="input100" type="password" name="pass">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Password</span>
+                    </div>
+                
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <input id="password_confirmationSignUp" class="input100" type="password" name="pass">
+                        <span class="focus-input100"></span>
+                        <span class="label-input100">Confirm Password</span>
+                    </div>
+                
+                
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" onclick="register()">
+                            SIGN UP
+                        </button>
+                    </div>
+                    <div class="text-center p-t-46 p-b-20">
+                        <a href="login.html" class="txt1">
+                            Already have an account?
+                        </a>
 					</div>
-				</form>
+                </form>
                 <div class="login100-more" style="background-image: url('Login_v18/Login_v18/images/bg-01.jpg');">
 				</div>
 			</div>
