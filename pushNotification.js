@@ -16,7 +16,7 @@ Notification.requestPermission().then((permission) => {
 });
 // [END request_permission]
 
- // Clear the messages element of all children.
+// Clear the messages element of all children.
 //  function clearMessages() {
 //   const messagesElement = document.querySelector('#messages');
 //   while (messagesElement.hasChildNodes()) {
@@ -61,7 +61,7 @@ function sendTokenToServer(currentToken) {
     setTokenSentToServer(true);
   } else {
     console.log('Token already sent to server so won\'t send it again ' +
-        'unless it changes');
+      'unless it changes');
   }
 
 }
@@ -80,13 +80,23 @@ function isTokenSentToServer() {
   return window.localStorage.getItem('sentToServer') === '1';
 }
 
-messaging.onMessage(function(payload){
-  console.log("Message receive:.... " + payload);
-  var title = payload.data.title;
+// messaging.onMessage(function(payload){
+//   console.log("Message receive:.... " + payload.data);
+//   // var title = payload.data.title ;
+//   // var options = {
+//   //   body: payload.data.body,
+//   //   icon: payload.data.icon,
+//   //   image: payload.data.image,
+//   // };
+//   // var myNotification = new Notification(title, options);
+// });
+
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  var title = payload.notification.title;
   var options = {
-    body: payload.data.body,
-    icon: payload.data.icon,
-    image: payload.data.image,
+    body: payload.notification.body,
+    icon: payload.notification.image,
   };
   var myNotification = new Notification(title, options);
 });

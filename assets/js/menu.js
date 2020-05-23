@@ -15,15 +15,6 @@ $(document).ready(function(){
     })
     // In your Javascript (external .js resource or <script> tag)
 
-db.collection('category').onSnapshot(snapshot => {
-    snapshot.docChanges().forEach(change => {
-      
-        $("#ListNotes_category").append('<option>'+change.doc.data().category+'</option>');
-      
-    });
-  });
-  
-
 var uploader = document.getElementById('uploader');
 var fileButton = document.getElementById('fileButton');
 //listen for file selection
@@ -36,7 +27,6 @@ fileButton.addEventListener('change', function(e){
     //upload file
     var task =storageRef.put(file);
     temp = file.name;
-    alert(temp);
     // upload progress bar
     task.on('state_changed',
         function progress(snapshot){
