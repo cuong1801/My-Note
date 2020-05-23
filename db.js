@@ -3,6 +3,7 @@ var notificationCheck = false;
 var finish = false;
 var notYet = false;
 var storageRef = firebase.storage().ref();
+var total = 0;
 
 db.enablePersistence()
     .catch(function (err) {
@@ -184,6 +185,7 @@ window.onload = function () {
 
                     snapshot.docs.forEach(doc => {
                         if (doc.data().userID == idUser) {
+                            total = total + 1;
                             var today = new Date();
                             var taskTime = new Date(doc.data().timeTaskShow);
 
@@ -296,6 +298,7 @@ window.onload = function () {
                             }
                         }
                     });
+                    document.getElementById("total").innerText = total;
                 });
 
             }
@@ -336,12 +339,11 @@ function closeNav2() {
 function deleteNote() {
     if (confirm('You want to delete note?')) {
         var id = event.target.id;
-        alert(id);
         db.collection('notelist').doc(id).delete();
         // var hidden1 =  id;
         // document.getElementById(hidden1).style.display = 'none';
         setTimeout(function () {
-            window.location.href = "index.html";
+            window.location.href = "main.html";
         }, 2000);
 
     } else { }
@@ -374,7 +376,7 @@ function addnewcategory() {
             });
     }
     setTimeout(function () {
-        window.location.href = "index.html";
+        window.location.href = "main.html";
     }, 1500);
 }
 
@@ -507,6 +509,7 @@ function editCategory() {
 
                         }
                     });
+                    
                 });
                 db.collection("task").get().then(snapshot => {
 
@@ -524,6 +527,9 @@ function editCategory() {
                     });
                 });
             }
+            setTimeout(function () {
+                window.location.href = "main.html";
+            }, 1500);
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -565,7 +571,7 @@ function save() {
     });
     batch.commit();
     setTimeout(function () {
-        window.location.href = "index.html";
+        window.location.href = "main.html";
     }, 1500);
 
 }
@@ -619,7 +625,6 @@ function writeNotesData() {
         Note_timepost2 = new Date(timepost2);
     }
 
-    alert(timepost2);
     if (NewNotes_name_text_value.length === 0 || NewNotes_name_text_value.length > 20) {
         alert('Title are required to continue!');
     } else {
@@ -646,7 +651,7 @@ function writeNotesData() {
             });
     }
     setTimeout(function () {
-        window.location.href = "index.html";
+        window.location.href = "main.html";
     }, 2000);
     //window.location="index.html";
 }
@@ -1174,7 +1179,6 @@ fileButton.addEventListener('change', function (e) {
     //upload file
     var task = storageRef.put(file);
     temp = file.name;
-    alert(temp);
     // upload progress bar
     task.on('state_changed',
         function progress(snapshot) {

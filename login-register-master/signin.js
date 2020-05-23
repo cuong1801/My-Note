@@ -31,13 +31,13 @@ function register() {
         if (password == passwordC) {
             document.getElementById("loading_SignUp").style.display = "block";
             $("#loading_SignUp").show();
-                firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    $("#signUp_Error").show().text(errorMessage);
-                    $("#loading_SignUp").hide();
-                });         
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                $("#signUp_Error").show().text(errorMessage);
+                $("#loading_SignUp").hide();
+            });
         } else {
             $("#signUp_Error").show().text("Your password and confirmation password do not match.");
         }
@@ -124,24 +124,24 @@ function signinGG() {
 }
 /// Function for forgot Pass
 function forgotPass() {
-var auth=firebase.auth();
-var email=document.getElementById("email_field").value;
-
-if (email != "") {
-    document.getElementById("loading_login").style.display = "block";
-    $("#loading_login").show();
-
-    firebase.auth().sendPasswordResetEmail (email).then(function(){
-        window.alert("Email has been sent to you, Please check and verify.")
-    }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        $("#loading_login").hide();
-        $("#login_Error").show().text(errorMessage);
-    });
-} else {
-    $("#login_Error").show().text("Form is incomplete, please fill out your email.");
-}
-
-}
+    var auth=firebase.auth();
+    var email=document.getElementById("email_field").value;
+    
+    if (email != "") {
+        document.getElementById("loading_login").style.display = "block";
+        $("#loading_login").show();
+    
+        firebase.auth().sendPasswordResetEmail (email).then(function(){
+            window.alert("Email has been sent to you, Please check and verify.")
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            $("#loading_login").hide();
+            $("#login_Error").show().text(errorMessage);
+        });
+    } else {
+        $("#login_Error").show().text("Form is incomplete, please fill out your email.");
+    }
+    
+    }
