@@ -1,3 +1,4 @@
+var curToken;
 messaging.usePublicVapidKey('BDUDGf1Xw7Dn1NXRzNBiEG-6qT0wQCRR2pnTsK4GtbYTj-wYR8JKbzcBR_Sw4gjo0aPGjmE6AwneQJLGke8kn2A');
 
 console.log('Requesting permission...');
@@ -32,6 +33,7 @@ function resetUI() {
   // subsequent calls to getToken will return from cache.
   messaging.getToken().then((currentToken) => {
     if (currentToken) {
+      curToken = currentToken;
       console.log(currentToken);
       sendTokenToServer(currentToken);
       // updateUIForPushEnabled(currentToken);
