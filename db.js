@@ -1198,6 +1198,7 @@ function addtask() {
     var titleFlag = true;
     var dateTimeNullFlag = true;
     var dateTimeDuplicateFlag = true;
+    var overTime = true;
     var today = new Date();
     var timepost2;
 

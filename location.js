@@ -25,7 +25,7 @@ function geocodeLatLng(geocoder, latI, latL, string) {
         window.alert('No results found');
       }
     } else {
-      window.alert('Geocoder failed due to: ' + status);
+      window.alert("Can't use GPS because don't have internet, please fill the input !!!!!");
     }
   });
 }
