@@ -56,7 +56,13 @@ function logout() {
     });
 
 }
-
+function logout_to_register(){
+    firebase.auth().signOut().then(function() {
+        window.location.assign("register.html");
+    }).catch(function(error) {
+        window.alert(error.message)
+    });
+}
 function signinFB() {
     var provider = new firebase.auth.FacebookAuthProvider();
     provider.addScope('user_birthday,email');

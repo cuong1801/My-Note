@@ -35,9 +35,9 @@ window.onload = function() {
                         $('#full_Name').text((doc.data().firstName) + " " + (doc.data().lastName));
                         $('#DropDownTimezone').val(doc.data().timeZone);
                         $("#nameuser").append(
-                            doc.data().lastName +
-                            ' ' +
-                            doc.data().firstName
+                            doc.data().firstName + 
+                            " " +
+                            doc.data().lastName
                         )
                         var imgProfile = document.getElementById("profile-image1");
                         storageRef.child('userImage/' + doc.data().temp).getDownloadURL().then(function(url) {
