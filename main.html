@@ -56,10 +56,10 @@
                 <div class="collapse navbar-collapse show" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Task</a>
+                            <a class="nav-link" href="task.html">Task</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
@@ -72,7 +72,7 @@
                         <li id="logout" class="nav-item">
                             <a class="nav-link " href="" data-toggle="modal" data-target="#logoutModal">Log Out</a>
                         </li>
-                        <li id="register" class="nav-item" onclick="logout()">
+                        <li id="register" class="nav-item" onclick="logout_to_register()">
                             <a class="nav-link " href="" data-toggle="modal" data-target="#register">Register</a>
                         </li>
                         <li id="login" class="nav-item" onclick="logout()">
@@ -139,7 +139,7 @@
                             aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <p><i class="fa fa-question-circle"></i> Are you sure you want to log-off? <br /></p>
+                    <p><i class="fa fa-question-circle"></i> Are you sure you want to log out? <br /></p>
                     <div class="actionsBtns">
                         <form action="/logout" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -268,7 +268,7 @@
             <h3 style="font-family: 'Roboto Slab Bold',serif;
             font-weight: 700; color:#5b4545;font-size: 2.61538461rem !important;margin-bottom: 24px !important;">
                 Maybe you don't remember</h3>
-                <a href="">< < view all > ></a>
+                <a href="task.html">< < view all > ></a>
             <div
                 style="border-radius: 1000px !important;width: 64px !important;display: block !important;margin-left: auto !important;
             margin-right: auto !important;margin-bottom: 24px !important;background-color: #f48024 !important;border-radius: 1000px !important;">

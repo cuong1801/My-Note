@@ -109,12 +109,51 @@ window.onload = function () {
                                 '<div class="modal-body">' +
                                 '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().content + '</textarea>' +
                                 '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
-                                '<em style="float: right;">' + doc.data().location + '</em>' +
+                                '<em style="float: left;">' + doc.data().location + '</em>' +
                                 '</div>' +
                                 '<div class="modal-footer">' +
                                 '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                 '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
+                                ' <button type="button" style="width: 70px;height: 50px;" class="btn btn-info"   data-toggle="modal" data-target="#editmodal' + doc.id + '">Edit</button>' +
                                 '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
+                                '<div id="editmodal' + doc.id + '" class="modal fade" role="dialog" style="margin-top: 100px;">' +
+                                '<div class="modal-dialog">' +
+                                '<div class="modal-content">' +
+                                '<div class="modal-header">' +
+                                '<h4 >Edit note</h4>' +
+                                '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                //body edit note
+                                '<input id="NewNotes_nameEdit" type="Title" class="form-control" id="tenghichu" placeholder="Title">' +
+                                '<br>' +
+
+                                '<textarea class="form-control" id="NewNotes_content" type="ghichu" name="message" placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>' +
+                                '<br>' +
+                                '<div class="input-group mb-3">' +
+                                '<input id="location_NameEdit" type="text" class="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2">' +
+                                '<div>' +
+                                '<button input id="submitEdit" class="btn btn-primary">My Location</button>' +
+                                '</div>' +
+                                '<div id="mapEdit"></div>' +
+                                '</div>' +
+                                '<select class="form-control" id="ListNotes_category1Edit">' +
+                                ' <option active="">No Category</option>' +
+                                '</select>' +
+                                '<br>' +
+                                '<input class="form-control" type="file" value="upload" id="fileButtonEdit" style="border:none" multiple />' +
+                                '<br>' +
+
+                                '</div>' +
+                                '<div class="modal-footer">' +
+                                '<button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Close</button>' +
+                                '<button type="button" class="btn btn-default btn-primary" id="editnote" data-dismiss="modal" onclick= "editnote()">Save</button>' +
+
+                                '</div>' +
+                                '</div>' +
+
+                                '</div>' +
+                                '</div>' +
                                 '</div>' +
                                 '</div>'
                             );
@@ -230,7 +269,7 @@ window.onload = function () {
                                     '</div>' +
                                     '</div>'
                                 );
-                            } else if(DD2 == DD && MM2 == MM && YYYY2 == YYYY){
+                            } else if (DD2 == DD && MM2 == MM && YYYY2 == YYYY) {
                                 $("#taskToday").append(
                                     '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
                                     '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deletetask()">X</span>' +
@@ -262,7 +301,7 @@ window.onload = function () {
                                     '</div>' +
                                     '</div>'
                                 );
-                            } else if(DD2 == DD +1 && MM2 == MM && YYYY2 == YYYY){
+                            } else if (DD2 == DD + 1 && MM2 == MM && YYYY2 == YYYY) {
                                 $("#taskTomorrow").append(
                                     '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
                                     '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deletetask()">X</span>' +
@@ -509,7 +548,7 @@ function editCategory() {
 
                         }
                     });
-                    
+
                 });
                 db.collection("task").get().then(snapshot => {
 
@@ -719,8 +758,9 @@ function Category_select(category) {
                                         var subTit = tit.slice(0, 30);
                                         var subDes = des.slice(0, 30);
                                         $("#name_notes").append(
-                                            '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%;cursor: pointer; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" onclick="openNav()">' +
+                                            '<div id="' + doc.id + '" data-id="' + doc.id + '" class="alert alert-success" role="alert" style="text-align: initial; width:99%; border-left: #E8DA74 solid 8px;background-color: #EEF7FF;" >' +
                                             '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="deleteNote()">X</span>' +
+                                            '<span id="' + doc.id + '" class="btn badge badge-primary badge-pill" style="float: right"  onclick="openNav()">...</span>' +
                                             '<p style="margin-bottom: -0.5rem;">' + subTit + '...</p>' +
                                             '<div class="row">' +
                                             '<div class="col-lg-6" style="width: auto;">' +
@@ -732,20 +772,61 @@ function Category_select(category) {
                                             '</div>' +
                                             '</div>' +
                                             '<div id="myOverlay' + doc.id + '" data-id="' + doc.id + '" class="w3-overlay w3-animate-opacity" onclick="closeNav2()" style="cursor:pointer" ></div>' +
-                                            '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 70%; display:none">' +
+                                            '<div id="mySidebar' + doc.id + '" class="sidebar" style="width: 47%; display:none">' +
+                                            '<div>' +
                                             '<div id="DetailNote' + doc.id + '" tabindex="-1" role="dialog" aria-labelledby="DetailNoteTitle" aria-hidden="true">' +
                                             '<h1 id="' + doc.id + 'Linhname" class="modal-title" style="font-family:auto;color: #f60000;text-align:center">' + doc.data().name + '</h1>' +
                                             '<div style="text-align: center"><em>' + doc.data().category + '</em> <em>' + doc.data().timepostShow + '</em></div>' +
                                             '</div>' +
                                             '<div class="modal-body">' +
-                                            '<textarea id="textarea' + doc.id + '"class="form-control" rows="7" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().content + '</textarea>' +
+                                            '<textarea id="textarea' + doc.id + '"class="form-control" rows="auto" style="background-color:rgb(255, 240, 240); border:none">' + doc.data().content + '</textarea>' +
                                             '<img id="imgNote' + doc.id + '" style="width: 50% ; height: 50%; margin-left: 25%"></img>' +
-                                            '<em style="float: right;">' + doc.data().location + '</em>' +
+                                            '<em style="float: left;">' + doc.data().location + '</em>' +
                                             '</div>' +
                                             '<div class="modal-footer">' +
                                             '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  data-dismiss="modal" onclick="closeNav()">Close</button>' +
                                             '<button type="button" style="width: 70px;height: 50px;" class="btn btn-info" id="' + doc.id + '" onclick="deleteNote()">Delete</button>' +
+                                            ' <button type="button" style="width: 70px;height: 50px;" class="btn btn-info"   data-toggle="modal" data-target="#editmodal' + doc.id + '">Edit</button>' +
                                             '<button id="' + doc.id + '" type="button" style="width: 70px;height: 50px;" class="btn btn-info"  onclick="save()">Save</button>' +
+                                            '<div id="editmodal' + doc.id + '" class="modal fade" role="dialog" style="margin-top: 100px;">' +
+                                            '<div class="modal-dialog">' +
+                                            '<div class="modal-content">' +
+                                            '<div class="modal-header">' +
+                                            '<h4 >Edit note</h4>' +
+                                            '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+                                            '</div>' +
+                                            '<div class="modal-body">' +
+                                            //body edit note
+                                            '<input id="NewNotes_nameEdit" type="Title" class="form-control" id="tenghichu" placeholder="Title">' +
+                                            '<br>' +
+            
+                                            '<textarea class="form-control" id="NewNotes_content" type="ghichu" name="message" placeholder="What are you doing..." style="width:100%; height:auto;"></textarea>' +
+                                            '<br>' +
+                                            '<div class="input-group mb-3">' +
+                                            '<input id="location_NameEdit" type="text" class="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2">' +
+                                            '<div>' +
+                                            '<button input id="submitEdit" class="btn btn-primary">My Location</button>' +
+                                            '</div>' +
+                                            '<div id="mapEdit"></div>' +
+                                            '</div>' +
+                                            '<select class="form-control" id="ListNotes_category1Edit">' +
+                                            ' <option active="">No Category</option>' +
+                                            '</select>' +
+                                            '<br>' +
+                                            '<input class="form-control" type="file" value="upload" id="fileButtonEdit" style="border:none" multiple />' +
+                                            '<br>' +
+            
+                                            '</div>' +
+                                            '<div class="modal-footer">' +
+                                            '<button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Close</button>' +
+                                            '<button type="button" class="btn btn-default btn-primary" id="editnote" data-dismiss="modal" onclick= "editnote()">Save</button>' +
+            
+                                            '</div>' +
+                                            '</div>' +
+            
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
                                             '</div>'
 
 
@@ -1305,4 +1386,10 @@ function deletetask() {
         // }, 2000);
 
     } else { }
+}
+function back() {
+    window.location("main.html")
+}
+function editnote() {
+
 }
